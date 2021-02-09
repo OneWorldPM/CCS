@@ -13,9 +13,11 @@ class Push_notifications extends CI_Controller {
             redirect('admin/alogin');
         }
         $this->load->model('madmin/m_push_notifications', 'mpushnotifications');
+        $this->load->model('madmin/M_sessions', 'sessions');
     }
 
     public function index() {
+        $data['sessions'] = $this->sessions->getAllSessions();
         $data['push_notifications'] = $this->mpushnotifications->get_push_notifications();
         $this->load->view('admin/header');
         $this->load->view('admin/push_notifications', $data);
