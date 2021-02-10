@@ -87,6 +87,7 @@ class M_sessions extends CI_Model {
             $return_array = array();
             foreach ($sessions->result() as $val) {
                  $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
+                 $val->moderators = $this->getModerators($val->sessions_id);
                 $return_array[] = $val;
             }
             return $return_array;
