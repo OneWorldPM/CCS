@@ -13,6 +13,7 @@ class Push_notification extends CI_Controller {
             redirect('login');
         }
         $this->load->model('user/m_push_notification', 'objpush_notification');
+        $this->load->model('madmin/M_sessions', 'sessions');
     }
 
     public function get_push_notification_admin() {

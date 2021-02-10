@@ -5,6 +5,7 @@
 
     }
 </style>
+
 <div class="main-content">
     <div class="wrap-content container" id="container">
         <!-- start: DYNAMIC TABLE -->
@@ -20,7 +21,7 @@
                                 <table class="table table-bordered table-striped text-center" id="user">
                                     <thead class="th_center">
                                         <tr>
-                                            <th>Question</th>
+                                            <th>Question </th>
 											 <th>Slide Number</th>
                                             <th>Poll Type</th>
                                             <th>Options</th>

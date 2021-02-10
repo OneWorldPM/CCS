@@ -22,6 +22,7 @@ class Push_notifications extends CI_Controller {
         $this->load->view('admin/header');
         $this->load->view('admin/push_notifications', $data);
         $this->load->view('admin/footer');
+        
     }
 
     public function add_push_notifications() {
