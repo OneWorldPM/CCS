@@ -1,2 +1,4 @@
 application/cache/session/
+application/config/config.php
+application/config/database.php
 
