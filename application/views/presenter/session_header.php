@@ -155,10 +155,12 @@ $presenter_details = $this->common->get_presenter_data($this->session->userdata(
                 <?php
                 $zoom_link=isset($sessions->zoom_link)?$sessions->zoom_link:"";
                 $zoom_pass=isset($sessions->zoom_password)?$sessions->zoom_password:"";
+                $zoom_number=isset($sessions->zoom_number)?$sessions->zoom_number:"";
 
                 if($zoom_link){
                     ?>
                     <p>Zoom Meeting Link : <a href="<?=$zoom_link?>" target="_blank"><?=$zoom_link?></a></p>
+                    <p>Zoom Meeting Number <?=$zoom_number?></a></p>
                     <p>Password : <?=$zoom_pass?></p>
                 <?php
                 }
