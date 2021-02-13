@@ -20,9 +20,12 @@
                                 <table class="table table-bordered table-striped text-center" id="user">
                                     <thead class="th_center">
                                         <tr>
-                                            <th>Question</th>
+                                            
+                                            <th>Question</th>3
+                                            <th>Session Question ID</th>
                                             <th>Poll Name</th>
                                             <th>Poll Type</th>
+                                            <th>Session Comparison ID</th>
                                             <th>Slide Number</th>
                                             <th>Modify</th>
                                             <th>Action</th>
@@ -34,9 +37,12 @@
                                             foreach ($poll_data as $val) {
                                                 ?>
                                                 <tr>
+                                                    
                                                     <td><?= $val->question ?></td>
+                                                    <td><?= $val->sessions_poll_question_id ?></td>
                                                     <td><?= $val->poll_name ?></td>
                                                     <td><?= $val->poll_type ?></td>
+                                                    <td><?= $val->poll_comparisons_id ?></td>
                                                     <td><?= $val->slide_number ?></td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="<?= base_url() . 'admin/sessions/editPollQuestion/' . $val->sessions_poll_question_id ?>">
