@@ -26,6 +26,7 @@
                                             <th>Title</th>
                                             <th>Presenter</th>
                                             <th>Zoom Link</th>
+                                            <th>Zoom Number</th>
                                              <th>Password</th>
                                             <th>Time Slot</th>
                                             <th>Action</th>
@@ -54,6 +55,7 @@
                                                         ?>
                                                     </td>
                                                      <td><a target="_blank" href="<?= $val->zoom_link ?>"><?= $val->zoom_link ?></a></td>
+                                                     <td><?= $val->zoom_number ?></a></td>
                                                      <td><?= $val->zoom_password ?></td>
                                                     <td><?= date("h:i A", strtotime($val->time_slot)) .' - '. date("h:i A", strtotime($val->end_time)) ?></td>
                                                     <td>
@@ -92,6 +94,7 @@
                                             <th>Photo</th>
                                             <th>Title</th>
                                             <th>Zoom Link</th>
+                                            <th>Zoom Number</th>
                                             <th>Password</th>
                                             <th>Presenter</th>
                                             <th>Time Slot</th>
@@ -113,6 +116,7 @@
                                                     </td>
                                                     <td style="text-align: left;"><?= $val->session_title ?></td>
                                                      <td><a target="_blank" href="<?= $val->zoom_link ?>"><?= $val->zoom_link ?></a></td>
+                                                     <td><?= $val->zoom_number?></a></td>
                                                     <td><?= $val->zoom_password ?></td>
                                                     <td style="text-align: left;">
                                                         <?php
