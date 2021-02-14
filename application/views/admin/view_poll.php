@@ -27,6 +27,7 @@
                                             <th>Poll Type</th>
                                             <th>Session Comparison ID</th>
                                             <th>Slide Number</th>
+                                            <th>Poll Instruction</th>
                                             <th>Modify</th>
                                             <th>Action</th>
                                         </tr>
@@ -44,6 +45,7 @@
                                                     <td><?= $val->poll_type ?></td>
                                                     <td><?= $val->poll_comparisons_id ?></td>
                                                     <td><?= $val->slide_number ?></td>
+                                                    <td><?= $val->poll_instruction ?></td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="<?= base_url() . 'admin/sessions/editPollQuestion/' . $val->sessions_poll_question_id ?>">
                                                             <i class="fa fa-pencil"></i> Edit
