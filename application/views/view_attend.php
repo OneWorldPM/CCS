@@ -116,7 +116,7 @@
                                         foreach ($sessions->presenter as $value) {
                                             ?>
                                             <h3 ></h3>
-                                            <h3 style="margin-bottom: 0px;  cursor: pointer;" data-presenter_photo="<?= $value->presenter_photo ?>" data-degree="<?= $value->degree ?>" data-presenter_name="<?= $value->presenter_name ?>" data-designation="<?= $value->designation ?>" data-email="<?= $value->email ?>" data-company_name="<?= $value->company_name ?>" class="presenter_open_modul" ><u style="color: #337ab7;"><?= $value->presenter_name ?></u><?= ($value->degree)?", ".$value->degree:"" ?><?= ($value->title != "") ? "," : "" ?> <?= $value->title ?></h3>
+                                            <h3 style="margin-bottom: 0px;  cursor: pointer;" data-presenter_photo="<?= $value->presenter_photo ?>" data-degree="<?= $value->degree ?>" data-presenter_name="<?= $value->presenter_name ?>" data-designation="<?= $value->designation ?>" data-email="<?= $value->email ?>" data-company_name="<?= $value->company_name ?>" class="presenter_open_modul" ><u style="color: #337ab7;"><?= $value->presenter_name ?></u><?= ($value->degree)?", ".$value->degree:"" ?></h3>
                                             <h3 style="margin-bottom: 0px;  cursor: pointer;"> <?= $value->company_name ?></h3>
                                             <!--<p class="m-t-20"><?= (isset($sessions) && !empty($sessions)) ? $sessions->bio : "" ?></p>-->
                                             <!--<img alt="" src="<?= base_url() ?>uploads/presenter_photo/<?= (isset($sessions) && !empty($sessions)) ? $sessions->presenter_photo : "" ?>" class="img-circle" height="100" width="100">-->
@@ -181,12 +181,12 @@
         $(".presenter_open_modul").click(function () {
             var presenter_photo = $(this).attr("data-presenter_photo");
             var presenter_name = $(this).attr("data-presenter_name");
-            var degree = $(this).attr("data-degree");
+            // var degree = $(this).attr("data-degree");
             var designation = $(this).attr("data-designation");
             var company_name = $(this).attr("data-company_name");
             var email = $(this).attr("data-email");
             $('#presenter_profile').attr('src', "<?= base_url() ?>uploads/presenter_photo/" + presenter_photo);
-            $('#presenter_title').text(presenter_name + ", " +degree + designation);
+            $('#presenter_title').text(presenter_name  + designation);
             $('#email').text(email);
             $('#company').text(company_name);
             $('#modal').modal('show');
