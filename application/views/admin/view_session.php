@@ -943,21 +943,27 @@
         $("iframe").addClass("embed-responsive-item");
 
 
-        var session_start_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->time_slot . ' UTC-4'?>";
-        var session_end_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time . ' UTC-4'?>";
+        var session_start_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->time_slot . ' UTC-5'?>";
+        var session_end_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time . ' UTC-5'?>";
 
+        console.log(session_end_datetime);
         function timeleft() {
             // Set the date we're counting down to
             var countDownDate = new Date(session_end_datetime).getTime();
+            console.log(countDownDate)
+
 
             // Update the count down every 1 second
             var x = setInterval(function () {
 
                 // Get today's date and time
                 var now = new Date().getTime();
+                console.log(now);
 
                 // Find the distance between now and the count down date
                 var distance = countDownDate - now;
+
+                console.log("distance:"+distance);
 
                 // Time calculations for days, hours, minutes and seconds
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
