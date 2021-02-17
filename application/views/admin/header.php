@@ -170,6 +170,19 @@ $user_name = ucfirst($this->session->userdata('uname'));
                                 </a>
                             </li>
 
+                            <li class="<?= ($uri_segment == 'chat_with_attendee') ? 'active' : ''; ?>">
+                                <a href="<?= site_url() ?>admin/chat_with_attendee" id="dash">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-commenting"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title">Attendee Chat</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
                             <?php if ($user_role == 'super_admin') { ?>
 							<li class="<?= ($uri_segment == 'eposters') ? 'active' : ''; ?>">
                                 <a href="<?= site_url() ?>admin/eposters" id="dash">
