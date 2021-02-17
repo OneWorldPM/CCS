@@ -115,7 +115,23 @@ $(document).ready(function () {
 
                     $('#adminChatStickeyIcon').show();
 
+                    if($('.notesSticky').is(":visible"))
+                        $('#minimizeTakeNote').click();
+
+                    if($('.resourcesSticky').is(":visible"))
+                        $('#minimizeResources').click();
+
+                    if($('.messagesSticky').is(":visible"))
+                        $('#minimizeMessages').click();
+
+                    if($('.questionsSticky').is(":visible"))
+                        $('#minimizeQuestions').click();
+
+                    if($('.askarepSticky').is(":visible"))
+                        $('#minimizeAskARep').click();
+
                     $('#adminChatStickeyIcon').click();
+
 
                     $(".admin-messages").scrollTop($(".admin-messages")[0].scrollHeight);
 
