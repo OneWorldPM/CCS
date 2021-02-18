@@ -227,12 +227,7 @@ switch ($msg) {
             } else if ($('#option_2').val() == '') {
                 alertify.error('Please Enter Option 2');
                 return false;
-            } else if ($('#option_3').val() == '') {
-                alertify.error('Please Enter Option 3');
-                return false;
-            } else if ($('#option_4').val() == '') {
-                alertify.error('Please Enter Option 4');
-                return false;
+
 //            } else if ($('#option_1').val().length > 25 || $('#option_2').val().length > 25 || $('#option_3').val().length > 25 || $('#option_4').val().length > 25 || $('#option_5').val().length > 25 || $('#option_6').val().length > 25 || $('#option_7').val().length > 25 || $('#option_8').val().length > 25 || $('#option_9').val().length > 25 || $('#option_10').val().length > 25) {
 //                alertify.error('Polls have 25 character limit including spaces in order to fit in attendee interface. Please reduce your characters');
 //                return false;
@@ -255,12 +250,6 @@ switch ($msg) {
                 return false;
             } else if ($('#option_2').val() == '') {
                 alertify.error('Please Enter Option 2');
-                return false;
-            } else if ($('#option_3').val() == '') {
-                alertify.error('Please Enter Option 3');
-                return false;
-            } else if ($('#option_4').val() == '') {
-                alertify.error('Please Enter Option 4');
                 return false;
             } else {
                 var sessions_id = $('#sessions_id').val();
