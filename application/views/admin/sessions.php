@@ -45,7 +45,12 @@ $user_role = $this->session->userdata('role');
                                             <input type="text" placeholder="Start Date" name="start_date" value="<?= ($this->session->userdata('start_date') != "") ? date("m/d/Y",strtotime($this->session->userdata('start_date'))) : ""  ?>" id="from_date" class="form-control">
                                             <span class="input-group-addon bg-primary">to</span>
                                             <input type="text" placeholder="End Date" name="end_date" value="<?= ($this->session->userdata('end_date') != "") ? date("m/d/Y",strtotime($this->session->userdata('end_date'))) : ""  ?>" id="to_date" class="form-control">
+                                            
                                         </div>
+                                        <!-- <button  name="btn_today" value="<?= date('Y-m-d');?>" id="today" class="btn btn-primary" onclick="location.href='<?= base_url() ?>admin/sessions/filter'" >Today</button> -->
+                                        <input type="submit" name="btn_today" class="btn btn-primary" style="margin-top: 22px;" id="filter_btn" value="Today">
+                                        <input type="submit" name="btn_tomorrow" class="btn btn-primary" style="margin-top: 22px;" id="filter_btn" value="Tomorrow">
+                              
                                     </div>
                                 </div>
                                 <div class="col-md-3">
