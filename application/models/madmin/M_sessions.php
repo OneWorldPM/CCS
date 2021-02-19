@@ -64,10 +64,90 @@ class M_sessions extends CI_Model {
         $this->db->from('sessions s');
 
         $post = $this->input->post();
-        $session_filter = array(
-            'start_date' => date('Y-m-d', strtotime($post['start_date'])),
-            'end_date' => date('Y-m-d', strtotime($post['end_date']))
-        );
+
+        if (isset($post['btn_today'])){
+           if ($post['btn_today']){
+                $session_filter = array(
+                    'start_date' => date('Y-m-d'),
+                    'end_date' => date('Y-m-d')
+                );
+                $this->session->set_userdata($session_filter);
+		
+                ($post['session_type'] != "") ? $where['s.sessions_type_id ='] = trim($post['session_type']) : '';
+        
+                ($post['btn_today'] != "") ? $where['DATE(s.sessions_date) >='] = date('Y-m-d') : '';
+        
+                ($post['btn_today'] != "") ? $where['DATE(s.sessions_date) <='] = date('Y-m-d') : '';
+
+                if (!empty($where)) {
+                    $this->db->where($where);
+                }
+        
+                $this->db->order_by("s.sessions_date", "asc");
+                $this->db->order_by("s.time_slot", "asc");
+                $sessions = $this->db->get();
+                if ($sessions->num_rows() > 0) {
+                    $return_array = array();
+                    foreach ($sessions->result() as $val) {
+                         $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
+                         $val->moderators = $this->getModerators($val->sessions_id);
+                        $return_array[] = $val;
+                    }
+                    return $return_array;
+                } else {
+                    return '';
+                }
+                
+            }
+            
+        }
+        else if (isset($post['btn_tomorrow'])){
+
+            $tomorrow = date("Y-m-d", strtotime("+1 day"));
+
+            
+           if ($post['btn_tomorrow']){
+                $session_filter = array(
+                    'start_date' => date('Y-m-d', strtotime("+1 day")),
+                    'end_date' => date('Y-m-d', strtotime("+1 day"))
+                );
+                $this->session->set_userdata($session_filter);
+		
+                ($post['session_type'] != "") ? $where['s.sessions_type_id ='] = trim($post['session_type']) : '';
+        
+                ($post['btn_tomorrow'] != "") ? $where['DATE(s.sessions_date) >='] = date('Y-m-d', strtotime("+1 day")) : '';
+        
+                ($post['btn_tomorrow'] != "") ? $where['DATE(s.sessions_date) <='] = date('Y-m-d', strtotime("+1 day")) : '';
+                
+                if (!empty($where)) {
+                    $this->db->where($where);
+                }
+        
+                $this->db->order_by("s.sessions_date", "asc");
+                $this->db->order_by("s.time_slot", "asc");
+                $sessions = $this->db->get();
+                if ($sessions->num_rows() > 0) {
+                    $return_array = array();
+                    foreach ($sessions->result() as $val) {
+                         $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
+                         $val->moderators = $this->getModerators($val->sessions_id);
+                        $return_array[] = $val;
+                    }
+                    return $return_array;
+                } else {
+                    return '';
+                }
+                
+            }
+            
+        }
+        else {
+            $session_filter = array(
+                'start_date' => date('Y-m-d', strtotime($post['start_date'])),
+                'end_date' => date('Y-m-d', strtotime($post['end_date']))
+            );
+        }
+
         $this->session->set_userdata($session_filter);
 		
         ($post['session_type'] != "") ? $where['s.sessions_type_id ='] = trim($post['session_type']) : '';
@@ -94,8 +174,11 @@ class M_sessions extends CI_Model {
         } else {
             return '';
         }
+
+       
     }
 
+    
     function getSession_Unique_Identifier_ID() {
         $this->db->order_by("sessions_id", "desc");
         $row_data = $this->db->get("sessions")->row();
@@ -182,6 +265,8 @@ class M_sessions extends CI_Model {
             "reg_date" => date("Y-m-d h:i"),
             'right_bar' => $session_right_bar,
             'sponsor_type' => $post['sponsor_type'],
+            'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
+            'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
 
 
         );
@@ -357,6 +442,8 @@ class M_sessions extends CI_Model {
             'link_text' => trim($post['link_text']),
             'sponsor_type' => $post['sponsor_type'],
             'right_bar' => $session_right_bar,
+            'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
+            'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
