@@ -211,8 +211,7 @@ $user_role = $this->session->userdata('role');
                                                        
                                                  
 
-                                                        <small>Group Chat Participants <?= (isset($GroupChatTotal) && !empty($GroupChatTotal) ) ? $GroupChatTotal : "" ?>/<?= (isset($total) && !empty($total) ) ? $total : "" ?></small>
-                                          
+                                                       
                                                         <span style="float: left;">Claim Link</span> <i class="fa fa-circle <?=($val->attendee_view_links_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->attendee_view_links_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i>
                                                         <span style="float: left;">Toolbox</span> <i class="fa fa-circle <?=($val->tool_box_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->tool_box_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i><br>
                                                         <hr/>
@@ -221,7 +220,11 @@ $user_role = $this->session->userdata('role');
                                                         <small><span style="float: left;">Notes</span> <i class="fa fa-circle <?=(in_array("notes", $toolboxItems))?'':'blink-element'?>" aria-hidden="true" style="color: <?=(in_array("notes", $toolboxItems))?'#0ab50a':'#ff2525'?>;float: right;"></i></small><br>
                                                         <small><span style="float: left;">Questions</span> <i class="fa fa-circle <?=(in_array("questions", $toolboxItems))?'':'blink-element'?>" aria-hidden="true" style="color: <?=(in_array("questions", $toolboxItems))?'#0ab50a':'#ff2525'?>;float: right;"></i></small><br>
                                                         <small><span style="float: left;">Ask A Rep</span> <i class="fa fa-circle <?=(in_array("askarep", $toolboxItems))?'':'blink-element'?>" aria-hidden="true" style="color: <?=(in_array("askarep", $toolboxItems))?'#0ab50a':'#ff2525'?>;float: right;"></i></small><br>
-                                                         
+                                                        <small><span style="float: left;">Presenters + Moderators </span> <?= (isset($total) && !empty($total) ) ?'<span style="float:right">'. $total : "".'</span>' ?></small>
+                                                        <small><span style="float: left;">Chat Participants </span> <?= (isset($GroupChatTotal) && !empty($GroupChatTotal) ) ?'<span style="float:right">'. $GroupChatTotal : "".'</span>' ?></small>
+                                                       
+                                                       
+                                          
                                                     </td>
                                                     <td>
 													  <a href="<?= base_url() ?>admin/sessions/view_session/<?= $val->sessions_id ?>" class="btn btn-info btn-sm" style="margin-bottom: 5px;">View</a>
