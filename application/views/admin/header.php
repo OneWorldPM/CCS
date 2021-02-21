@@ -342,6 +342,21 @@ $user_name = ucfirst($this->session->userdata('uname'));
                             </li>
                             <?php } ?>
 							
+
+                            <?php if ($user_role == 'super_admin') { ?>
+                            <li class="<?= ($uri_segment == 'notes') ? 'active' : ''; ?>" >
+                                <a href="<?= site_url() ?>admin/notes" id="dash">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-book"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title">Notes </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <?php } ?>
                         </ul>
                     </nav>
                 </div>
