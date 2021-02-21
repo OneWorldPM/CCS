@@ -42,9 +42,14 @@
                                                     <?php
                                                     if (isset($val->user_list) && !empty($val->user_list)) {
                                                         foreach ($val->user_list as $value) {
+                                                            
                                                             echo $value->first_name . ' ' . $value->last_name . ", ";
+                                                         
+                                                            
                                                         }
+                                                        
                                                     }
+                                                    
                                                     ?>
                                                 </td>-->
                                                  <td>
@@ -57,8 +62,9 @@
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($val->status == 0) { ?>
+                                                    <?php if ($val->status == 0) {  ?>
                                                         <label class="btn btn-warning btn-sm" >Pending</label>
+                                                        
                                                     <?php } else if ($val->status == 1) { ?>
                                                         <label class="btn btn-success btn-sm" >Open</label>
                                                     <?php } else { ?>
