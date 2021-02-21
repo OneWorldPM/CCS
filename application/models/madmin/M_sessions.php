@@ -41,6 +41,7 @@ class M_sessions extends CI_Model {
                 $val->moderators = $this->getModerators($val->sessions_id);
                 $val->groupchat= $this->getGroupChatDetails($val->sessions_id);
                 $val->groupchatPresenter= $this->getGroupChatDetailsPresenter($val->sessions_id);
+                $val->getChatAll= $this->getChatAll($val->sessions_id);
                 
                 $return_array[] = $val;
             }
@@ -1844,6 +1845,20 @@ class M_sessions extends CI_Model {
         }
     }
 
+
+
+    function getChatAll($session){
+        $this->db->select('*');
+        $this->db->from('sessions_group_chat');
+        $this->db->where('sessions_id',$session);
+        $this->db->order_by("group_chat_date", "desc");
+        $presenter = $this->db->get();
+        if ($presenter->num_rows() > 0) {
+            return $presenter->result();
+        } else {
+            return '';
+        }
+    }
 
 
     private function fixZeroTotalTime($start)
