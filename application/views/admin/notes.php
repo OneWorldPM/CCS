@@ -42,7 +42,7 @@
                                        
                                     </thead>
                                     <tbody>
-                                        <?php if (isset($notes)){
+                                        <?php if (isset($notes) && !empty($notes)) {
                                             foreach ($notes as $note){
                                                 // $note_cont=$note['note_content'];
 
