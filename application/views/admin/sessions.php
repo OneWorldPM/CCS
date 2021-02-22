@@ -265,8 +265,10 @@ $user_role = $this->session->userdata('role');
                                                          <?php } ?>
                                                          <a href="<?= base_url() ?>admin/sessions/send_json/<?= $val->sessions_id ?>" class="btn btn-purple btn-sm" style="margin-bottom: 5px;">Send JSON</a>
                                                          <a href="<?= base_url() ?>admin/sessions/view_json/<?= $val->sessions_id ?>" class="btn btn-purple btn-sm" style="margin-bottom: 5px;">View JSON</a>
-														 <a href="<?= base_url() ?>admin/sessions/reset_sessions/<?= $val->sessions_id ?>" style="margin-bottom: 5px;"  class="btn btn-danger btn-sm">Clear JSON</a>
-														 <a href="<?= base_url() ?>admin/sessions/flash_report/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-info btn-sm">Flash Report</a>
+                                                         <?php if ($user_role == 'super_admin') { ?>
+                                                            <button href-url="<?= base_url() ?>admin/sessions/reset_sessions/<?= $val->sessions_id ?>" session-name="<?= $val->session_title ?>" style="margin-bottom: 5px;"  class="clear-json-btn btn btn-danger btn-sm">Clear JSON</button>
+                                                         <?php } ?>
+                                                         <a href="<?= base_url() ?>admin/sessions/flash_report/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-info btn-sm">Flash Report</a>
                                                          <a href="<?= base_url() ?>admin/sessions/polling_report/<?= $val->sessions_id ?>" class="btn btn-azure btn-sm">Polling Report</a>
                                                          <button class="askarep-report btn btn-azure btn-sm" session-id="<?=$val->sessions_id?>" session-name="<?= $val->session_title ?>">Ask A Rep - Report</button>
                                                     </td>
@@ -322,6 +324,7 @@ $user_role = $this->session->userdata('role');
     </div>
 </div>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@9.17.0/dist/sweetalert2.all.min.js"></script>
 <?php
 $msg = $this->input->get('msg');
 $m;
@@ -372,9 +375,28 @@ switch ($msg) {
             alertify.<?= $t ?>("<?= $m ?>");
 <?php endif; ?>
 
-    $('#sessions_table').on('click', '.reload-attendee', function () {
+    $('.reload-attendee').on('click', '.reload-attendee', function () {
         socket.emit('reload-attendee', $(this).attr('app-name'));
     });
+    $('#sessions_table').on('click', '.clear-json-btn', function () {
+
+let session_name = $(this).attr('session-name');
+let href = $(this).attr('href-url');
+
+Swal.fire({
+    title: 'Are you sure?',
+    text: "This will delete all data collected from users on this session("+session_name+"), you won't be able to revert this action!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+    if (result.isConfirmed) {
+        window.open(href, "_self");
+    }
+})
+});
 
     });
 
@@ -416,5 +438,7 @@ switch ($msg) {
                 alertify.error("Unable to load the report.");
             });
     });
+
+
 
 </script>
