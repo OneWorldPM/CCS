@@ -37,6 +37,56 @@ class Common {
         }
     }
 
+    function sendSmtpEmail($toEmail, $emailSubject, $emailBody)
+    {
+        $this->load->config('email_config', TRUE);
+
+        if (!$this->config->item('smtp_user', 'email_config'))
+        {
+            $response = array(
+                'status' => 'failed',
+                'msg' => "Send email option is not configured, please contact developer or system administrator."
+            );
+
+            echo json_encode($response);
+
+            return;
+        }
+
+
+        $config = Array(
+            'protocol' => $this->config->item('protocol', 'email_config'),
+            'smtp_host' => $this->config->item('smtp_host', 'email_config'),
+            'smtp_port' => $this->config->item('smtp_port', 'email_config'),
+            'smtp_user' => $this->config->item('smtp_user', 'email_config'),
+            'smtp_pass' => $this->config->item('smtp_pass', 'email_config'),
+            'mailtype'  => $this->config->item('mailtype', 'email_config'),
+            'charset'   => $this->config->item('charset', 'email_config')
+        );
+        $this->load->library('email', $config);
+
+        $this->email->from('no-reply@yourconference.live', 'Your Conference Live');
+        $this->email->to($toEmail); // To email here
+        //$this->email->cc('athullive@gmail.com');
+        //$this->email->bcc('athullive@gmail.com');
+
+        $this->email->subject($emailSubject);
+
+        $this->email->message($emailBody);
+
+        $result = $this->email->send();
+
+        if ($result)
+        {
+            echo 1;
+        }else{
+
+            echo 0;
+        }
+
+        return;
+    }
+
     function get_user_details($cust_id) {
         $this->_CI->db->where('cust_id', trim($cust_id));
         $customer_master = $this->_CI->db->get('customer_master');
