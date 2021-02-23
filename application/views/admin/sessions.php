@@ -271,6 +271,7 @@ $user_role = $this->session->userdata('role');
                                                          <a href="<?= base_url() ?>admin/sessions/flash_report/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-info btn-sm">Flash Report</a>
                                                          <a href="<?= base_url() ?>admin/sessions/polling_report/<?= $val->sessions_id ?>" class="btn btn-azure btn-sm">Polling Report</a>
                                                          <button class="askarep-report btn btn-azure btn-sm" session-id="<?=$val->sessions_id?>" session-name="<?= $val->session_title ?>">Ask A Rep - Report</button>
+                                                         <a href="<?= base_url() ?>admin/sessions/questionsReport/<?= $val->sessions_id ?>" style="margin-top: 5px;" class="btn btn-info btn-sm">Questions Report</a>
                                                     </td>
                                               
                                                      
