@@ -773,10 +773,10 @@ $(document).ready(function() {
             if (days != 0 && days)
                 timer_string = days + "d " + timer_string;
             timer_string = "Time Remaining: " + timer_string;
-
-            // Display the result in the element with id="demo"
-            //$('#quiz-time-left').html('Time Left: '+hours + "h " + minutes + "m " + seconds + "s ");
-            //console.log('Time Left: '+hours + "h " + minutes + "m " + seconds + "s ");
+            $('#id_day_time_clock').css('color', '#FF6347')
+                // Display the result in the element with id="demo"
+                //$('#quiz-time-left').html('Time Left: '+hours + "h " + minutes + "m " + seconds + "s ");
+                //console.log('Time Left: '+hours + "h " + minutes + "m " + seconds + "s ");
             $('#id_day_time_clock').text(timer_string);
 
             // If the count down is finished,
