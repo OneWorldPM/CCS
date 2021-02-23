@@ -868,5 +868,32 @@ class Sessions extends CI_Controller {
         return;
     }
 
+    public function questionsReport($sessionId)
+    {
+        $file_name = 'Questions_Session_'.$sessionId.'.csv';
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$file_name");
+        header("Content-Type: application/csv;");
+
+
+        $this->db->select("question");
+        $this->db->where('sessions_id', $sessionId);
+        $this->db->from('sessions_cust_question');
+        $questions = $this->db->get();
+
+        // file creation
+        $file = fopen('php://output', 'w');
+
+        $header = array("Question");
+        fputcsv($file, $header);
+        foreach ($questions->result_array() as $key => $value)
+        {
+            fputcsv($file, $value);
+        }
+        fclose($file);
+        exit;
+
+    }
+
 
 }
