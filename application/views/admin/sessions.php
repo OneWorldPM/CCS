@@ -375,7 +375,7 @@ switch ($msg) {
             alertify.<?= $t ?>("<?= $m ?>");
 <?php endif; ?>
 
-    $('.reload-attendee').on('click', '.reload-attendee', function () {
+    $('#sessions_table').on('click', '.reload-attendee', function () {
         socket.emit('reload-attendee', $(this).attr('app-name'));
     });
     $('#sessions_table').on('click', '.clear-json-btn', function () {
