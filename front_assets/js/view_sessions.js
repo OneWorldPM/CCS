@@ -920,7 +920,7 @@ function stop_music() {
     audio.pause();
 }
 
-var upgradeTime = 15;
+var upgradeTime = 10;
 var seconds = upgradeTime;
 
 // function timer(status) {
@@ -962,7 +962,7 @@ function timer(status)
         $("#id_day_time").css("color", "#ef5e25");
         play_music();
 
-        var timeLeft = 15;
+        var timeLeft = 10;
         var pollTimer = setInterval(function(){
             if(timeLeft <= 0){
                 clearInterval(pollTimer);
