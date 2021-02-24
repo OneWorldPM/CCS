@@ -147,35 +147,7 @@
             extract(config);
             var socketServer = "https://socket.yourconference.live:443";
             let socket = io(socketServer);
-            socket.on('serverStatus', function (data) {
-                socket.emit('addMeToActiveListPerApp', {'user_id':user_id, 'app': socket_app_name, 'room': socket_active_user_list});
-            });
-        });
-
-        // Active again
-        function resetActive(){
-            socket.emit('userActiveChangeInApp', {"app":socket_app_name, "room":socket_active_user_list, "name":user_name, "userId":user_id, "status":true});
-        }
-        // No activity let everyone know
-        function inActive(){
-            socket.emit('userActiveChangeInApp', {"app":socket_app_name, "room":socket_active_user_list, "name":user_name, "userId":user_id, "status":false});
-        }
-
-        $(window).on("blur focus", function(e) {
-            var prevType = $(this).data("prevType");
-
-            if (prevType != e.type) {   //  reduce double fire issues
-                switch (e.type) {
-                    case "blur":
-                        inActive();
-                        break;
-                    case "focus":
-                        resetActive();
-                        break;
-                }
-            }
-
-            $(this).data("prevType", e.type);
+        
         });
     });
 </script>
@@ -203,22 +175,22 @@
                             $("#push_notification_id").val(data.result.push_notification_id);
                         }
                         if (push_notification_id != data.result.push_notification_id && data.result.session_id == null) {
-                         
+                            if (data.result.receiver=="presenter" || data.result.receiver=="both" || data.result.receiver==null){
                             $("#push_notification_id").val(data.result.push_notification_id);
                             $('#push_notification').modal('show');
                             $("#push_notification_message").text(data.result.message);
-                            
+                            }
                         }
 
                         if (push_notification_id != data.result.push_notification_id && data.result.session_id != null)
                         {
-                         
+                            if (data.result.receiver=="presenter" || data.result.receiver=="both" || data.result.receiver==null){
                             if (typeof session_id !== 'undefined' && session_id == data.result.session_id)
                             {
                                 $("#push_notification_id").val(data.result.push_notification_id);
                                 $('#push_notification').modal('show');
                                 $("#push_notification_message").text(data.result.message);
-                            
+                            }
                         }
                         }
                     } else {

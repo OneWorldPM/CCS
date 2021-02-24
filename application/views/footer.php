@@ -100,7 +100,8 @@
                             $("#push_notification_id").val(data.result.push_notification_id);
                         }
                         if (push_notification_id != data.result.push_notification_id && data.result.session_id == null) {
-                            if(data.result.receiver == null){
+                            if (data.result.receiver=="attendee" || data.result.receiver=="both" ||data.result.receiver==null){
+                       
                             $("#push_notification_id").val(data.result.push_notification_id);
                             $('#push_notification').modal('show');
                             $("#push_notification_message").text(data.result.message);
@@ -108,14 +109,15 @@
                         }
 
                         if (push_notification_id != data.result.push_notification_id && data.result.session_id != null)
-                        { 
-                             if(data.result.receiver == null){
+                        {    if (data.result.receiver=="attendee" || data.result.receiver=="both" || data.result.receiver==null){
+                           
                             if (typeof session_id !== 'undefined' && session_id == data.result.session_id)
                             {
                                 $("#push_notification_id").val(data.result.push_notification_id);
                                 $('#push_notification').modal('show');
                                 $("#push_notification_message").text(data.result.message);
                             }
+
                         }
                         }
                     } else {
