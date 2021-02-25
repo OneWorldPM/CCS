@@ -53,6 +53,29 @@ class M_sessions extends CI_Model {
     }
     #####################
     
+    function getSessionsAllDesc() {
+        $this->db->select('s.*');
+        $this->db->from('sessions s');
+		 ($this->session->userdata('start_date') != "") ? $where['DATE(s.sessions_date) >='] = date('Y-m-d', strtotime($this->session->userdata('start_date'))) : '';
+        ($this->session->userdata('end_date') != "") ? $where['DATE(s.sessions_date) <='] = date('Y-m-d', strtotime($this->session->userdata('end_date'))) : '';
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+        $this->db->order_by("s.sessions_date", "desc");
+        $this->db->order_by("s.time_slot", "asc");
+        $sessions = $this->db->get();
+        if ($sessions->num_rows() > 0) {
+            $return_array = array();
+            foreach ($sessions->result() as $val) {
+                $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
+                $val->moderators = $this->getModerators($val->sessions_id);
+                $return_array[] = $val;
+            }
+            return $return_array;
+        } else {
+            return '';
+        }
+    }##########################
     function getAllSessions() {
         $this->db->select('*');
         $this->db->from('sessions');
