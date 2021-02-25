@@ -111,6 +111,7 @@ $user_role = $this->session->userdata('role');
                                             <th>Presenters</th>
                                             <th>Moderators</th>
                                             <th>Time Slot</th>
+                                            <th>Session Notes</th>
                                             <th>Other Info</th>
                                             <th style="border-right: 0px solid #ddd;">Action</th>
                                             <th style="border-left: 0px solid #ddd; border-right: 0px solid #ddd;"></th>
@@ -204,6 +205,12 @@ $user_role = $this->session->userdata('role');
                                                     </td>
                                                 
                                                     <td><?= date("h:i A", strtotime($val->time_slot)) . ' - ' . date("h:i A", strtotime($val->end_time)) ; ?></td>
+                                                    <td>  <?php if (isset($val->getNotesAll) && !empty($val->getNotesAll)){
+                                                           foreach ($val->getNotesAll as $note){
+                                                              $note_content= $note->note_content;
+                                                            echo "".$note_content ."<br>";
+                                                           }
+                                                       }?></td>
                                                     <td>
                                                     
                                                         <?php $total=$mod_count+$pres_count ;  ?>
@@ -256,7 +263,8 @@ $user_role = $this->session->userdata('role');
                                                         <a href="<?= base_url() ?>admin/sessions/view_question_answer/<?= $val->sessions_id ?>" class="btn btn-primary btn-sm" style="margin-bottom: 5px;">View Q&A</a>
                                                         <a href="<?= base_url() ?>admin/sessions/report/<?= $val->sessions_id ?>" class="btn btn-grey btn-sm" style="margin-bottom: 5px;">Report</a>
                                                         <a href="<?= base_url() ?>admin/groupchat/sessions_groupchat/<?= $val->sessions_id ?>" class="btn btn-blue btn-sm" style="margin-bottom: 5px;">Create Chat</a>
-                                                        <a href="<?= base_url() ?>admin/sessions/resource/<?= $val->sessions_id ?>" class="btn btn-success btn-sm">Resources</a>
+                                                        <a href="<?= base_url() ?>admin/sessions/resource/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-success btn-sm" >Resources</a>
+                                                        <a href="<?= base_url() ?>admin/sessions/add_notes/<?= $val->sessions_id ?>" class="btn btn-light-green btn-sm">Notes</a>
                                                         <?php } ?>
                                                     </td>
                                                     <td>
@@ -331,6 +339,14 @@ $msg = $this->input->get('msg');
 $m;
 $t;
 switch ($msg) {
+    case "A":
+        $m = "Successfully Added";
+        $t = "success";
+        break;
+    case "D":
+        $m = "Successfully Deleted";
+        $t = "success";
+        break;
     case "S":
         $m = "Successfully Cleared";
         $t = "success";

@@ -42,7 +42,8 @@ class M_sessions extends CI_Model {
                 $val->groupchat= $this->getGroupChatDetails($val->sessions_id);
                 $val->groupchatPresenter= $this->getGroupChatDetailsPresenter($val->sessions_id);
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
-                
+                $val->getNotesAll= $this->getNotesAll($val->sessions_id);
+
                 $return_array[] = $val;
             }
             return $return_array;
@@ -1867,6 +1868,55 @@ class M_sessions extends CI_Model {
             return '';
         }
     }
+
+    function getNotesAll($session){
+        $this->db->select('*');
+        $this->db->from('notes');
+        $this->db->where('sessions_id',$session);
+        $this->db->order_by("date_created", "desc");
+        $notes = $this->db->get();
+        if ($notes->num_rows() > 0) {
+            return $notes->result();
+        } else {
+            return '';
+        }
+    }
+
+    function getNotesDetails($session_id){
+        $this->db->select('*');
+        $this->db->from('notes');
+        $this->db->where('sessions_id',$session_id);
+        $this->db->order_by("date_created", "desc");
+        $notes = $this->db->get();
+        if ($notes->num_rows() > 0) {
+            return $notes->result();
+        } else {
+            return '';
+        }
+    }
+
+    function create_notes($sessions_id){
+        $post = $this->input->post();
+        $set = array(
+           
+            'sessions_id' => $sessions_id,
+            'date_created' => date('Y-m-d'),
+            'note_title' => $post['note_title'],
+            'note_content' => $post['note_content'],
+        );
+        $result=$this->db->insert("notes", $set);
+        if($result){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+    function delete_notes($note_id) {
+        $this->db->delete("notes", array("note_id" => $note_id));
+        return "success";
+    }
+
 
 
     private function fixZeroTotalTime($start)
