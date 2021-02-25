@@ -33,9 +33,9 @@ class Notes extends CI_Controller {
       
        $result=$this->mnotes->create_note();
        if ($result != "") {
-        header('location:' . base_url() . 'admin/sessions');
+        header('location:' . base_url() . 'admin/notes?msg=S');
     } else {
-        header('location:' . base_url() . 'admin/sessions');
+        header('location:' . base_url() . 'admin/notes?msg=E');
     }
     }
 }
