@@ -17,6 +17,7 @@
                     <div class="panel-body bg-white" style="border: 1px solid #b2b7bb!important;">
                         <div class="row">
                             <div class="col-md-12 table-responsive">
+                            <a href="<?=base_url('admin/sessions/create_poll/')?><?=$session_id?>"><button class="btn btn-sm btn-success" style="margin-bottom: 5px;"><i class="fa fa-plus" aria-hidden="true"></i> Create Poll</button></a>
                                 <table class="table table-bordered table-striped text-center" id="user">
                                     <thead class="th_center">
                                         <tr>
