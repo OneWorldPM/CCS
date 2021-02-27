@@ -970,6 +970,26 @@ class Sessions extends CI_Controller {
     }
 
 
-
+            
+   public function delete_all_session_photos($session_id) {
+    $qstr = $this -> msessions -> edit_sessions($session_id);
+    $sessions_photo_name = $qstr -> sessions_photo;
+    $sessions_logo = $qstr -> sessions_logo;
+    if (isset($sessions_photo_name) && !empty($sessions_photo_name)) {
+        unlink("uploads/sessions_logo/".$sessions_logo);
+    }
+    if (isset($sessions_addnl_logo) && !empty($sessions_addnl_logo)) {
+        unlink("uploads/sessions_logo/".$sessions_addnl_logo);
+    }
+    if (isset($sessions_logo) && !empty($sessions_logo)) {
+        unlink("uploads/sessions/".$sessions_photo_name);
+    }
+    $res = $this -> msessions -> delete_all_session_photos($session_id);
+    if ($res) {
+        echo "success";
+    } else {
+        echo "error";
+    }
+    }
 
 }
