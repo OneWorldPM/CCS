@@ -479,14 +479,15 @@ class Sessions extends CI_Controller {
 
     function send_json($sessions_id) {
         if ($sessions_id != "") {
-            $result = $this->msessions->send_json($sessions_id);
-            if ($result) {
-                header('location:' . base_url() . 'admin/sessions?msg=S');
+            $result = $this->msessions->send_json($sessions_id); 
+            if ($result) {  
+                $this->msessions->update_json_status($sessions_id);
+                header('location:' . base_url() . 'admin/sessions?msg=JS');
             } else {
-                header('location:' . base_url() . 'admin/sessions?msg=E');
+                header('location:' . base_url() . 'admin/sessions?msg=JE');
             }
         } else {
-            header('location:' . base_url() . 'admin/sessions?msg=E');
+            header('location:' . base_url() . 'admin/sessions?msg=JE');
         }
     }
     
