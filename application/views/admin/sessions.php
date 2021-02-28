@@ -434,23 +434,7 @@ Swal.fire({
 })
 });
 
-//  this will show if json already sent
-// $('.send-json').on("click", function () {
-//             var sesionId = <?=$val->sessions_id?>;
-//             alertify.confirm('Resend Json','This will resend the Json data in this session', function(e){ 
-//                 console.log("here");
-//                 if(e){
-//                     $.ajax({
-//                     url: "<?=base_url()?>admin/sessions/send_json/"+sesionId,
-//                     type: "post",
-//                     dataType: "json",
-//                     success: function (response) {
-//                         alertify.success('Json Resent!');
-//                     }
-//                 });
-//                 }
-//                 });
-//         });
+
 $('.send-json').on('click', function () {
 
 let sesionId = <?=$val->sessions_id?>;
