@@ -435,7 +435,7 @@ Swal.fire({
 });
 
 
-$('.send-json').on('click', function () {
+$('#sessions_table').on('click','.send-json', function () {
 
 let sesionId = <?=$val->sessions_id?>;
 let href = $(this).attr('href-url');
