@@ -20,7 +20,7 @@
                                     <div class="form-group">
                                             <label for="visibility">Visibility :</label>
                                             <select class="form-control" id="visibility" name="visibility">
-                                                <option value="null">Whole Site</option>
+                                                <option value="0">Whole Site</option>
                                                 <?php
                                                 foreach ($sessions as $session)
                                                 { ?>
@@ -29,6 +29,13 @@
                                                 }
                                                 ?>
                                             </select>
+                                            <br>
+                                            <div class="form-group">
+                                            <input type="checkbox" id="presenter" name="chk_presenter" value="presenter">
+                                            <label for="presenter">Presenter</label><br>
+                                            <input type="checkbox" id="attendee" name="chk_attendee" value="attendee">
+                                            <label for="attendee">Attendee</label><br>
+                                            </div>
                                             <small style="color: grey;">Note: Sending a session specific push notification will go to both the attend and view pages.</small>
                                         </div>
                                         
@@ -63,6 +70,7 @@
                                                 <th>Date</th>
                                                 <th>Visibility</th>
                                                 <th>Message</th>
+                                                <th>Viewer</th>
                                                 <th>Action</th>                          
                                             </tr>
                                         </thead>
@@ -80,6 +88,17 @@
                                                                 <label class="label label-primary">Sent</label>
                                                             <?php } ?>
                                                         </td>-->
+                                                 
+                                                        <?php if (isset($val->receiver)){
+                                                                if ($val->receiver=="both"){
+                                                                  echo '<td> All </td>';
+                                                                }else{
+                                                                    echo '<td>'.Ucfirst($val->receiver).'</td>';
+                                                                }
+                                                        }else{
+                                                            echo'<td> All </td>';
+                                                        }?>
+                                                      
                                                         <td> 
                                                             <?php if ($val->status == 0) { ?>
                                                                 <a class="btn btn-success btn-sm send_notification" data-id="<?= $val->push_notification_id ?>" href="#">

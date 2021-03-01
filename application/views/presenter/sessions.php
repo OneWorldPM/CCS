@@ -23,21 +23,22 @@
                                     <thead class="th_center">
                                         <tr>
                                             <th>Photo</th>
+                                            <th>Time Slot</th>
+                                            <th>Session Number</th>
                                             <th>Title</th>
                                             <th>Presenter</th>
                                             <th>Zoom Link</th>
                                             <th>Zoom Number</th>
-                                             <th>Password</th>
-                                            <th>Time Slot</th>
+                                             <th>Password</th>                                
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
+                                        <?php                                      
                                         if (isset($sessions) && !empty($sessions)) {
                                             foreach ($sessions as $val) {
                                                 ?>
-                                                <tr>
+                                                <tr>                                             
                                                     <td>
                                                         <?php if ($val->sessions_photo != "") { ?>
                                                             <img src="<?= base_url() ?>uploads/sessions/<?= $val->sessions_photo ?>" style="height: 40px; width: 40px;">
@@ -45,6 +46,10 @@
                                                             <img src="<?= base_url() ?>front_assets/images/session_avtar.jpg" style="height: 40px; width: 40px;">
                                                         <?php } ?>
                                                     </td>
+                                                    <td><?= date("h:i A", strtotime($val->time_slot)) .' - '. date("h:i A", strtotime($val->end_time)) ?></td>
+                                                    <td>
+                                                <?= $val->sessions_id ?>
+                                                </td>   
                                                     <td><?= $val->session_title ?></td>
                                                     <td><?php
                                                         if (isset($val->presenter) && !empty($val->presenter)) {
@@ -57,8 +62,7 @@
                                                      <td><a target="_blank" href="<?= $val->zoom_link ?>"><?= $val->zoom_link ?></a></td>
                                                      <td><?= $val->zoom_number ?></a></td>
                                                      <td><?= $val->zoom_password ?></td>
-                                                    <td><?= date("h:i A", strtotime($val->time_slot)) .' - '. date("h:i A", strtotime($val->end_time)) ?></td>
-                                                    <td>
+                                                     <td>
                                                         <a href="<?= base_url() ?>presenter/sessions/view_session/<?= $val->sessions_id ?>" class="btn btn-light-azure btn-sm">View Session</a>
                                                            <a href="<?= base_url() ?>presenter/groupchat/sessions_groupchat/<?= $val->sessions_id ?>" class="btn btn-grey btn-sm">Create Chat</a>
                                                         <a href="<?= base_url() ?>presenter/sessions/view_question_answer/<?= $val->sessions_id ?>" class="btn btn-grey btn-sm">View Q&A</a>
@@ -90,14 +94,15 @@
                             <div class="col-md-12 table-responsive">
                                 <table class="table table-bordered table-striped text-center " id="moderator_sessions_table">
                                     <thead class="th_center">
-                                        <tr>
+                                        <tr>                                         
                                             <th>Photo</th>
+                                            <th>Time Slot</th>
+                                            <th>Session Number</th>
                                             <th>Title</th>
                                             <th>Zoom Link</th>
                                             <th>Zoom Number</th>
                                             <th>Password</th>
-                                            <th>Presenter</th>
-                                            <th>Time Slot</th>
+                                            <th>Presenter</th>                                          
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -106,7 +111,7 @@
                                         if (isset($moderator_sessions) && !empty($moderator_sessions)) {
                                             foreach ($moderator_sessions as $val) {
                                                 ?>
-                                                <tr>
+                                                <tr>                                             
                                                     <td>
                                                         <?php if ($val->sessions_photo != "") { ?>
                                                             <img src="<?= base_url() ?>uploads/sessions/<?= $val->sessions_photo ?>" style="height: 40px; width: 40px;">
@@ -114,9 +119,13 @@
                                                             <img src="<?= base_url() ?>front_assets/images/session_avtar.jpg" style="height: 40px; width: 40px;">
                                                         <?php } ?>
                                                     </td>
+                                                    <td style="white-space: pre; text-align: right;"><?= date("m-d-Y", strtotime($val->sessions_date)) ?>  <?= date("h:i A", strtotime($val->time_slot)) . ' - ' . date("h:i A", strtotime($val->end_time)) ?></td>
+                                                    <td>
+                                                <?= $val->sessions_id ?>
+                                                </td>
                                                     <td style="text-align: left;"><?= $val->session_title ?></td>
                                                      <td><a target="_blank" href="<?= $val->zoom_link ?>"><?= $val->zoom_link ?></a></td>
-                                                     <td><?= $val->zoom_number?></a></td>
+                                                     <td><?= $val->zoom_number?></a></td>   
                                                     <td><?= $val->zoom_password ?></td>
                                                     <td style="text-align: left;">
                                                         <?php
@@ -127,8 +136,7 @@
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td style="white-space: pre; text-align: right;"><?= date("m-d-Y", strtotime($val->sessions_date)) ?>  <?= date("h:i A", strtotime($val->time_slot)) . ' - ' . date("h:i A", strtotime($val->end_time)) ?></td>
-                                                    <td>
+                                                  <td>
                                                           <a href="<?= base_url() ?>presenter/sessions/view_session/<?= $val->sessions_id ?>?status=2" class="btn btn-light-azure btn-sm" style="margin: 3px;">View Session</a>
                                                         <a href="<?= base_url() ?>presenter/groupchat/sessions_groupchat/<?= $val->sessions_id ?>" class="btn btn-grey btn-sm" style="margin: 3px;">Create Chat</a>
                                                         <a href="<?= base_url() ?>presenter/sessions/view_question_answer/<?= $val->sessions_id ?>" class="btn btn-grey btn-sm" style="margin: 3px;">View Q&A</a>

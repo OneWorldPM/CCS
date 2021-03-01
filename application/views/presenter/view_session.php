@@ -1,6 +1,16 @@
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
 <link href="<?= base_url() ?>front_assets/presenter/view_session.css?v=2" rel="stylesheet">
+<style>
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
+.sticky + .content {
+  padding-top: 60px;
+}
+ </style>
 <?php
 if (isset($_GET['testing']) && $_GET['testing'] == 1) {
     echo date('yy-m-d h:m:i');
@@ -33,7 +43,7 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>        
                 <div class="content">
                     <input type="hidden" id="sessions_group_chat_id" value="">
                     <div class="wrap-messages">
@@ -125,16 +135,12 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
     </div>
 </div>
 
-
-
-
-
 <div class="stickyTimer">
     <?php if (1==2){ ?>
-
     <?php } ?>
-
-    <div id="id_day_time_clock" class="timer" style="right:20px;position:fixed"></div>
+    <div class="bg-dark sticky-top" id="stickTimer" style="right:20px;position:fixed;background:black; width:100%">
+        <div id="id_day_time_clock" class="timer" style="right:20px;"></div>
+    </div>
 </div>
 
 <div class="rightSticky presenterRightSticky" data-screen="presenter">
@@ -156,4 +162,19 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
 </script>
 
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/presenter/view_session.js?v=7"></script>
+<script src="<?= base_url() ?>front_assets/presenter/view_session.js?v=8"></script>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("stickTimer");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
