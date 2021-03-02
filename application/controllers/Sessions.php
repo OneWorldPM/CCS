@@ -66,6 +66,8 @@ class Sessions extends CI_Controller {
         }
 
         $header_data["sesions_logo"] = $sesions->sessions_logo;
+        $header_data["sesions_logo_width"] = $sesions->sessions_logo_width;
+        $header_data["sesions_logo_height"] = $sesions->sessions_logo_height;
         $header_data["sponsor_type"] = $sesions->sponsor_type;
       $header_data["right_bar"] = $sesions->right_bar;
         $header_data["tool_box_status"] = $sesions->tool_box_status;
@@ -531,12 +533,12 @@ class Sessions extends CI_Controller {
         $this->db->where(array('session_id'=>$post['session_id'], 'user_id'=>$post['user_id'], 'rep_type'=>$post['rep_type']));
         $response = $this->db->get();
         if ($response->num_rows() > 0)
-            echo json_encode(array('status'=>'failed', 'msg'=>"You have already requested to be contacted by a representative ({$post['rep_type']}).<br> A representative will contact you within 5 business days."));
+            echo json_encode(array('status'=>'failed', 'msg'=>"You have already requested to be contacted by a representative ({$post['rep_type']}).<br> A representative will contact you shortly."));
         else
         {
             $this->db->insert('ask_a_rep', $data);
             if ($this->db->affected_rows() > 0)
-                echo json_encode(array('status'=>'success', 'msg'=>"Thank you for your request. <br> A representative will contact you within 5 business days."));
+                echo json_encode(array('status'=>'success', 'msg'=>"Thank you for your request. <br> A representative will contact you shortly."));
             else
                 echo json_encode(array('status'=>'failed', 'msg'=>"Unable to request, please try again."));
         }

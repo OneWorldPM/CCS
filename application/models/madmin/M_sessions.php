@@ -294,6 +294,8 @@ class M_sessions extends CI_Model {
             "reg_date" => date("Y-m-d h:i"),
             'right_bar' => $session_right_bar,
             'sponsor_type' => $post['sponsor_type'],
+            'sessions_logo_width' => $post['sessions_logo_width'],
+            'sessions_logo_height' => $post['sessions_logo_height'],
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
 
@@ -470,6 +472,8 @@ class M_sessions extends CI_Model {
             'url_link' => trim($post['url_link']),
             'link_text' => trim($post['link_text']),
             'sponsor_type' => $post['sponsor_type'],
+            'sessions_logo_width' => $post['sessions_logo_width'],
+            'sessions_logo_height' => $post['sessions_logo_height'],
             'right_bar' => $session_right_bar,
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,

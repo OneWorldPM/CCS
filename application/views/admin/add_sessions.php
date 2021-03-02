@@ -247,37 +247,37 @@ $user_role = $this->session->userdata('role');
                                             </div>
                                     </div>
 
-                                            <div class="form-group" style="position: unset !important; <?=($user_role != 'super_admin')?'display:none':''?>" >
-                                                <label class="col-md-12 text-large text-bold">Sponsor/Additional Logo</label>
-                                                <input type="file" class="form-control" name="sessions_logo" id="sessions_logo" <?=($user_role != 'super_admin')?'disabled':''?>>
-                                                <?php
-                                                if (isset($sessions_edit)) {
-                                                    if ($sessions_edit->sessions_logo != "") {
-                                                        ?>
-                                                        <img src="<?= base_url() ?>uploads/sessions_logo/<?= $sessions_edit->sessions_logo ?>" style="object-fit: contain;height: 100px; width: 100px;">
-                                                        <?php
-                                                    }
-                                                }else{
-                                                    ?>
-                                                    <img src="<?= base_url() ?>uploads/sessions/sessions_50731296.png" style="height: 100px; width: 100px;">
-                                                    <?php
-                                                }
-                                                ?>
-                                                <hr style="border: 2px solid;">
-                                            </div>
+                                <div class="form-group" style="position: unset !important; <?=($user_role != 'super_admin')?'display:none':''?>" >
+                                    <hr style="border: 2px solid;">
+                                    <label class="col-md-12 text-large text-bold">Sponsor Logo</label>
+                                    <input type="file" class="form-control" name="sessions_logo" id="sessions_logo" <?=($user_role != 'super_admin')?'disabled':''?>>
+                                    <?php
+                                    if (isset($sessions_edit)) {
+                                        if ($sessions_edit->sessions_logo != "") {
+                                            ?>
+                                            <img src="<?= base_url() ?>uploads/sessions_logo/<?= $sessions_edit->sessions_logo ?>" style="object-fit: contain;height: 100px; width: 100px;">
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                    <div class="clearfix" style="height: 5px;"></div>
+                                    <span style="color: blue;">Width: </span><input type="number" class="form-control-sm" style="color: #000;" name="sessions_logo_width" id="sessions_logo_width" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->sessions_logo_width : "" ?>" <?=($user_role != 'super_admin')?'readonly':''?>><span style="color: blue;">(pixels)</span>&nbsp;&nbsp;&nbsp;
+                                    <span style="color: red;">Height: </span><input type="number" class="form-control-sm" style="color: #000;" name="sessions_logo_height" id="sessions_logo_height" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->sessions_logo_height : "" ?>" <?=($user_role != 'super_admin')?'readonly':''?>><span style="color: red;">(pixels)</span>
+                                </div>
 
-                                        <div class="row" style="margin-top: 20px; <?=($user_role != 'super_admin')?'display:none':''?>">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 text-large text-bold" for="sel1">Select Sponsor Type</label>
+                                <div class="row" style="margin-top: 20px; <?=($user_role != 'super_admin')?'display:none':''?>">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-12 text-large text-bold" for="sel1">Select Sponsor Text</label>
 
-                                                    <select class="form-control" name="sponsor_type" <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
-                                                        <option value="SPONSORED BY" <?=isset($sessions_edit)?($sessions_edit->sponsor_type=="SPONSORED BY"?"selected":""):""?>>SPONSORED BY</option>
-                                                        <option value="EDUCATED BY" <?=isset($sessions_edit)?($sessions_edit->sponsor_type=="EDUCATED BY"?"selected":""):""?>>EDUCATED BY</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <select class="form-control" name="sponsor_type" <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
+                                                <option value="" <?=isset($sessions_edit)?($sessions_edit->sponsor_type==""?"selected":""):""?>>___No Text___</option>
+                                                <option value="SPONSORED BY" <?=isset($sessions_edit)?($sessions_edit->sponsor_type=="SPONSORED BY"?"selected":""):""?>>SPONSORED BY</option>
+                                                <option value="EDUCATED BY" <?=isset($sessions_edit)?($sessions_edit->sponsor_type=="EDUCATED BY"?"selected":""):""?>>EDUCATED BY</option>
+                                            </select>
                                         </div>
+                                    </div>
+                                </div>
 
                                         <div class="form-group">
                                             <h5 class="over-title margin-bottom-15" style="text-align: center;">
