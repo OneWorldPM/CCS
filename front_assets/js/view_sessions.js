@@ -1104,7 +1104,7 @@ $(document).ready(function () {
             {
                 rep_type: rep_type,
                 user_id: user_id,
-                session_id: user_id
+                session_id: session_id
             })
             .done(function( data ) {
                 data = JSON.parse(data);
