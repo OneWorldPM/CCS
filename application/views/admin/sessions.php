@@ -313,6 +313,8 @@ $user_role = $this->session->userdata('role');
 </div>
 
 
+<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
 <!-- Ask a rep report modal -->
 <div class="modal fade" id="askarepReportModal" tabindex="-1" role="dialog" aria-labelledby="askarepReportModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" style="width: 50%;">
@@ -344,7 +346,17 @@ $user_role = $this->session->userdata('role');
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@9.17.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://kit.fontawesome.com/fd91b3535c.js" crossorigin="anonymous"></script>
 <?php
 $msg = $this->input->get('msg');
 $m;
@@ -486,7 +498,33 @@ Swal.fire({
                 });
 
                 $("#askarepReportTable").dataTable({
-                    "order": [[ 3, "desc" ]]
+                    "order": [[ 3, "desc" ]],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ],
+                    initComplete: function () {
+                        $('.buttons-copy').removeClass('dt-button');
+                        $('.buttons-copy').addClass('btn btn-info peco-dt-btns margin-right-5');
+                        $('.buttons-copy').html('<span><i class="fas fa-copy fa-2x"></i> Copy</span>');
+
+                        $('.buttons-csv').removeClass('dt-button');
+                        $('.buttons-csv').addClass('btn btn-primary peco-dt-btns margin-right-5');
+                        $('.buttons-csv').html('<span><i class="fas fa-file-csv fa-2x"></i> CSV <i class="fas fa-download"></i></span>');
+
+                        $('.buttons-excel').removeClass('dt-button');
+                        $('.buttons-excel').addClass('btn btn-success peco-dt-btns margin-right-5');
+                        $('.buttons-excel').html('<span><i class="fas fa-file-excel fa-2x"></i> Excel <i class="fas fa-download"></i></span>');
+
+                        $('.buttons-pdf').removeClass('dt-button');
+                        $('.buttons-pdf').addClass('btn btn-warning peco-dt-btns margin-right-5');
+                        $('.buttons-pdf').html('<span><i class="fas fa-file-pdf fa-2x"></i> PDF <i class="fas fa-download"></i></span>');
+
+                        $('.buttons-print').removeClass('dt-button');
+                        $('.buttons-print').addClass('btn btn-info peco-dt-btns margin-right-5');
+                        $('.buttons-print').html('<span><i class="fas fa-print fa-2x"></i> Print</span>');
+
+                    }
                 });
 
                 $('#askarepReportModal').modal('show');

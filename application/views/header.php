@@ -81,10 +81,9 @@
             }
 
             .logo2 {
-                border-left: 1px solid black;
                 float: left;
                 padding-left: 15px;
-                margin-top: 8px;
+                margin-top: 15px;
             }
 
             .logo2 img {
@@ -94,7 +93,7 @@
             }
             .logo2 span {
                 position: absolute;
-                top: -6px;
+                top: 5px;
                 font-family: sans-serif;
                 font-size: 11px;
             }
@@ -251,8 +250,10 @@
                         if (isset($sesions_logo)) {
                             ?>
                             <div class="logo2">
+                                <?php if($sponsor_type!=''):?>
                                 <span><?= $sponsor_type ?></span>
-                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()">
+                                <?php endif;?>
+                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: <?=$sesions_logo_width?>px;height: <?=$sesions_logo_height?>px;">
                             </div>
                             <?php
                         }
