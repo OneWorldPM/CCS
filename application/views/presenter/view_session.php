@@ -43,7 +43,7 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
                             </ul>
                         </div>
                     </div>
-                </div>        
+                </div>
                 <div class="content">
                     <input type="hidden" id="sessions_group_chat_id" value="">
                     <div class="wrap-messages">
