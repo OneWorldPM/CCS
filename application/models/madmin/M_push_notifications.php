@@ -18,10 +18,24 @@ class M_push_notifications extends CI_Model {
     }
 
     function add_push_notifications($post) {
-        $data = array(
+      if(isset($post['chk_presenter']) && isset($post['chk_attendee'])){
+          $receiver="both";
+      }
+      if(isset($post['chk_presenter']) && !isset($post['chk_attendee'])){
+        $receiver="presenter";
+    }
+    if(!isset($post['chk_presenter']) && isset($post['chk_attendee'])){
+        $receiver="attendee";
+    }
+    if(!isset($post['chk_presenter']) && !isset($post['chk_attendee'])){
+        $receiver=null;
+    }
+
+              $data = array(
             'message' => $post['message'],
             'notification_date' => date("Y-m-d h:i:s"),
-            'session_id'=>$post['visibility']
+            'session_id'=>($post['visibility']==0)?NULL:$post['visibility'],
+            'receiver'=>$receiver,
         );
         $this->db->insert('push_notification_admin', $data);
         $pid = $this->db->insert_id();
@@ -31,5 +45,8 @@ class M_push_notifications extends CI_Model {
             return '';
         }
     }
+
+
+    
 
 }
