@@ -189,12 +189,7 @@ $user_role = $this->session->userdata('role');
                                                     </td>
                                                     <td><small><?=(isset($val->embed_html_code))?$val->embed_html_code: '' ?></small></td>
                                                     <td><?=(isset($val->embed_html_code_presenter) && !empty($val->embed_html_code_presenter))? 'Yes':'<span style="color:red">X</span>'?> </td>
-                                                    <td>  <?php if (isset($val->getNotesAll) && !empty($val->getNotesAll)){
-                                                           foreach ($val->getNotesAll as $note){
-                                                              $note_content= $note->note_content;
-                                                            echo "".$note_content ."<br>";
-                                                           }
-                                                       }?></td>
+                                                    <td> <?=(isset($val->session_notes) && !empty($val->session_notes))?$val->session_notes:''?></td>
                                                     <td>
                                                         <?php $total=$mod_count+$pres_count ;  ?>
                                                         <?php $GroupChatTotal=$groupModCount+$groupPresCount ;  ?>
@@ -239,7 +234,6 @@ $user_role = $this->session->userdata('role');
                                                         <a href="<?= base_url() ?>admin/sessions/report/<?= $val->sessions_id ?>" class="btn btn-grey btn-sm" style="margin-bottom: 5px;">Report</a>
                                                         <a href="<?= base_url() ?>admin/groupchat/sessions_groupchat/<?= $val->sessions_id ?>" class="btn btn-blue btn-sm" style="margin-bottom: 5px;">Create Chat</a>
                                                         <a href="<?= base_url() ?>admin/sessions/resource/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-success btn-sm" >Resources</a>
-                                                        <a href="<?= base_url() ?>admin/sessions/add_notes/<?= $val->sessions_id ?>" class="btn btn-light-green btn-sm">Notes</a>
                                                         <?php } ?>
                                                     </td>
                                                     <td>
