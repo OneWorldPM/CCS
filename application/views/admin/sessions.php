@@ -110,6 +110,7 @@ $user_role = $this->session->userdata('role');
                                             <th>Title</th>
                                             <th>Presenters</th>
                                             <th>Moderators</th>
+                                            <th>Stream Name</th>
                                             <th>Time Slot</th>
                                             <th>Session Notes</th>
                                             <th>Other Info</th>
@@ -138,16 +139,11 @@ $user_role = $this->session->userdata('role');
                                                     <td><?= $val->session_title ?></td>
                                                     <td>
                                                         <?php
-
-                                           
                                                         if (isset($val->presenter) && !empty($val->presenter)) {
                                                             foreach ($val->presenter as $value) {
                                                                 echo $value->presenter_name . " <br><br>";
-                                                            }
-                                                                
-                                                                $pres_count=count($val->presenter);
-                                                           
-                                                           
+                                                            }  
+                                                                $pres_count=count($val->presenter);  
                                                         }else{
                                                             $pres_count=0;
                                                         }
@@ -159,13 +155,9 @@ $user_role = $this->session->userdata('role');
                                                              $groupPresCount=count($val->groupchatPresenter);
                                                            
                                                             }
-                                                         
                                                         }else{
                                                             $groupPresCount=0;
                                                         }
-                                                       
-                                                       
-                                                    
                                                         ?>
                                                     </td>
                                                     <td>
@@ -177,33 +169,25 @@ $user_role = $this->session->userdata('role');
                                                              $mod_count=count($val->moderators);
                                                                 echo $name . " <br><br>";
                                                             }
-                                                         
                                                         }else{
                                                             $mod_count=0;
                                                         }
-                                                       
-                                                       
                                                         ?>
-
-
                                                             <?php
                                                         if (isset($val->groupchat) && !empty($val->groupchat)) {
                                                        
                                                             foreach ($val->groupchat as $name) {
                                                               
                                                              $groupModCount=count($val->groupchat);
-                                                           
-                                                            }
-                                                         
+                                                            } 
                                                         }else{
                                                             $groupModCount=0;
                                                         }
-                                                       
-                                                       
                                                         ?>
-                                                        
                                                     </td>
-                                                
+                                                    <td>
+                                                    <small><?=(isset($val->embed_html_code))?$val->embed_html_code: '' ?></small>
+                                                    </td>
                                                     <td><?= date("h:i A", strtotime($val->time_slot)) . ' - ' . date("h:i A", strtotime($val->end_time)) ; ?></td>
                                                     <td>  <?php if (isset($val->getNotesAll) && !empty($val->getNotesAll)){
                                                            foreach ($val->getNotesAll as $note){
@@ -212,13 +196,8 @@ $user_role = $this->session->userdata('role');
                                                            }
                                                        }?></td>
                                                     <td>
-                                                    
                                                         <?php $total=$mod_count+$pres_count ;  ?>
                                                         <?php $GroupChatTotal=$groupModCount+$groupPresCount ;  ?>
-                                                       
-                                                 
-
-                                                       
                                                         <span style="float: left;">Claim Link</span> <i class="fa fa-circle <?=($val->attendee_view_links_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->attendee_view_links_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i>
                                                         <span style="float: left;">Toolbox</span> <i class="fa fa-circle <?=($val->tool_box_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->tool_box_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i><br>
                                                         <hr/>
@@ -237,17 +216,13 @@ $user_role = $this->session->userdata('role');
                                                             $chatModCount=explode(',',($value->moderator_id));
                                                             $chatPresCount=explode(',',($value->presenter_id));
                                                             $sessionChatCount = count  ($chatModCount)+count  ($chatPresCount);
-                                                         
                                                       ?>
                                                            <small><?= (isset($value) && !empty($value)) ?'<span style="float: left;">'.$value->group_chat_title.', '.$sessionChatCount.'/'.$total:""  ?><i class="fa fa-circle" aria-hidden="true" style="color: <?=($value->status==1)?'#0ab50a':(($value->status==0)?'#ff8205':'#ff2525')?>;"></i></small><br>
-                                                            
+ 
                                                         <?php
-                                                     
                                                          } 
                                                         }
                                                          ?>
-                                                       
-                                          
                                                     </td>
                                                     <td>
 													  <a href="<?= base_url() ?>admin/sessions/view_session/<?= $val->sessions_id ?>" class="btn btn-info btn-sm" style="margin-bottom: 5px;">View</a>
