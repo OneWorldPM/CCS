@@ -91,9 +91,7 @@ class M_sessions extends CI_Model {
 	function getSessionsFilter() {
         $this->db->select('*');
         $this->db->from('sessions s');
-
         $post = $this->input->post();
-
         if (isset($post['btn_today'])){
            if ($post['btn_today']){
                 $session_filter = array(
@@ -107,11 +105,9 @@ class M_sessions extends CI_Model {
                 ($post['btn_today'] != "") ? $where['DATE(s.sessions_date) >='] = date('Y-m-d') : '';
         
                 ($post['btn_today'] != "") ? $where['DATE(s.sessions_date) <='] = date('Y-m-d') : '';
-
                 if (!empty($where)) {
                     $this->db->where($where);
                 }
-        
                 $this->db->order_by("s.sessions_date", "asc");
                 $this->db->order_by("s.time_slot", "asc");
                 $sessions = $this->db->get();
@@ -120,38 +116,29 @@ class M_sessions extends CI_Model {
                     foreach ($sessions->result() as $val) {
                          $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
                          $val->moderators = $this->getModerators($val->sessions_id);
+                         $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
                         $return_array[] = $val;
                     }
                     return $return_array;
                 } else {
                     return '';
                 }
-                
             }
-            
         }
         else if (isset($post['btn_tomorrow'])){
-
             $tomorrow = date("Y-m-d", strtotime("+1 day"));
-
-            
            if ($post['btn_tomorrow']){
                 $session_filter = array(
                     'start_date' => date('Y-m-d', strtotime("+1 day")),
                     'end_date' => date('Y-m-d', strtotime("+1 day"))
                 );
                 $this->session->set_userdata($session_filter);
-		
                 ($post['session_type'] != "") ? $where['s.sessions_type_id ='] = trim($post['session_type']) : '';
-        
                 ($post['btn_tomorrow'] != "") ? $where['DATE(s.sessions_date) >='] = date('Y-m-d', strtotime("+1 day")) : '';
-        
                 ($post['btn_tomorrow'] != "") ? $where['DATE(s.sessions_date) <='] = date('Y-m-d', strtotime("+1 day")) : '';
-                
                 if (!empty($where)) {
                     $this->db->where($where);
                 }
-        
                 $this->db->order_by("s.sessions_date", "asc");
                 $this->db->order_by("s.time_slot", "asc");
                 $sessions = $this->db->get();
@@ -160,15 +147,14 @@ class M_sessions extends CI_Model {
                     foreach ($sessions->result() as $val) {
                          $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
                          $val->moderators = $this->getModerators($val->sessions_id);
+                         $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
                         $return_array[] = $val;
                     }
                     return $return_array;
                 } else {
                     return '';
                 }
-                
             }
-            
         }
         else {
             $session_filter = array(
@@ -176,19 +162,13 @@ class M_sessions extends CI_Model {
                 'end_date' => date('Y-m-d', strtotime($post['end_date']))
             );
         }
-
         $this->session->set_userdata($session_filter);
-		
         ($post['session_type'] != "") ? $where['s.sessions_type_id ='] = trim($post['session_type']) : '';
-
         ($post['start_date'] != "") ? $where['DATE(s.sessions_date) >='] = date('Y-m-d', strtotime($post['start_date'])) : '';
-
         ($post['end_date'] != "") ? $where['DATE(s.sessions_date) <='] = date('Y-m-d', strtotime($post['end_date'])) : '';
-
         if (!empty($where)) {
             $this->db->where($where);
         }
-
         $this->db->order_by("s.sessions_date", "asc");
         $this->db->order_by("s.time_slot", "asc");
         $sessions = $this->db->get();
@@ -197,14 +177,13 @@ class M_sessions extends CI_Model {
             foreach ($sessions->result() as $val) {
                  $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
                  $val->moderators = $this->getModerators($val->sessions_id);
+                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
                 $return_array[] = $val;
             }
             return $return_array;
         } else {
             return '';
         }
-
-       
     }
 
     
