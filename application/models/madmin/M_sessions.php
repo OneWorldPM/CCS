@@ -1892,6 +1892,21 @@ class M_sessions extends CI_Model {
        return false;
     }
 
+    // Delete each session photo
+    function delete_session_photo($session_id,$session_table) {
+        $set = array(
+            $session_table=>null,
+        );
+      $result= $this->db->update("sessions", $set, array("sessions_id" => $session_id));
+       if ($result){
+                $res=$result;
+       }else {
+           $res = false;
+       }
+
+       return $res;
+    }
+    
     // this will update the json status
         function update_json_status($session_id){
             $set=array(

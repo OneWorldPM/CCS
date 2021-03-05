@@ -215,6 +215,11 @@ $user_role = $this->session->userdata('role');
                                     <div class="form-group" style="position: unset !important;  <?=($user_role != 'super_admin')?'display:none':''?>">
                                         <label class="col-md-12 text-large text-bold">Sessions Photo</label>
                                         <input type="file" class="form-control" name="sessions_photo" id="sessions_photo" <?=($user_role != 'super_admin')?'disabled':''?>>
+                                        <?php if (isset($sessions_edit)) {
+                                        if ($sessions_edit->sessions_photo != "") {?>
+                                        <div class="clearfix" style="height: 5px;"></div>
+                                        <button class="btn btn-warning btn-sm delete-photo" id="sessions_photo" style="float:right">Delete</button><br>
+                                        <?php }}?>
                                         <?php
                                         if (isset($sessions_edit)) {
                                             if ($sessions_edit->sessions_photo != "") {
@@ -254,6 +259,11 @@ $user_role = $this->session->userdata('role');
                                     <hr style="border: 2px solid;">
                                     <label class="col-md-12 text-large text-bold">Sponsor Logo &nbsp; (uploaded logo is displayed on right side of client logo in attendee view)</label>
                                     <input type="file" class="form-control" name="sessions_logo" id="sessions_logo" <?=($user_role != 'super_admin')?'disabled':''?>>
+                                    <?php if (isset($sessions_edit)) {
+                                                    if ($sessions_edit->sessions_logo != "") { ?>
+                                                        <div class="clearfix" style="height: 5px;"></div>
+                                                        <button class="btn btn-warning btn-sm delete-photo" id="sessions_logo" style="float:right">Delete</button><br>
+                                                    <?php }}?>
                                     <?php
                                     if (isset($sessions_edit)) {
                                         if ($sessions_edit->sessions_logo != "") {
@@ -518,6 +528,27 @@ $user_role = $this->session->userdata('role');
                         }else{
                             alertify.success('No Session Photo to Delete!');
                             window.setTimeout('location.reload()', 2000);
+                        }
+                });   
+             }
+            }, function(){ 
+             });
+        });
+
+        $('.delete-photo').on("click", function (event) {
+            event.preventDefault()
+            var sesionId = <?= $sessions_edit->sessions_id?>;
+            var session_loc=this.id;
+
+            alertify.confirm('Are you sure?', 'This will delete photo in this session', function(e){
+                if(e){
+                $.post("<?= base_url() ?>admin/sessions/delete_session_logo/",{session_id:sesionId,session_loc:session_loc},function (response){
+                    if(response=="success"){
+                            alertify.success('Session Photo Deleted!');
+                        window.setTimeout('location.reload()', 2000);
+                        }else{
+                            alertify.success('No Session Photo to Delete!');
+                        window.setTimeout('location.reload()', 2000);
                         }
                 });   
              }
