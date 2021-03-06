@@ -55,6 +55,7 @@ $user_role = $this->session->userdata('role');
                               
                                     </div>
                                 </div>
+                                <input type="button" onclick="location.href='<?php echo base_url();?>admin/sessions/archive_session'" name="archive_session" class="btn btn-info" style="margin-top: 90px;margin-right:10px;float:right" id="archive_session" value="Archived Sessions">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Session Type:</label>
