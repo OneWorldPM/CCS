@@ -539,8 +539,8 @@ function update_viewsessions_history_open()
                     dataType: "json",
                     success: function (data) {
                         if (data.status == "success") {
-                            //  $("#briefcase").val("");
-                            $("#success_briefcase").text("Add Notes Successfully").fadeIn('slow').fadeOut(5000);
+                            $("#briefcase").val("");
+                            $("#success_briefcase").text("Notes Submitted Successfully").fadeIn('slow').fadeOut(5000);
                         }
                         // $(location).attr('href', base_url+'sessions/downloadNote/'+briefcase);
                     }
@@ -570,7 +570,7 @@ function update_viewsessions_history_open()
                         success: function (data) {
                             if (data.status == "success") {
                                 $("#briefcase").val("");
-                                $("#success_briefcase").text("Add Notes Successfully").fadeIn('slow').fadeOut(5000);
+                                $("#success_briefcase").text("Notes Submitted Successfully").fadeIn('slow').fadeOut(5000);
                             }
                             //$(location).attr('href', base_url+'sessions/downloadNote/'+briefcase);
                         }

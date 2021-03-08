@@ -201,7 +201,7 @@ if (isset($sessions)) {
                 <div class="col-md-12 input-group">
                     <textarea type="text" id="briefcase" class="form-control" placeholder="Enter Note" value=""><?= isset($sessions_notes_download) ? $sessions_notes_download : "" ?></textarea>
                 </div>
-                <a class="button color btn"  id="briefcase_send"><span>Save</span></a>
+                <a class="button color btn"  id="briefcase_send"><span>Submit</span></a>
 <!--                <a class="button color btn" id="downloadbriefcase"><span>Download</span></a>-->
             </div>
             <span id='error_briefcase' style='color:red;'></span>
@@ -474,5 +474,5 @@ if (isset($sessions)) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
 
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=23"></script>
+<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=25"></script>
 <script src="<?= base_url() ?>front_assets/js/admin-to-attendee-chat.js?v=100"></script>
