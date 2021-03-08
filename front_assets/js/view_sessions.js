@@ -548,10 +548,10 @@ function update_viewsessions_history_open()
             }
         });
 
-        $(document).on("click", "#downloadbriefcase", function () {
-            var briefcase = $("#briefcase").val();
-            $(location).attr('href', base_url+'sessions/downloadNote/' + briefcase);
-        });
+        // $(document).on("click", "#downloadbriefcase", function () {
+        //     var briefcase = $("#briefcase").val();
+        //     $(location).attr('href', base_url+'sessions/downloadNote/' + briefcase);
+        // });
 
         $('#briefcase').keypress(function (e) {
             var key = e.which;
@@ -572,7 +572,7 @@ function update_viewsessions_history_open()
                                 $("#briefcase").val("");
                                 $("#success_briefcase").text("Add Notes Successfully").fadeIn('slow').fadeOut(5000);
                             }
-                            $(location).attr('href', base_url+'sessions/downloadNote/'+briefcase);
+                            //$(location).attr('href', base_url+'sessions/downloadNote/'+briefcase);
                         }
                     });
                 }

@@ -1,7 +1,7 @@
 <link href="<?= base_url() ?>assets/css/attendee-session-view.css?v=200" rel="stylesheet">
 
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
-<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=26" rel="stylesheet">
+<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=27" rel="stylesheet">
 
 
 <section class="parallax" style="background: url('<?= base_url() ?>front_assets/images/pres_bg.jpg') no-repeat;">
@@ -202,7 +202,7 @@ if (isset($sessions)) {
                     <textarea type="text" id="briefcase" class="form-control" placeholder="Enter Note" value=""><?= isset($sessions_notes_download) ? $sessions_notes_download : "" ?></textarea>
                 </div>
                 <a class="button color btn"  id="briefcase_send"><span>Save</span></a>
-                <a class="button color btn" id="downloadbriefcase"><span>Download</span></a>
+<!--                <a class="button color btn" id="downloadbriefcase"><span>Download</span></a>-->
             </div>
             <span id='error_briefcase' style='color:red;'></span>
             <span id='success_briefcase' style='color:green;'></span>
