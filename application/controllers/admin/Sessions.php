@@ -921,10 +921,15 @@ class Sessions extends CI_Controller {
         $file = fopen('php://output', 'w');
         $header = array("Attendee Name","Question"); 
         fputcsv($file, $header);
+        if($questionData){
         foreach ($questionData->result_array() as $value)
         {   
              fputcsv($file,$value);    
         }
+    }else{
+        $content=array('','');
+        fputcsv($file, $content);        
+    }
         fclose($file); 
         exit; 
     }

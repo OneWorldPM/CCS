@@ -106,16 +106,16 @@ $user_role = $this->session->userdata('role');
                                         <tr>
                                             <th>Time Slot</th>
                                             <th>Date</th>
-                                            <th>Unique Identifier</th>
+                                            <th style="padding:0">Uni<br>que<br>Iden<br>tifi<br>er</th>
                                             <th>CCO Event ID</th>
                                             <th>Photo</th>
                                             <th>Title</th>
                                             <th>Presenters</th>
                                             <th>Moderators</th>
                                             <th>Stream Name</th>
-                                            <th>Presenter PPT Uploaded</th>
+                                            <th style="padding:0">Pres<br>enter<br>PPT<br>Uploa<br>ded</th>
                                             <th>Session Notes</th>
-                                            <th>Other Info</th>
+                                            <th style="white-space: nowrap; padding-left:40px;padding-right:60px">Other Info</th>
                                             <th style="border-right: 0px solid #ddd;">Action</th>
                                             <th style="border-left: 0px solid #ddd; border-right: 0px solid #ddd;"></th>
                                             <th style="border-left: 0px solid #ddd;"></th>
@@ -188,13 +188,24 @@ $user_role = $this->session->userdata('role');
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td><small><?=(isset($val->embed_html_code))?$val->embed_html_code: '' ?></small></td>
+                                                    <td><?php if (isset($val->embed_html_code)&& !empty($val->embed_html_code)){
+                                                        if (strlen($val->embed_html_code)>19){
+                                                          echo preg_replace('/([^\s]{10})(?=[^\s])/', '$1'.'</br>', $val->embed_html_code);
+                                                        }
+                                                        else{
+                                                            echo $val->embed_html_code;
+                                                        }
+                                                       
+                                                           
+                                                    }else{
+                                                        echo "";
+                                                    } ?></td>
                                                     <td><?=(isset($val->embed_html_code_presenter) && !empty($val->embed_html_code_presenter))? 'Yes':'<span style="color:red">X</span>'?> </td>
                                                     <td> <?=(isset($val->session_notes) && !empty($val->session_notes))?$val->session_notes:''?></td>
                                                     <td>
                                                         <?php $total=$mod_count+$pres_count ;  ?>
                                                         <?php $GroupChatTotal=$groupModCount+$groupPresCount ;  ?>
-                                                        <span style="float: left;">Claim Link</span> <i class="fa fa-circle <?=($val->attendee_view_links_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->attendee_view_links_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i>
+                                                        <span style="float: left;">Claim Link</span> <i class="fa fa-circle <?=($val->attendee_view_links_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->attendee_view_links_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i><br>
                                                         <span style="float: left;">Toolbox</span> <i class="fa fa-circle <?=($val->tool_box_status == 1)?'':'blink-element'?>" aria-hidden="true" style="color: <?=($val->tool_box_status == 1)?'#0ab50a':'#ff2525'?>;float: right;"></i><br>
                                                         <hr/>
                                                         <small><span style="float: left;">Resources</span> <i class="fa fa-circle <?=(in_array("resources", $toolboxItems))?'':'blink-element'?>" aria-hidden="true" style="color: <?=(in_array("resources", $toolboxItems))?'#0ab50a':'#ff2525'?>;float: right;"></i></small><br>
