@@ -132,7 +132,7 @@ section {
 #briefcase ,#resource_display_status{
     border: 1px solid #2d2d2da8;
     background-color: black;
-    color: black;
+    color: white;
 }
 .rightSticykPopup .open > .dropdown-menu {
     left: -125px;
