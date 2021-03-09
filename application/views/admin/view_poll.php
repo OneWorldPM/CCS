@@ -21,8 +21,7 @@
                                 <table class="table table-bordered table-striped text-center" id="user">
                                     <thead class="th_center">
                                         <tr>
-                                            
-                                            <th>Question</th>3
+                                            <th>Question</th>
                                             <th>Session Question ID</th>
                                             <th>Poll Name</th>
                                             <th>Poll Type</th>
@@ -109,6 +108,10 @@ switch ($msg) {
         $m = "Something went wrong, Please try again!!!";
         $t = "error";
         break;
+    case "PI":
+        $m = "Poll Imported";
+        $t = "success";
+        break; 
     default:
         $m = 0;
         break;

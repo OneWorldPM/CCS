@@ -9,7 +9,7 @@
                                 <h4 class="panel-title text-white">Import Poll</h4>
                             </div>
                             <div class="panel-body bg-white" style="border: 1px solid #b2b7bb;">
-                                <form class="form-login" id="frm_poll_data" name="frm_poll_data" enctype="multipart/form-data" method="post" action="<?= base_url() ?>admin/sessions/importSessionsPoll">
+                                <form class="form-login" id="frm_poll_data" name="frm_poll_data" enctype="multipart/form-data" method="post" action="<?= base_url().'admin/sessions/importSessionsPoll/'.$sessions->sessions_id?>">
                                     <div class="form-body">
                                         <div class="form-group">
                                             <a href="<?= base_url() ?>uploads/sample.csv" download>Download Sample CSV</a>
