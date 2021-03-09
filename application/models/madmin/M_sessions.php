@@ -34,6 +34,7 @@ class M_sessions extends CI_Model {
         else{
             $where['DATE(sessions_date) >='] = date('Y-m-d', strtotime("-1 day"));
             $this->db->where($where);
+            $this->db->or_where('s.sessions_id=',25);
         }
         $this->db->order_by("s.sessions_date", "asc");
         $this->db->order_by("s.time_slot", "asc");
@@ -43,7 +44,6 @@ class M_sessions extends CI_Model {
             foreach ($sessions->result() as $val) {
                 $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
                 $val->moderators = $this->getModerators($val->sessions_id);
-                $val->groupchat= $this->getGroupChatDetails($val->sessions_id);
                 $val->groupchatPresenter= $this->getGroupChatDetailsPresenter($val->sessions_id);
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
@@ -88,6 +88,7 @@ class M_sessions extends CI_Model {
         else{
             $where['DATE(sessions_date) <='] = date('Y-m-d', strtotime("-1 day"));
             $this->db->where($where);
+            $this->db->or_where('s.sessions_id=',25);
         }
         $this->db->order_by("s.sessions_date", "asc");
         $this->db->order_by("s.time_slot", "asc");
@@ -97,7 +98,6 @@ class M_sessions extends CI_Model {
             foreach ($sessions->result() as $val) {
                 $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
                 $val->moderators = $this->getModerators($val->sessions_id);
-                $val->groupchat= $this->getGroupChatDetails($val->sessions_id);
                 $val->groupchatPresenter= $this->getGroupChatDetailsPresenter($val->sessions_id);
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
@@ -1087,12 +1087,28 @@ class M_sessions extends CI_Model {
                 $csv_array = $this->csvimport->get_array($file_path);
                 if (!empty($csv_array)) {
                     foreach ($csv_array as $val) {
+                        $poll_type_id=$val['poll_type_id'];
+                        if (trim(strtolower($poll_type_id)) == "presurvey"){
+                            $poll_type="1";
+                        }
+                        elseif (trim(strtolower($poll_type_id)) =="poll" ){
+                            $poll_type="2";
+                        }
+                        elseif (trim(strtolower($poll_type_id)) =='assessment'){
+                            $poll_type="3";
+                        }else{
+                            $poll_type=$poll_type_id;
+                        }
                         if ($val['question'] != "" && $val['poll_type_id'] != "") {
                             $post = $this->input->post();
                             $set = array(
                                 'sessions_id' => trim($post['sessions_id']),
                                 'poll_type_id' => $val['poll_type_id'],
+                                'poll_type_id' => $poll_type,
+                                'poll_name' => trim($val['poll_name']),
                                 'question' => trim($val['question']),
+                                'slide_number'=>$val['slide_number'],
+                                'poll_instruction'=>trim($val['poll_instruction']),
                                 'poll_comparisons_id' => 0,
                                 "create_poll_date" => date("Y-m-d h:i")
                             );
@@ -1838,43 +1854,7 @@ class M_sessions extends CI_Model {
         return;
     }
 
-    function getGroupChatDetails($session_id) {
 
-        $moderators = array();
-        $groupChatModerators = array();
-
-
-        $this->db->select('*');
-        $this->db->from('sessions_group_chat');
-        $this->db->where('sessions_id',$session_id);
-        $groupChat = $this->db->get();
-        if ($groupChat->num_rows() > 0) {
-            foreach ($groupChat->result_array() as $row)
-            {
-                $groupChatModerators = explode(',', $row['moderator_id']);
-            }
-
-             foreach ($groupChatModerators as $moderator_id)
-            {
-                $this->db->select('first_name, last_name');
-                $this->db->from('presenter');
-                $this->db->where(array('presenter_id'=>$moderator_id));
-
-                $response = $this->db->get();
-                if ($response->num_rows() > 0)
-                {
-                    foreach ($response->result_array() as $row)
-                    {
-                        $moderators[] = $row['first_name'].' '.$row['last_name'];
-                    }
-                }
-            }
-            
-            return $moderators;
-        } else {
-            return '';
-        }
-    }
     function getGroupChatDetailsPresenter($session_id) {
 
         $presenters = array();

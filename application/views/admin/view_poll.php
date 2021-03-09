@@ -21,8 +21,7 @@
                                 <table class="table table-bordered table-striped text-center" id="user">
                                     <thead class="th_center">
                                         <tr>
-                                            
-                                            <th>Question</th>3
+                                            <th>Question</th>
                                             <th>Session Question ID</th>
                                             <th>Poll Name</th>
                                             <th>Poll Type</th>
@@ -40,7 +39,7 @@
                                                 ?>
                                                 <tr>
                                                     
-                                                    <td><?= $val->question ?></td>
+                                                    <td style="text-align:left !important"><?= $val->question ?></td>
                                                     <td><?= $val->sessions_poll_question_id ?></td>
                                                     <td><?= $val->poll_name ?></td>
                                                     <td><?= $val->poll_type ?></td>
@@ -109,6 +108,10 @@ switch ($msg) {
         $m = "Something went wrong, Please try again!!!";
         $t = "error";
         break;
+    case "PI":
+        $m = "Poll Imported";
+        $t = "success";
+        break; 
     default:
         $m = 0;
         break;
