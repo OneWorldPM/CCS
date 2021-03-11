@@ -1,3 +1,27 @@
+<style>
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
+    select {
+        height:30px;
+        line-height:30px;
+        background:#f4f4f4;
+    } 
+}
+select::-moz-focus-inner { /*Remove button padding in FF*/ 
+    border: 0;
+    padding: 0;
+}
+@-moz-document url-prefix() { /* targets Firefox only */
+    select {
+        padding: 15px 0!important;
+    }
+}        
+@media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */        
+    select {
+        height:30px;
+        line-height:30px;
+    }     
+}
+</style>
 <?php
 $user_role = $this->session->userdata('role');
 ?>
@@ -60,6 +84,14 @@ $user_role = $this->session->userdata('role');
                                           </div>
                                     </div>
                                     </div>
+                                    <div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
+                                    <div class="row">
+                                        <label class="col-md-12 text-large text-bold">Auto Add Poll Set</label>
+                                        <div class="form-group col-md-12">
+                                            <label class="checkbox-inline"><input type="checkbox" name="auto_poll_enabled" <?= (isset($sessions_edit) && !empty($sessions_edit)) ? ($sessions_edit->ppt_uploaded == "1") ? 'checked' : '' : '' ?> value="1" >Enable Auto Poll</label>
+                                          </div>
+                                    </div>
+                                    </div>
                                     <hr style="border: 2px solid;">
                                     <div class="form-group">
                                         <label class="text-large text-bold">CCO Event ID (cssid)</label>
@@ -87,7 +119,7 @@ $user_role = $this->session->userdata('role');
 
 									<div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
                                         <label class="text-large text-bold">Moderator</label>
-                                        <select class="form-control" id="moderator_id" name="moderator_id[]" multiple <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
+                                        <select class="form-control"  style="height:400px;line-height:300px"  id="moderator_id" name="moderator_id[]" multiple <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
                                             <?php if(!isset($sessions_edit)){ ?>
                                             <option selected="" value="">Select Moderator</option> 
                                             <?php } ?>
