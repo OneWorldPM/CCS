@@ -1393,7 +1393,7 @@ class M_sessions extends CI_Model {
                         'uuid'=>$val->cust_id,
                         'index' => (int) $key,
                         'login' => (int) $val->cust_id,
-                        'body' => (int) $val->sessions_cust_question_id,
+                        'body' => $val->question,
                         'timestamp' => strtotime($val->reg_question_date),
                         'upvotes'=>array()
 //                        'question' => $val->question,
@@ -1658,7 +1658,7 @@ class M_sessions extends CI_Model {
                         'uuid'=>$val->cust_id,
                         'index' => (int) $key,
                         'login' => (int) $val->cust_id,
-                        'body' => (int) $val->sessions_cust_question_id,
+                        'body' => $val->question,
                         'timestamp' => strtotime($val->reg_question_date),
                         'upvotes'=>array()
 //                        'question' => $val->question,
