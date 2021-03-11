@@ -21,8 +21,8 @@
                                 <table class="table table-bordered table-striped text-center" id="user">
                                     <thead class="th_center">
                                         <tr>
-                                            
-                                            <th>Question</th>3
+                                            <th id="num-width">#</th>
+                                            <th>Question</th>
                                             <th>Session Question ID</th>
                                             <th>Poll Name</th>
                                             <th>Poll Type</th>
@@ -36,11 +36,15 @@
                                     <tbody>
                                         <?php
                                         if (isset($poll_data) && !empty($poll_data)) {
+                                            $i=count($poll_data);
+                                            $a=0;
                                             foreach ($poll_data as $val) {
+                                                $a++
                                                 ?>
                                                 <tr>
-                                                    
-                                                    <td><?= $val->question ?></td>
+                                                    <td style="text-align:left"><?php if($a<=$i){echo $a;
+                                                    }?></td>
+                                                    <td style="text-align:left !important"><?= $val->question ?></td>
                                                     <td><?= $val->sessions_poll_question_id ?></td>
                                                     <td><?= $val->poll_name ?></td>
                                                     <td><?= $val->poll_type ?></td>
@@ -109,6 +113,10 @@ switch ($msg) {
         $m = "Something went wrong, Please try again!!!";
         $t = "error";
         break;
+    case "PI":
+        $m = "Poll Imported";
+        $t = "success";
+        break; 
     default:
         $m = 0;
         break;
@@ -217,6 +225,10 @@ switch ($msg) {
 
         return hash;
     }
+
+    $(document).ready(function(){
+       $('#num-width').css('width','20px');
+    })
 </script>
 
 

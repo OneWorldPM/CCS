@@ -1,3 +1,27 @@
+<style>
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
+    select {
+        height:30px;
+        line-height:30px;
+        background:#f4f4f4;
+    } 
+}
+select::-moz-focus-inner { /*Remove button padding in FF*/ 
+    border: 0;
+    padding: 0;
+}
+@-moz-document url-prefix() { /* targets Firefox only */
+    select {
+        padding: 15px 0!important;
+    }
+}        
+@media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */        
+    select {
+        height:30px;
+        line-height:30px;
+    }     
+}
+</style>
 <?php
 $user_role = $this->session->userdata('role');
 ?>
@@ -87,7 +111,7 @@ $user_role = $this->session->userdata('role');
 
 									<div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
                                         <label class="text-large text-bold">Moderator</label>
-                                        <select class="form-control" id="moderator_id" name="moderator_id[]" multiple <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
+                                        <select class="form-control"  style="height:400px;line-height:300px"  id="moderator_id" name="moderator_id[]" multiple <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
                                             <?php if(!isset($sessions_edit)){ ?>
                                             <option selected="" value="">Select Moderator</option> 
                                             <?php } ?>
@@ -218,7 +242,7 @@ $user_role = $this->session->userdata('role');
                                         <?php if (isset($sessions_edit)) {
                                         if ($sessions_edit->sessions_photo != "") {?>
                                         <div class="clearfix" style="height: 5px;"></div>
-                                        <button class="btn btn-warning btn-sm delete-photo" id="sessions_photo" style="float:right">Delete</button><br>
+                                        <button data-sessions-id="<?= $sessions_edit->sessions_id ?>" class="btn btn-warning btn-sm delete-photo" id="sessions_photo" style="float:right">Delete</button><br>
                                         <?php }}?>
                                         <?php
                                         if (isset($sessions_edit)) {
@@ -262,7 +286,7 @@ $user_role = $this->session->userdata('role');
                                     <?php if (isset($sessions_edit)) {
                                                     if ($sessions_edit->sessions_logo != "") { ?>
                                                         <div class="clearfix" style="height: 5px;"></div>
-                                                        <button class="btn btn-warning btn-sm delete-photo" id="sessions_logo" style="float:right">Delete</button><br>
+                                                        <button data-sessions-id="<?= $sessions_edit->sessions_id ?>" class="btn btn-warning btn-sm delete-photo" id="sessions_logo" style="float:right">Delete</button><br>
                                                     <?php }}?>
                                     <?php
                                     if (isset($sessions_edit)) {
@@ -516,7 +540,7 @@ $user_role = $this->session->userdata('role');
 
          //====== session ALL Photo delete =======//
          $('.delete-session-photo').on("click", function () {
-            var sesionId = <?= $sessions_edit->sessions_id?>;
+            var sesionId = $(this).attr("data-sessions-id");
             console.log(sesionId);
             alertify.confirm('Delete All Sessions Photo', 'This will delete all photo in this session', function(e){ 
                 if(e){
@@ -537,7 +561,7 @@ $user_role = $this->session->userdata('role');
 
         $('.delete-photo').on("click", function (event) {
             event.preventDefault()
-            var sesionId = <?= $sessions_edit->sessions_id?>;
+            var sesionId = $(this).attr("data-sessions-id");
             var session_loc=this.id;
 
             alertify.confirm('Are you sure?', 'This will delete photo in this session', function(e){
