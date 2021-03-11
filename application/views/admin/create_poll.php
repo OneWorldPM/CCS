@@ -227,11 +227,25 @@ switch ($msg) {
             } else if ($('#option_2').val() == '') {
                 alertify.error('Please Enter Option 2');
                 return false;
-
-//            } else if ($('#option_1').val().length > 25 || $('#option_2').val().length > 25 || $('#option_3').val().length > 25 || $('#option_4').val().length > 25 || $('#option_5').val().length > 25 || $('#option_6').val().length > 25 || $('#option_7').val().length > 25 || $('#option_8').val().length > 25 || $('#option_9').val().length > 25 || $('#option_10').val().length > 25) {
-//                alertify.error('Polls have 25 character limit including spaces in order to fit in attendee interface. Please reduce your characters');
-//                return false;
             } else {
+
+                let allOptions = $('.input_cust_class');
+            let optionValues = [];
+            for (option = 0; option < allOptions.length; option++)
+            {
+                if((allOptions[option]).value != '')
+                {
+                    optionValues.push((allOptions[option]).value);
+                }
+            }
+
+            if(new Set(optionValues).size !== optionValues.length)
+            {
+                alertify.error('You have duplicate options');
+                let optionValues = [];
+                return false;
+            }
+
                 $('#frm_add_Poll').attr('action', '<?= base_url() ?>admin/sessions/add_poll_data');
                 $('#frm_add_Poll').submit();
                 return true;
@@ -252,6 +266,23 @@ switch ($msg) {
                 alertify.error('Please Enter Option 2');
                 return false;
             } else {
+                let allOptions = $('.input_cust_class');
+            let optionValues = [];
+            for (option = 0; option < allOptions.length; option++)
+            {
+                if((allOptions[option]).value != '')
+                {
+                    optionValues.push((allOptions[option]).value);
+                }
+            }
+
+            if(new Set(optionValues).size !== optionValues.length)
+            {
+                alertify.error('You have duplicate options');
+                let optionValues = [];
+                return false;
+            }
+            
                 var sessions_id = $('#sessions_id').val();
                 $('#frm_add_Poll').attr('action', '<?= base_url() ?>admin/sessions/update_poll_data/'+sessions_id);
                 $('#frm_add_Poll').submit();
