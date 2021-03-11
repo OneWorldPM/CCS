@@ -376,80 +376,79 @@ class M_sessions extends CI_Model {
                     }
                 }
             }
-            if(isset($post['auto_poll_enabled']) && !empty($post['auto_poll_enabled'])){
-                    $setPollQuestion=array(
-                        'sessions_id'=>$sessions_id,
-                        'question'=>'How many patients do you treat in a week?',
-                        'poll_type_id'=>2,
-                        'poll_name'=>'Poll 1',
-                        'slide_number'=>2,
-                        'poll_instruction'=>'no results',
-                    );
-                    $this->db->insert("sessions_poll_question", $setPollQuestion);
-                    $insert_id = $this->db->insert_id();
-                    if ($insert_id > 0) {
-                        for ($i = 1; $i <= 3; $i++) {
-                                    $post['option_1']='<50'; 
-                                    $post['option_2']='50-70'; 
-                                    $post['option_3']='>70'; 
-                                $set_array = array(
-                                    'sessions_poll_question_id' => $insert_id,
-                                    'sessions_id' => $sessions_id,
-                                    'option' => $post['option_' . $i],
-                                    "total_vot" => 0
-                                );
-                                $this->db->insert("poll_question_option", $set_array); 
-                        }
-                    }
-                    $setPollQuestion=array(
-                        'sessions_id'=>$sessions_id,
-                        'question'=>'Was this content related to your practice?',
-                        'poll_type_id'=>2,
-                        'poll_name'=>'Poll 2',
-                        'slide_number'=>28,
-                        'poll_instruction'=>'no results',
-                    );
-                    $this->db->insert("sessions_poll_question", $setPollQuestion);
-                    $insert_id = $this->db->insert_id();
-                    if ($insert_id > 0) {
-                        for ($i = 1; $i <= 2; $i++) {
-                                    $post['option_1']='Yes'; 
-                                    $post['option_2']='No'; 
-                                $set_array = array(
-                                    'sessions_poll_question_id' => $insert_id,
-                                    'sessions_id' => $sessions_id,
-                                    'option' => $post['option_' . $i],
-                                    "total_vot" => 0
-                                );
-                                $this->db->insert("poll_question_option", $set_array);
-                        }
-                    }
-                    $setPollQuestion=array(
-                        'sessions_id'=>$sessions_id,
-                        'question'=>'Would you recommend viewing a ClinicalXchange to a colleague?',
-                        'poll_type_id'=>2,
-                        'poll_name'=>'Poll 3',
-                        'slide_number'=>29,
-                        'poll_instruction'=>'no results',
-                    );
-                    $this->db->insert("sessions_poll_question", $setPollQuestion);
-                    $insert_id = $this->db->insert_id();
-                    if ($insert_id > 0) {
-                        for ($i = 1; $i <= 2; $i++) {
-                                    $post['option_1']='Yes'; 
-                                    $post['option_2']='No'; 
-                                
-                                $set_array = array(
-                                    'sessions_poll_question_id' => $insert_id,
-                                    'sessions_id' => $sessions_id,
-                                    'option' => $post['option_' . $i],
-                                    "total_vot" => 0
-                                );
-                                $this->db->insert("poll_question_option", $set_array);
-                        }
-                    }
-                    return '1';  
+            $setPollQuestion=array(
+                'sessions_id'=>$sessions_id,
+                'question'=>'How many patients do you treat in a week?',
+                'poll_type_id'=>2,
+                'poll_name'=>'Poll 1',
+                'slide_number'=>'',
+                'poll_instruction'=>'no results',
+            );
+            $this->db->insert("sessions_poll_question", $setPollQuestion);
+            $insert_id = $this->db->insert_id();
+            if ($insert_id > 0) {
+                for ($i = 1; $i <= 3; $i++) {
+                            $post['option_1']='<50'; 
+                            $post['option_2']='50-70'; 
+                            $post['option_3']='>70'; 
+                        $set_array = array(
+                            'sessions_poll_question_id' => $insert_id,
+                            'sessions_id' => $sessions_id,
+                            'option' => $post['option_' . $i],
+                            "total_vot" => 0
+                        );
+                        $this->db->insert("poll_question_option", $set_array); 
+                }
             }
+
+            $setPollQuestion=array(
+                'sessions_id'=>$sessions_id,
+                'question'=>'Was this content related to your practice?',
+                'poll_type_id'=>2,
+                'poll_name'=>'Poll 2',
+                'slide_number'=>'',
+                'poll_instruction'=>'no results',
+            );
+            $this->db->insert("sessions_poll_question", $setPollQuestion);
+            $insert_id = $this->db->insert_id();
+            if ($insert_id > 0) {
+                for ($i = 1; $i <= 2; $i++) {
+                            $post['option_1']='Yes'; 
+                            $post['option_2']='No'; 
+                        $set_array = array(
+                            'sessions_poll_question_id' => $insert_id,
+                            'sessions_id' => $sessions_id,
+                            'option' => $post['option_' . $i],
+                            "total_vot" => 0
+                        );
+                        $this->db->insert("poll_question_option", $set_array);
+                }
+            }
+            $setPollQuestion=array(
+                'sessions_id'=>$sessions_id,
+                'question'=>'Would you recommend viewing a ClinicalXchange to a colleague?',
+                'poll_type_id'=>2,
+                'poll_name'=>'Poll 3',
+                'slide_number'=>'',
+                'poll_instruction'=>'no results',
+            );
+            $this->db->insert("sessions_poll_question", $setPollQuestion);
+            $insert_id = $this->db->insert_id();
+            if ($insert_id > 0) {
+                for ($i = 1; $i <= 2; $i++) {
+                            $post['option_1']='Yes'; 
+                            $post['option_2']='No'; 
+                        
+                        $set_array = array(
+                            'sessions_poll_question_id' => $insert_id,
+                            'sessions_id' => $sessions_id,
+                            'option' => $post['option_' . $i],
+                            "total_vot" => 0
+                        );
+                        $this->db->insert("poll_question_option", $set_array);
+                }
+            }
+
             return "1";
         } else {
             return "2";
@@ -648,80 +647,6 @@ class M_sessions extends CI_Model {
                     }
                 }
             }
-            if(isset($post['auto_poll_enabled']) && !empty($post['auto_poll_enabled'])){
-                $setPollQuestion=array(
-                    'sessions_id'=>$sessions_id,
-                    'question'=>'How many patients do you treat in a week?',
-                    'poll_type_id'=>2,
-                    'poll_name'=>'Poll 1',
-                    'slide_number'=>2,
-                    'poll_instruction'=>'no results',
-                );
-                $this->db->insert("sessions_poll_question", $setPollQuestion);
-                $insert_id = $this->db->insert_id();
-                if ($insert_id > 0) {
-                    for ($i = 1; $i <= 3; $i++) {
-                                $post['option_1']='<50'; 
-                                $post['option_2']='50-70'; 
-                                $post['option_3']='>70'; 
-                            $set_array = array(
-                                'sessions_poll_question_id' => $insert_id,
-                                'sessions_id' => $sessions_id,
-                                'option' => $post['option_' . $i],
-                                "total_vot" => 0
-                            );
-                            $this->db->insert("poll_question_option", $set_array); 
-                    }
-                }
-                $setPollQuestion=array(
-                    'sessions_id'=>$sessions_id,
-                    'question'=>'Was this content related to your practice?',
-                    'poll_type_id'=>2,
-                    'poll_name'=>'Poll 2',
-                    'slide_number'=>28,
-                    'poll_instruction'=>'no results',
-                );
-                $this->db->insert("sessions_poll_question", $setPollQuestion);
-                $insert_id = $this->db->insert_id();
-                if ($insert_id > 0) {
-                    for ($i = 1; $i <= 2; $i++) {
-                                $post['option_1']='Yes'; 
-                                $post['option_2']='No'; 
-                            $set_array = array(
-                                'sessions_poll_question_id' => $insert_id,
-                                'sessions_id' => $sessions_id,
-                                'option' => $post['option_' . $i],
-                                "total_vot" => 0
-                            );
-                            $this->db->insert("poll_question_option", $set_array);
-                    }
-                }
-                $setPollQuestion=array(
-                    'sessions_id'=>$sessions_id,
-                    'question'=>'Would you recommend viewing a ClinicalXchange to a colleague?',
-                    'poll_type_id'=>2,
-                    'poll_name'=>'Poll 3',
-                    'slide_number'=>29,
-                    'poll_instruction'=>'no results',
-                );
-                $this->db->insert("sessions_poll_question", $setPollQuestion);
-                $insert_id = $this->db->insert_id();
-                if ($insert_id > 0) {
-                    for ($i = 1; $i <= 2; $i++) {
-                                $post['option_1']='Yes'; 
-                                $post['option_2']='No'; 
-                            
-                            $set_array = array(
-                                'sessions_poll_question_id' => $insert_id,
-                                'sessions_id' => $sessions_id,
-                                'option' => $post['option_' . $i],
-                                "total_vot" => 0
-                            );
-                            $this->db->insert("poll_question_option", $set_array);
-                    }
-                }
-                return '1';  
-        }
             return "1";
         } else {
             return "2";
