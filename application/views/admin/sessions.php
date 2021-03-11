@@ -105,7 +105,7 @@ $user_role = $this->session->userdata('role');
                                     <thead class="th_center">
                                         <tr>
                                             <th>Time Slot</th>
-                                            <th>Date</th>
+                                            <th style="padding-left:30px;padding-right:30px">Date</th>
                                             <th style="padding:0">Uni<br>que<br>Iden<br>tifi<br>er</th>
                                             <th>CCO Event ID</th>
                                             <th>Photo</th>
