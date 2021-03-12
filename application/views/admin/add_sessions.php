@@ -516,13 +516,14 @@ $user_role = $this->session->userdata('role');
                 return false;
             }  else if ($('#attendee_view_links').is(':checked')) {
                 if ($('#link_text').val() == '') {
-                    alertify.error("Enter Link");
+                    alertify.error("Claim Credit Link Empty");
                     return false;
                 }  else {
                     return true;
                 }
+            }else{
+                return true;
             }
-
 
             return false;
         });
