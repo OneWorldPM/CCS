@@ -1266,13 +1266,15 @@ class M_sessions extends CI_Model {
                         $end_date_time = 0;
                         $total_time = 0;
                     }
-                    $private_notes = "";
+                    $private_notes = array();
                     $this->db->select('note');
                     $this->db->from('sessions_cust_briefcase');
                     $this->db->where(array("cust_id" => $val->cust_id, "sessions_id"=>$sessions_id));
                     $sessions_cust_briefcase = $this->db->get();
                     if ($sessions_cust_briefcase->num_rows() > 0) {
-                        $private_notes = $sessions_cust_briefcase->row()->note;
+                        foreach ($sessions_cust_briefcase->result() as $notes_row)
+                            $private_notes[] = $notes_row->note;
+                        //$private_notes = $sessions_cust_briefcase->row()->note;
                     }
                     $sessions_history_login[] = array(
                         'uuid' => $val->cust_id,
@@ -1391,7 +1393,7 @@ class M_sessions extends CI_Model {
                         'uuid'=>$val->cust_id,
                         'index' => (int) $key,
                         'login' => (int) $val->cust_id,
-                        'body' => (int) $val->sessions_cust_question_id,
+                        'body' => $val->question,
                         'timestamp' => strtotime($val->reg_question_date),
                         'upvotes'=>array()
 //                        'question' => $val->question,
@@ -1528,13 +1530,15 @@ class M_sessions extends CI_Model {
                         $total_time = 0;
                     }
 
-                    $private_notes = "";
+                    $private_notes = array();
                     $this->db->select('*');
                     $this->db->from('sessions_cust_briefcase');
                     $this->db->where(array("cust_id" => $val->cust_id, "sessions_id"=>$sessions_id));
                     $sessions_cust_briefcase = $this->db->get();
                     if ($sessions_cust_briefcase->num_rows() > 0) {
-                        $private_notes = $sessions_cust_briefcase->row()->note;
+                        foreach ($sessions_cust_briefcase->result() as $note_row)
+                            $private_notes[] = $note_row->note;
+                        //$private_notes = $sessions_cust_briefcase->row()->note;
                     }
 
                     $sessions_history_login[] = array(
@@ -1654,7 +1658,7 @@ class M_sessions extends CI_Model {
                         'uuid'=>$val->cust_id,
                         'index' => (int) $key,
                         'login' => (int) $val->cust_id,
-                        'body' => (int) $val->sessions_cust_question_id,
+                        'body' => $val->question,
                         'timestamp' => strtotime($val->reg_question_date),
                         'upvotes'=>array()
 //                        'question' => $val->question,
