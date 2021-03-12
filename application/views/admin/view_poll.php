@@ -14,8 +14,6 @@
                     <div class="panel-heading">
                         <h4 class="panel-title text-white">Poll <?= (isset($session_id) && !empty($session_id))?'Session '.$session_id.' -':''; ?>
                             <?php
-                            echo '<pre>';
-                            print_r($presenter);
                             if (isset($presenter) && !empty($presenter)) {
                                 foreach ($presenter as $value) {
                                 }
