@@ -13,31 +13,13 @@
                 <div class="panel panel-primary" id="panel5">
                     <div class="panel-heading">
                         <h4 class="panel-title text-white">Poll
-                            <?php if(isset($presenter)): ?>
+                            <?php if(isset($presenter) && !empty($presenter->presenter)): ?>
                             Session <?=$presenter->sessions_id?> -
                             <?php foreach($presenter->presenter as $presenterData): ?>
                                 <?=$presenterData->presenter_name?> |
                             <?php endforeach; ?>
                             <?=$presenter->session_title?>
                             <?php endif; ?>
-
-<!--                            --><?//= (isset($session_id) && !empty($session_id))?'Session '.$session_id.' -':''; ?>
-<!--                            --><?php
-//                            if (isset($presenter) && !empty($presenter))
-//                            {
-//                                foreach ($presenter->p as $value)
-//                                {
-//                                }
-//                                if (isset($value) && !empty($value))
-//                                {
-//                                    foreach ($value as $val)
-//                                    {
-//                                        echo ($val->first_name) . ' ' . ($val->last_name) . ', ';
-//                                    }
-//                                }
-//                                echo (isset($presenter->session_title) && !empty($presenter->session_title)) ? $presenter->session_title : '';
-//                            } ?>
-
                         </h4>
                     </div>
                     <div class="panel-body bg-white" style="border: 1px solid #b2b7bb!important;">
