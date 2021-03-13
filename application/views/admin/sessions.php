@@ -385,7 +385,7 @@ switch ($msg) {
   $('.datepicker').datepicker();
    
         //====== session delete =======//
-        $(".delete_session").on("click", function () {
+        $('#sessions_table').on("click", ".delete_session", function () {
             var sesionId = $(this).data("session-id");
             alertify.confirm("Are you sure you want to delete this session?", function (e) {
                 if (e)
