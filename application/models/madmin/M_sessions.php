@@ -1192,7 +1192,6 @@ class M_sessions extends CI_Model {
                             $post = $this->input->post();
                             $set = array(
                                 'sessions_id' => trim($post['sessions_id']),
-                                'poll_type_id' => $val['poll_type_id'],
                                 'poll_type_id' => $poll_type,
                                 'poll_name' => trim($val['poll_name']),
                                 'question' => trim($val['question']),
