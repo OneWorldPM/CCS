@@ -47,6 +47,8 @@ class Sessions extends CI_Controller {
 	public function filter_clear() {
         $this->session->unset_userdata('start_date');
         $this->session->unset_userdata('end_date');
+        $this->session->unset_userdata('session_viewing');
+        
         header('location:' . base_url() . 'admin/sessions');
     }
 
@@ -988,6 +990,7 @@ class Sessions extends CI_Controller {
 public function archive_session() {
     $data['sessions'] = $this->msessions->getArchivedSessions();
     $data['session_types'] = $this->msessions->getSessionTypes();
+    $this->session->set_userdata('session_viewing','Archived');
     $this->load->view('admin/header');
     $this->load->view('admin/sessions', $data);
     $this->load->view('admin/footer');
