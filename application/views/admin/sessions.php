@@ -253,10 +253,10 @@ $user_role = $this->session->userdata('role');
                                                                 foreach ($val->check_send_json_exist as $status) {
                                                                     if ($status->send_json_status==1) {
                                                                         ?>
-                                                                         <a data-session-id="<?= $val->sessions_id?>" class="btn btn-purple btn-sm send-json" style="margin-bottom: 5px;">JSON Sent</a>
+                                                                         <a data-session-id="<?= $val->sessions_id ?>" class="btn btn-purple btn-sm send-json" style="margin-bottom: 5px;">JSON Sent</a>
                                                                         <?php
                                                                     } else {
-                                                                        ?>  <a href="<?= base_url() ?>admin/sessions/send_json/<?= $val->sessions_id ?>" class="btn btn-success btn-sm" style="margin-bottom: 5px;">Send JSON</a><?php
+                                                                        ?>  <a data-session-id="<?= $val->sessions_id ?>" href="<?= base_url() ?>admin/sessions/send_json/<?= $val->sessions_id ?>" class="btn btn-success btn-sm" style="margin-bottom: 5px;">Send JSON</a><?php
                                                                     }
                                                                 }
                                                          }?>
@@ -430,7 +430,7 @@ Swal.fire({
 
 $('#sessions_table').on('click','.send-json', function () {
 
-let sesionId = <?=$val->sessions_id?>;
+let sesionId = $(this).data("session-id");
 let href = $(this).attr('href-url');
 
 Swal.fire({
