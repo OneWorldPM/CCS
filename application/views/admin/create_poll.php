@@ -12,7 +12,7 @@
                                 <form class="form-login" id="frm_poll_data" name="frm_poll_data" enctype="multipart/form-data" method="post" action="<?= base_url().'admin/sessions/importSessionsPoll/'.$sessions->sessions_id?>">
                                     <div class="form-body">
                                         <div class="form-group">
-                                            <a href="<?= base_url() ?>uploads/sample.csv" download>Download Sample CSV</a>
+                                            <a href="<?= base_url() ?>uploads/sample2.csv" download>Download Sample CSV</a>
                                         </div>  
                                         <?php if (isset($sessions)) { ?>    
                                             <input type="hidden" name="sessions_id" value="<?= $sessions->sessions_id ?>">
