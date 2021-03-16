@@ -12,7 +12,7 @@
                                 <form class="form-login" id="frm_poll_data" name="frm_poll_data" enctype="multipart/form-data" method="post" action="<?= base_url().'admin/sessions/importSessionsPoll/'.$sessions->sessions_id?>">
                                     <div class="form-body">
                                         <div class="form-group">
-                                            <a href="<?= base_url() ?>uploads/sample.csv" download>Download Sample CSV</a>
+                                            <a href="<?= base_url() ?>uploads/sample2.csv" download>Download Sample CSV</a>
                                         </div>  
                                         <?php if (isset($sessions)) { ?>    
                                             <input type="hidden" name="sessions_id" value="<?= $sessions->sessions_id ?>">
@@ -41,7 +41,17 @@
                 <div class="col-md-6 col-md-offset-3">
                     <div class="panel panel-primary" id="panel5">
                         <div class="panel-heading">
-                            <h4 class="panel-title text-white">Create Poll</h4>
+                            <h4 class="panel-title text-white">Create Poll
+                                <?php if(isset($presenter)): ?>
+                                    Session <?=$presenter->sessions_id?> -
+                                <?php if(isset($presenter->presenter)&& !empty($presenter->presenter)): ?>
+                                    <?php foreach($presenter->presenter as $presenterData): ?>
+                                        <?=$presenterData->presenter_name?> |
+                                    <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    <?=$presenter->session_title?>
+                                <?php endif; ?>
+                            </h4>
                         </div>
                         <div class="panel-body bg-white" style="border: 1px solid #b2b7bb;">
                             <form name="frm_add_Poll" id="frm_add_Poll" method="POST" >
