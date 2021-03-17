@@ -40,6 +40,7 @@
     $(function() {
 
         $.get( "<?=base_url()?>socket_config.php", function( data ) {
+
             var config = JSON.parse(data);
             extract(config);
 
@@ -48,6 +49,24 @@
             socket.on('serverStatus', function (data) {
                 socket.emit('addMeToActiveListPerApp', {'user_id':user_id, 'app': socket_app_name, 'room': socket_active_user_list});
             });
+
+            $(window).on("blur focus", function(e) {
+                var prevType = $(this).data("prevType");
+
+                if (prevType != e.type) {   //  reduce double fire issues
+                    switch (e.type) {
+                        case "blur":
+                            inActive();
+                            break;
+                        case "focus":
+                            resetActive();
+                            break;
+                    }
+                }
+
+                $(this).data("prevType", e.type);
+            });
+
         });
 
         // Active again
@@ -59,22 +78,7 @@
             socket.emit('userActiveChangeInApp', {"app":socket_app_name, "room":socket_active_user_list, "name":user_name, "userId":user_id, "status":false});
         }
 
-        $(window).on("blur focus", function(e) {
-            var prevType = $(this).data("prevType");
 
-            if (prevType != e.type) {   //  reduce double fire issues
-                switch (e.type) {
-                    case "blur":
-                        inActive();
-                        break;
-                    case "focus":
-                        resetActive();
-                        break;
-                }
-            }
-
-            $(this).data("prevType", e.type);
-        });
     });
 </script>
 <script type="text/javascript">

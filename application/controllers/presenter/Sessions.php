@@ -308,4 +308,92 @@ class Sessions extends CI_Controller {
         }
     }
 
+
+    public function getAllAdminToAttendeeChat()
+    {
+        $post = $this->input->post();
+
+        $data = array(
+            'session_id' => $post['session_id']
+        );
+        $or_where = "((from_id = '{$post['from_id']}' AND to_id = '{$post['to_id']}') OR (from_id = '{$post['to_id']}' AND to_id = '{$post['from_id']}'))";
+
+        $this->db->select('*');
+        $this->db->from('admin_to_attendee_chat');
+        $this->db->where($data);
+        $this->db->where($or_where);
+        $this->db->order_by("date_time", "asc");
+
+        $query = $this->db->get();
+
+        if ( $query->num_rows() > 0 )
+        {
+            echo json_encode($query->result_array());
+        }else{
+            echo json_encode(array());
+        }
+
+        return;
+    }
+
+    public function getUnreadMsgs($session_id, $user_id)
+    {
+
+        $data = array(
+            'session_id' => $session_id,
+            'from_id' => $user_id,
+            'marked_read' => 0
+        );
+
+        $this->db->select('*');
+        $this->db->from('admin_to_attendee_chat');
+        $this->db->where($data);
+
+        $query = $this->db->get();
+
+        if ( $query->num_rows() > 0 )
+            return true;
+
+        return false;
+    }
+
+    public function markAllAsRead($session_id, $user_id)
+    {
+        $data = array(
+            'session_id' => $session_id,
+            'from_id' => $user_id
+        );
+
+        $this->db->where($data);
+        $this->db->update('admin_to_attendee_chat', array('marked_read'=>1));
+
+        if ($this->db->affected_rows() > 0)
+            echo 1;
+        else
+            echo 0;
+
+        return;
+    }
+
+    public function saveAdminToAttendeeChat()
+    {
+        $post = $this->input->post();
+
+        $data = array(
+            'session_id' => $post['session_id'],
+            'from_id' => $post['from_id'],
+            'to_id' => $post['to_id'],
+            'chat_text' => $post['chat_text'],
+            'date_time' => date("Y-m-d H:i:s")
+        );
+
+        $this->db->insert('admin_to_attendee_chat', $data);
+
+        if ($this->db->affected_rows() > 0)
+            echo 1;
+        else
+            echo 0;
+
+        return;
+    }
 }
