@@ -15,7 +15,11 @@ class Presenters extends CI_Controller {
         $this->load->model('madmin/m_presenters', 'mpresenters');
     }
 
-    public function index() {
+    public function index($presenter_id='') {
+        if (isset($presenter_id) && !empty($presenter_id)){
+            $presenter_id=$presenter_id;
+        }
+        $data['presenter_id']=$presenter_id;
         $data['presenters'] = $this->mpresenters->get_presenters();
         $this->load->view('admin/header');
         $this->load->view('admin/presenters', $data);
@@ -24,10 +28,11 @@ class Presenters extends CI_Controller {
 
     public function add_presenters() {
         $post = $this->input->post();
+//        print_r($post['presenter_id']);exit;
         if (!empty($post)) {
             $res = $this->mpresenters->add_presenters($post);
             if ($res) {
-                header('Location: ' . base_url() . 'admin/presenters?msg=S');
+                header('Location: ' . base_url() . 'admin/presenters/index/'.$post['presenter_id']);
             } else {
                 header('Location: ' . base_url() . 'admin/presenters?msg=E');
             }
