@@ -335,11 +335,10 @@ function attendeeChatPopup(cust_id, cust_name,cust_question)
         {
             session_id: sessionId,
             from_id: cust_id,
-            to_id: "admin"
+            to_id: "admin",
         }
 
     ).done(function(chats) {
-
             $.get(base_url+"presenter/sessions/markAllAsRead/"+sessionId+'/'+cust_id, function( data ) {
                 if (data == 1)
                 {
@@ -348,7 +347,6 @@ function attendeeChatPopup(cust_id, cust_name,cust_question)
             });
 
             chats = JSON.parse(chats);
-              console.log(chats);
             $('#chatBody').html('');
             $.each(chats, function(index, chat)
             {
@@ -362,7 +360,6 @@ function attendeeChatPopup(cust_id, cust_name,cust_question)
             });
 
             $("#chatBody").scrollTop($("#chatBody")[0].scrollHeight+100);
-
         }
     ).error((error)=>{
         toastr.error('Unable to load the chat.');
@@ -405,13 +402,14 @@ $(document).ready(function () {
                 session_id: sessionId,
                 from_id: 'admin',
                 to_id: userId,
-                chat_text: message
+                chat_text: message,
+                sent_from: cp_id
             }
 
         ).done(function( data ) {
                 if (data == 1)
                 {
-                    socket.emit('new-attendee-to-admin-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "from_id":"admin", "to_id":userId, "chat_text":message});
+                    socket.emit('new-attendee-to-admin-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "from_id":"admin", "to_id":userId, "chat_text":message, "sent_from":cp_id});
 
                     $('#chatBody').append('' +
                         '<span class="admin-to-user-text-admin">'+message+'</span>');
@@ -443,7 +441,10 @@ $(document).ready(function () {
         {
             if (data.from_id != 'admin')
             {
-                attendeeChatPopup(data.from_id, data.user_name);
+                if(data.sent_from == cp_id){
+                    attendeeChatPopup(data.from_id, data.user_name);
+                }
+
             }
         }
     });

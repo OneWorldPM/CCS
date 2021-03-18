@@ -1,4 +1,5 @@
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
+
 <link href="<?= base_url() ?>front_assets/presenter/view_session.css?v=6" rel="stylesheet">
 <style>
 .sticky {
@@ -196,6 +197,7 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
 
 
 <script>
+
     var base_url = "<?=base_url()?>";
     var site_url = "<?= site_url() ?>";
     var user_id = "<?=$this->session->userdata('cid')?>";
@@ -205,7 +207,7 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
     var session_start_datetime = "<?= date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->time_slot . ' UTC-4' ?>";
     var session_end_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time . ' UTC-4' ?>";
     //Conflict resolver
-
+    var cp_id = "<?= $this->session->userdata('pid')?>";
 </script>
 <script>
 
