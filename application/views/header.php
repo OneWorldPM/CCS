@@ -340,7 +340,7 @@
                                             }
                                             ?>
                                             <li>
-                                                <a target="_blank">TOOLBOX</a>
+                                                <a target="_blank" id="toolbox">TOOLBOX</a>
                                                 <ul class="toolboxCustomDrop">
                                                     <?php
                                                     if (isset($right_bar) && isset($tool_box_status)) {

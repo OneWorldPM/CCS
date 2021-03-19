@@ -38,8 +38,14 @@ $(document).ready(function () {
         $.each(chats, function(index, chat)
         {
             if (chat.from_id == 'admin'){
-                $('.admin-messages').append('' +
-                    '<span class="admin-to-user-text"><strong style="margin-right: 10px">Admin</strong>'+chat.chat_text+'</span>');
+                if(chat.presenter_name){
+                    $('.admin-messages').append('' +
+                        '<span class="admin-to-user-text"><strong style="margin-right: 10px">'+chat.presenter_name+'</strong>'+chat.chat_text+'</span>');
+                }else{
+                    $('.admin-messages').append('' +
+                        '<span class="admin-to-user-text"><strong style="margin-right: 10px">Admin</strong>'+chat.chat_text+'</span>');
+                }
+
             }else{
                 $('.admin-messages').append('' +
                     '<span class="user-to-admin-text">'+chat.chat_text+'</span>');
@@ -108,9 +114,13 @@ $(document).ready(function () {
             {
                 if (data.to_id == user_id)
                 {
-                    $('.admin-messages').append('' +
-                        '<span class="admin-to-user-text"><strong style="margin-right: 10px">Admin</strong>'+data.chat_text+'</span>');
-
+                    if(data.presenter_name){
+                        $('.admin-messages').append('' +
+                            '<span class="admin-to-user-text"><strong style="margin-right: 10px">'+data.presenter_name+'</strong>'+data.chat_text+'</span>');
+                    }else{
+                        $('.admin-messages').append('' +
+                            '<span class="admin-to-user-text"><strong style="margin-right: 10px">Admin</strong>'+data.chat_text+'</span>');
+                    }
                     $('.new-admin-chat-badge').show();
 
                     $('#adminChatStickeyIcon').show();
