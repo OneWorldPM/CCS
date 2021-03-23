@@ -111,6 +111,7 @@ $(document).ready(function () {
 
 
     socket.on('new-attendee-to-admin-chat-notification', function (data) {
+        console.log(data);
         if (data.socket_session_name == socket_session_name)
         {
             if ((data.from_id == user_id) || data.to_id == user_id)
