@@ -20,6 +20,7 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
     print_r($sessions);
     exit("</pre>");
 }
+
 ?>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@9.17.0/dist/sweetalert2.all.min.js"></script>
