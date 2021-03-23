@@ -20,7 +20,6 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
     print_r($sessions);
     exit("</pre>");
 }
-$c_name = '';
 if (isset($sessions->presenter) && !empty($sessions->presenter)){
     foreach ($sessions->presenter as $presenters) {
         if ($this->session->userdata('pid') == $presenters->presenter_id) {
@@ -28,6 +27,17 @@ if (isset($sessions->presenter) && !empty($sessions->presenter)){
         }
     }
 }
+if(isset($sessions->moderator) && !empty($sessions->moderator)){
+    foreach ($sessions->moderator as $moderators){
+        if ($this->session->userdata('pid') == $moderators->presenter_id) {
+            $c_name = $moderators->presenter_name;
+        }
+    }
+}
+else{
+    $c_name="";
+}
+
 
 ?>
 
@@ -216,7 +226,7 @@ if (isset($sessions->presenter) && !empty($sessions->presenter)){
     var session_start_datetime = "<?= date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->time_slot . ' UTC-4' ?>";
     var session_end_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time . ' UTC-4' ?>";
     //Conflict resolver
-    var cp_id = "<?= $this->session->userdata('pid')?>";
+    var cp_id= "<?= $this->session->userdata('pid')?>";
 </script>
 <script>
 
