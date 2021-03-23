@@ -27,6 +27,17 @@ if (isset($sessions->presenter) && !empty($sessions->presenter)){
         }
     }
 }
+if(isset($sessions->moderator) && !empty($sessions->moderator)){
+    foreach ($sessions->moderator as $moderators){
+        if ($this->session->userdata('pid') == $moderators->presenter_id) {
+            $c_name = $moderators->presenter_name;
+        }
+    }
+}
+else{
+    $c_name="";
+}
+
 
 ?>
 
