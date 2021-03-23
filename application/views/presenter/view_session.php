@@ -20,6 +20,7 @@ if (isset($_GET['testing']) && $_GET['testing'] == 1) {
     print_r($sessions);
     exit("</pre>");
 }
+$c_name = '';
 if (isset($sessions->presenter) && !empty($sessions->presenter)){
     foreach ($sessions->presenter as $presenters) {
         if ($this->session->userdata('pid') == $presenters->presenter_id) {
