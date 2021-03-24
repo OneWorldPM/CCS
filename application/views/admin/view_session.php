@@ -690,6 +690,8 @@
 
     var app_name = "<?=getAppName($sessions->sessions_id) ?>";
 
+    let currently_chatting_with_attendee = '';
+    let currently_question_with_attendee = '';
     socket.emit("getSessionViewUsers", "<?=getAppName($sessions->sessions_id) ?>", function (resp) {
         if (resp) {
             var totalUsers = resp.users ? resp.users.length : 0;
@@ -698,7 +700,7 @@
         }
     });
 
-    function attendeeChatPopup(cust_id, cust_name,cust_question)
+    function attendeeChatPopup(cust_id, cust_name,cust_question, withPopUp=true)
     {
         $('#chatAttendeeName').text(cust_name);
         $('#chattAttendeeQuestion').text(cust_question);
@@ -750,68 +752,21 @@
             toastr.error('Unable to load the chat.');
         });
 
-        $('#attendeeChatModal').modal('show');
+        if(withPopUp){
+            $('#attendeeChatModal').modal('show');
+        }
 
     }
 
-    function attendeeChatUpdate(cust_id, cust_name,cust_question)
-    {
-        $('#chatAttendeeName').text(cust_name);
-        $('#chattAttendeeQuestion').text(cust_question);
-        $('#sendMessagetoAttendee').attr('user-id', cust_id);
-        $('#endChatBtn').attr('userId', cust_id);
-
-        $.post(base_url+"admin/sessions/getAllAdminToAttendeeChat",
-
-            {
-                session_id: sessionId,
-                from_id: cust_id,
-                to_id: "admin"
-            }
-
-        ).done(function(chats) {
-
-                $.get(base_url+"admin/sessions/markAllAsRead/"+sessionId+'/'+cust_id, function( data ) {
-                    if (data == 1)
-                    {
-
-                    }
-                });
-
-                chats = JSON.parse(chats);
-
-                $('#chatBody').html('');
-                $.each(chats, function(index, chat)
-                {
-                    if (chat.from_id == 'admin'){
-                        if(chat.presenter_name){
-                            $('#chatBody').append('' +
-                                '<span class="admin-to-user-text-admin"><strong>'+chat.presenter_name+'</strong>'+chat.chat_text+'</span>');
-                        }else{
-                            $('#chatBody').append('' +
-                                '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
-                        }
-
-                    }else{
-                        $('#chatBody').append('' +
-                            '<span class="user-to-admin-text-admin"><strong style="margin-right: 10px">'+cust_name+'</strong>'+chat.chat_text+'</span>');
-                    }
-                });
-
-                $("#chatBody").scrollTop($("#chatBody")[0].scrollHeight+100);
-
-            }
-        ).error((error)=>{
-            toastr.error('Unable to load the chat.');
-        });
-    }
 
     $(document).ready(function () {
 
         $('#question_list').on('click', '.question_attendee_name', function () {
             let cust_id = $(this).attr('cust-id');
             let cust_name = $(this).attr('cust-name');
+            currently_chatting_with_attendee = cust_name;
             let cust_question = $(this).attr('cust-question');
+            currently_question_with_attendee = cust_question;
 
             attendeeChatPopup(cust_id, cust_name, cust_question);
         });
@@ -845,7 +800,8 @@
                     if (data == 1)
                     {
                         socket.emit('new-attendee-to-admin-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "from_id":"admin", "to_id":userId, "chat_text":message});
-                        socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":$('#chatAttendeeName').val() });
+                        socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":currently_chatting_with_attendee, 'current_question':currently_question_with_attendee});
+
                         $('#chatBody').append('' +
                             '<span class="admin-to-user-text-admin">'+message+'</span>');
 
@@ -876,6 +832,7 @@
             {
                 if (data.from_id != 'admin')
                 {
+                    console.log(data);
                     attendeeChatPopup(data.from_id, data.user_name);
                 }
             }
@@ -884,7 +841,7 @@
         socket.on('update-admin-attendee-chat', function (data) {
             if (data.socket_session_name == socket_session_name)
             {
-                attendeeChatUpdate(data.to_id, data.to_name);
+                attendeeChatPopup(data.to_id, data.to_name, data.current_question, false);
             }
         });
 
@@ -1023,11 +980,11 @@
         var session_start_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->time_slot . ' UTC-4'?>";
         var session_end_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time . ' UTC-4'?>";
 
-        console.log(session_end_datetime);
+        //console.log(session_end_datetime);
         function timeleft() {
             // Set the date we're counting down to
             var countDownDate = new Date(session_end_datetime).getTime();
-            console.log(countDownDate)
+            //console.log(countDownDate)
 
 
             // Update the count down every 1 second
@@ -1035,12 +992,12 @@
 
                 // Get today's date and time
                 var now = new Date().getTime();
-                console.log(now);
+                //console.log(now);
 
                 // Find the distance between now and the count down date
                 var distance = countDownDate - now;
 
-                console.log("distance:"+distance);
+                //console.log("distance:"+distance);
 
                 // Time calculations for days, hours, minutes and seconds
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
