@@ -247,5 +247,8 @@
             success: function (data) {
             }
         });
+
+        $('#toolbox').hide();
+
     });
 </script>
