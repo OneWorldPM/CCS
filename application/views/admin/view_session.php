@@ -729,8 +729,14 @@
                 $.each(chats, function(index, chat)
                 {
                     if (chat.from_id == 'admin'){
-                        $('#chatBody').append('' +
-                            '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
+                        if(chat.presenter_name){
+                            $('#chatBody').append('' +
+                                '<span class="admin-to-user-text-admin"><strong style="float: left">'+chat.presenter_name+'</strong>'+chat.chat_text+'</span>');
+                        }else{
+                            $('#chatBody').append('' +
+                                '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
+                        }
+
                     }else{
                         $('#chatBody').append('' +
                             '<span class="user-to-admin-text-admin"><strong style="margin-right: 10px">'+cust_name+'</strong>'+chat.chat_text+'</span>');
@@ -748,6 +754,57 @@
 
     }
 
+    function attendeeChatUpdate(cust_id, cust_name,cust_question)
+    {
+        $('#chatAttendeeName').text(cust_name);
+        $('#chattAttendeeQuestion').text(cust_question);
+        $('#sendMessagetoAttendee').attr('user-id', cust_id);
+        $('#endChatBtn').attr('userId', cust_id);
+
+        $.post(base_url+"admin/sessions/getAllAdminToAttendeeChat",
+
+            {
+                session_id: sessionId,
+                from_id: cust_id,
+                to_id: "admin"
+            }
+
+        ).done(function(chats) {
+
+                $.get(base_url+"admin/sessions/markAllAsRead/"+sessionId+'/'+cust_id, function( data ) {
+                    if (data == 1)
+                    {
+
+                    }
+                });
+
+                chats = JSON.parse(chats);
+
+                $('#chatBody').html('');
+                $.each(chats, function(index, chat)
+                {
+                    if (chat.from_id == 'admin'){
+                        if(chat.presenter_name){
+                            $('#chatBody').append('' +
+                                '<span class="admin-to-user-text-admin"><strong>'+chat.presenter_name+'</strong>'+chat.chat_text+'</span>');
+                        }else{
+                            $('#chatBody').append('' +
+                                '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
+                        }
+
+                    }else{
+                        $('#chatBody').append('' +
+                            '<span class="user-to-admin-text-admin"><strong style="margin-right: 10px">'+cust_name+'</strong>'+chat.chat_text+'</span>');
+                    }
+                });
+
+                $("#chatBody").scrollTop($("#chatBody")[0].scrollHeight+100);
+
+            }
+        ).error((error)=>{
+            toastr.error('Unable to load the chat.');
+        });
+    }
 
     $(document).ready(function () {
 
@@ -827,7 +884,7 @@
         socket.on('update-admin-attendee-chat', function (data) {
             if (data.socket_session_name == socket_session_name)
             {
-                attendeeChatPopup(data.to_id, data.to_name);
+                attendeeChatUpdate(data.to_id, data.to_name);
             }
         });
 
