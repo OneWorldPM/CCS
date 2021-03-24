@@ -5,3 +5,5 @@ application/config/database.php
 
 application/config/config.php
 .htaccess
+socket_config.php
+application/config/database.php
