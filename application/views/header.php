@@ -217,6 +217,8 @@
                     width: 115px;
                 }
             }
+
+
         </style>
 
     </head>
@@ -225,7 +227,7 @@
         <div class="wrapper">
             <!-- HEADER -->
             <header id="header" class="header-transparent header-sticky">
-                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 60)?'style="height:'.$sesions_logo_height.'px"':'':'';?>>
+                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 80)?'style="height:'.$sesions_logo_height.'px"':'style="height:115px"':'';?>>
                 <div style="height: 4px;background-color: #52c4ad;"></div>
                     <div class="container">
                         <!--LOGO-->
