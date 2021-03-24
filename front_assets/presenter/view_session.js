@@ -1,5 +1,6 @@
 let admin_chat_presenter_ids=[];
-
+let currently_chatting_with_attendee = '';
+let currently_question_with_attendee = '';
 socket.emit("getSessionViewUsers", app_name, function(resp) {
     if (resp) {
         var totalUsers = resp.users ? resp.users.length : 0;
@@ -324,7 +325,7 @@ $(document).ready(function() {
 
 //############### Added by Rexter ####################
 
-function attendeeChatPopup(cust_id, cust_name,cust_question)
+function attendeeChatPopup(cust_id, cust_name, cust_question )
 {
     $('#chatAttendeeName').text(cust_name);
     $('#chattAttendeeQuestion').text(cust_question);
@@ -377,7 +378,9 @@ $(document).ready(function () {
     $('#question_list').on('click', '.question_attendee_name', function () {
         let cust_id = $(this).attr('cust-id');
         let cust_name = $(this).attr('cust-name');
+        currently_chatting_with_attendee = cust_name;
         let cust_question = $(this).attr('cust-question');
+        currently_question_with_attendee = cust_question;
 
         attendeeChatPopup(cust_id, cust_name, cust_question);
     });
@@ -413,7 +416,7 @@ $(document).ready(function () {
                 if (data == 1)
                 {
                     socket.emit('new-attendee-to-admin-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "from_id":"admin", "to_id":userId, "chat_text":message, "sent_from":cp_id, 'presenter_name': cp_name });
-                    socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":$('#chatAttendeeName').val() });
+                    socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":currently_chatting_with_attendee, 'current_question':currently_question_with_attendee });
 
                     $('#chatBody').append('' +
                         '<span class="admin-to-user-text-admin">'+message+'</span>');
@@ -455,10 +458,11 @@ $(document).ready(function () {
     });
 
     socket.on('update-admin-attendee-chat', function (data) {
+        console.log(data);
         if (data.socket_session_name == socket_session_name)
         {
             if(admin_chat_presenter_ids.includes(cp_id)){
-                attendeeChatPopup(data.to_id, data.to_name);
+                attendeeChatPopup(data.to_id, data.to_name, data.current_question);
             }
 
         }
