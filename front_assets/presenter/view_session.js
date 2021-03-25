@@ -461,6 +461,7 @@ $(document).ready(function () {
         console.log(data);
         if (data.socket_session_name == socket_session_name)
         {
+            $('#'+ data.replied_status).addClass('fa fa-commenting-o');
             if(admin_chat_presenter_ids.includes(cp_id)){
                 attendeeChatPopup(data.to_id, data.to_name, data.current_question);
             }
@@ -525,8 +526,14 @@ function get_question_list() {
                     } else {
                         var add_star_class = 'fa fa-star cust_class_star_remove';
                     }
+                    if(val.marked_replied == 1){
+                        var add_comment_class = 'fa fa-commenting-o';
+                    }else{
+                        var add_comment_class='';
+                    }
+
                     $("#last_sessions_cust_question_id").val(val.sessions_cust_question_id);
-                    $('#question_list').prepend('<div id="question_list_key_' + key + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span class="question_attendee_name" cust-question="'+ val.question +'" cust-id="'+val.cust_id+'" cust-name="' + val.first_name + ' ' + val.last_name + '" style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <span class="' + add_star_class + ' " data-sessions_cust_question_id=' + val.sessions_cust_question_id + '></span> <a href="javascript:void(0)" class="hide_question" data-q-id="' + val.sessions_cust_question_id + '" data-listkey-id="question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"><input type="hidden" ' + readonly_value + ' id="answer_' + key + '" data-key_id="' + key + '" class="form-control input_class" placeholder="Enter Answer"  data-cust_id="' + val.cust_id + '" data-last_id="' + val.sessions_cust_question_id + '" value="' + answer_value + '"><a  class="btn btn-success btn_publish" id="btn_publish" data-answer_btn="answer_' + key + '" ' + disabled_value + ' style="border-radius: 0px; display:none">Send</a></div></div>');
+                    $('#question_list').prepend('<div id="question_list_key_' + key + '"  comment-question-id="comment_question_id_' + val.sessions_cust_question_id + '" marked-replied="'+val.marked_replied+'" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span class="question_attendee_name" cust-question="'+ val.question +'" cust-id="'+val.cust_id+'" cust-name="' + val.first_name + ' ' + val.last_name + '" style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <span class="' + add_star_class + ' " data-sessions_cust_question_id=' + val.sessions_cust_question_id + '></span> <a href="javascript:void(0)" class="hide_question" data-q-id="' + val.sessions_cust_question_id + '" data-listkey-id="question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a>&nbsp;<span data-comment-id="' + val.sessions_cust_question_id + '" id="comment_question_id_' + val.sessions_cust_question_id+ '" comment-question-id="comment_id_' + val.sessions_cust_question_id + '" class="'+ add_comment_class +'"></span></h5><div style="display: flex;"><input type="hidden" ' + readonly_value + ' id="answer_' + key + '" data-key_id="' + key + '" class="form-control input_class" placeholder="Enter Answer"  data-cust_id="' + val.cust_id + '" data-last_id="' + val.sessions_cust_question_id + '" value="' + answer_value + '"><a  class="btn btn-success btn_publish" id="btn_publish" data-answer_btn="answer_' + key + '" ' + disabled_value + ' style="border-radius: 0px; display:none">Send</a></div></div>');
                 });
             }
         }
