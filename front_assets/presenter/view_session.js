@@ -354,8 +354,14 @@ function attendeeChatPopup(cust_id, cust_name, cust_question )
             $.each(chats, function(index, chat)
             {
                 if (chat.from_id == 'admin'){
-                    $('#chatBody').append('' +
-                        '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
+                    if(chat.presenter_name){
+                        $('#chatBody').append('' +
+                            '<span class="admin-to-user-text-admin"><span style="float:left">'+chat.presenter_name+'</span>'+chat.chat_text+'</span>');
+                    }else{
+                        $('#chatBody').append('' +
+                            '<span class="admin-to-user-text-admin"><span style="float:left"> Admin </span>'+chat.chat_text+'</span>');
+                    }
+
                 }else{
                     $('#chatBody').append('' +
                         '<span class="user-to-admin-text-admin"><strong style="margin-right: 10px">'+cust_name+'</strong>'+chat.chat_text+'</span>');
