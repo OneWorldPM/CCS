@@ -408,8 +408,10 @@ class M_sessions extends CI_Model {
     }
 
     function get_music_setting() {
-        $query = $this->db->get_where('music_setting');
-        return $query->row();
+        $this->db->select('*');
+        $this->db->from('music_setting');
+        $query = $this->db->get();
+        return $query->result();
     }
 
 }

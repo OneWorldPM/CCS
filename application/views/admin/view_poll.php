@@ -77,6 +77,7 @@
                                                             <a href="<?= base_url() ?>admin/sessions/open_poll/<?= $val->sessions_poll_question_id ?>" class="btn btn-success btn-sm">Open Poll</a>
                                                         <?php } else if ($val->status == 1) { ?>
                                                             <a href="<?= base_url() ?>admin/sessions/start_timer/<?= $val->sessions_poll_question_id ?>" class="btn btn-blue btn-sm">Start Timer</a>
+                                                            <a href="<?= base_url() ?>admin/sessions/start_timer15sec/<?= $val->sessions_poll_question_id ?>" class="btn btn-blue btn-sm">Start Timer 15 Sec</a>
                                                             <a href="<?= base_url() ?>admin/sessions/close_poll/<?= $val->sessions_poll_question_id ?>" class="btn btn-danger btn-sm">Close Poll</a>
                                                             <a href="<?= base_url() ?>admin/sessions/show_result/<?= $val->sessions_poll_question_id ?>" class="btn btn-primary btn-sm">Show Results</a>
                                                         <?php } else if ($val->status == 2) { ?>
