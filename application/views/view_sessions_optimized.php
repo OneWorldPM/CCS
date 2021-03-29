@@ -65,13 +65,17 @@
                     <div class="col-md-12">
                         <?php
                         if (isset($music_setting)) {
-                            if ($music_setting->music_setting != "") {
-                                ?>
-                                <audio allow="autoplay" id="audio" src="<?= base_url() ?>uploads/music/<?= $music_setting->music_setting ?>"></audio>
-                                <?php
+                            foreach($music_setting as $music_setting){
+                                if ($music_setting->music_setting != "") {
+                                    ?>
+                                    <audio allow="autoplay" id="audio_<?=$music_setting->music_setting_id?>" src="<?= base_url() ?>uploads/music/<?= $music_setting->music_setting ?>"></audio>
+                                    <?php
+                                }
                             }
+
                         }
                         ?>
+
                         <input type="hidden" id="view_sessions_history_id" value="">
                         <input type="hidden" id="sessions_id" value=" <?= isset($sessions) ? $sessions->sessions_id : "" ?>">
                         <input type="hidden" id="poll_vot_section_id_status" value="0">
