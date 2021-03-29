@@ -653,14 +653,16 @@ function get_poll_vot_section() {
                     $("#poll_vot_section_last_status").val(data.result.status);
                 }
                 if (data.result.poll_status == 1 && data.result.timer_status == 1) {
+                    var timer_count = data.result.timer_count;
+                    console.log('timer_count'+timer_count);
                     if (poll_vot_section_id_status != data.result.sessions_poll_question_id) {
                         $("#timer_sectiom").show();
                         $("#popup_title_lbl").css({"border-top-right-radius": "0px", "border-top-left-radius": "0px"});
-                        timer(0);
+                        timer(0,timer_count);
                     } else {
                         $("#timer_sectiom").show();
                         $("#popup_title_lbl").css({"border-top-right-radius": "0px", "border-top-left-radius": "0px"});
-                        timer(1);
+                        timer(1,timer_count);
                     }
                 } else {
                     stop_music();
@@ -926,13 +928,20 @@ function ajaxcall() {
     });
 
 function play_music() {
-    var audio = document.getElementById("audio");
+    var audio = document.getElementById("audio_1");
+    audio.play();
+}
+
+function play_music_15sec() {
+    var audio = document.getElementById("audio_2");
     audio.play();
 }
 
 function stop_music() {
-    var audio = document.getElementById("audio");
-    audio.pause();
+    var audio1 = document.getElementById("audio_1");
+    var audio2 = document.getElementById("audio_2");
+    audio1.pause();
+    audio2.pause();
 }
 
 var upgradeTime = 10;
@@ -968,16 +977,21 @@ function pad(n) {
     return (n < 10 ? "0" + n : n);
 }
 
-function timer(status)
+function timer(status,timer_count)
 {
     var is_poll_ended = $('#poll_vot_section_is_ended').val();
     if (status == 0 || is_poll_ended == 1) {
         $('#poll_vot_section_is_ended').val(0);
         $("#btn_vote").show();
         $("#id_day_time").css("color", "#ef5e25");
-        play_music();
 
-        var timeLeft = 10;
+        if(timer_count >= 15){
+            play_music_15sec();
+        }else{
+            play_music();
+        }
+
+        var timeLeft = timer_count;
         var pollTimer = setInterval(function(){
             if(timeLeft <= 0){
                 clearInterval(pollTimer);
