@@ -17,11 +17,13 @@
                             <h4 class="panel-title text-white">Music Setting</h4>
                         </div>
                         <div class="panel-body bg-white" style="border: 1px solid #b2b7bb !important;">
-                            <form id="stripekeyForm" name="stripekeyForm" action="<?= site_url() ?>admin/music_setting/update_music_setting"  method="POST" enctype="multipart/form-data" >
+                            <?php    foreach ($music_setting as $music_setting){?>
+                            <form id="stripekeyForm" name="stripekeyForm" action="<?= site_url().'admin/music_setting/update_music_setting/'.$music_setting->music_setting_id; ?>"  method="POST" enctype="multipart/form-data" >
                                 <div class="form-group">
-                                    <label>Select Music File</label>
+                                    <label>Select Music File <?=($music_setting->music_setting_id=="1")?'10 Sec':'15 Sec'?></label>
                                     <input type="file" class="form-control" name="music" id="music">
                                     <?php
+
                                     if (isset($music_setting)) {
                                         if ($music_setting->music_setting != "") {
                                             ?>
@@ -29,6 +31,7 @@
                                             <?php
                                         }
                                     }
+
                                     ?>
                                 </div>
 
@@ -36,6 +39,7 @@
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
+                            <?php   }?>
                         </div>
                     </div>
                 </div>

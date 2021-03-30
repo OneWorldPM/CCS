@@ -7,11 +7,15 @@ class M_music_setting extends CI_Model {
     }
 
     function get_music_setting() {
-        $query = $this->db->get_where('music_setting');
-        return $query->row();
+        $this->db->select('*');
+        $this->db->from('music_setting');
+        $query = $this->db->get();
+
+        return $query->result();
+
     }
 
-    function update_music_setting() {
+    function update_music_setting($music_setting_id) {
       
         $_FILES['music']['name'] = $_FILES['music']['name'];
         $_FILES['music']['type'] = $_FILES['music']['type'];
@@ -22,7 +26,8 @@ class M_music_setting extends CI_Model {
         $this->upload->initialize($this->set_upload_options());
         $this->upload->do_upload('music');
         $file_upload_name = $this->upload->data();
-        
+
+        $this->db->where('music_setting_id=',$music_setting_id);
         $this->db->update('music_setting', array('music_setting' => $file_upload_name['file_name']));
         return 1;
     }
