@@ -461,7 +461,7 @@ class Sessions extends CI_Controller {
     }
     public function start_timer15sec($sessions_poll_question_id) {
         $sessions_poll_question_row = $this->db->get_where("sessions_poll_question", array("sessions_poll_question_id" => $sessions_poll_question_id))->row();
-        $this->db->update("sessions_poll_question", array("timer_status" => 1,"timer_count"=>15), array("sessions_poll_question_id" => $sessions_poll_question_id),);
+        $this->db->update("sessions_poll_question", array("timer_status" => 1,"timer_count"=>15), array("sessions_poll_question_id" => $sessions_poll_question_id));
         header('location:' . base_url() . 'admin/sessions/view_poll/' . $sessions_poll_question_row->sessions_id . '?msg=U&pollAction=start_timer');
     }
 
