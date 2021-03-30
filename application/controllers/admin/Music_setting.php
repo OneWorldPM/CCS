@@ -16,8 +16,8 @@ class Music_setting extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    function update_music_setting() {
-        $result = $this->music_setting->update_music_setting();
+    function update_music_setting($music_setting_id) {
+        $result = $this->music_setting->update_music_setting($music_setting_id);
         header('location:' . site_url() . 'admin/music_setting?msg=U');
     } 
 }
