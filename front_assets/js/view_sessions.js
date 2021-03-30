@@ -941,7 +941,9 @@ function stop_music() {
     var audio1 = document.getElementById("audio_1");
     var audio2 = document.getElementById("audio_2");
     audio1.pause();
+    audio1.currentTime = 0;
     audio2.pause();
+    audio2.currentTime = 0;
 }
 
 var upgradeTime = 10;
