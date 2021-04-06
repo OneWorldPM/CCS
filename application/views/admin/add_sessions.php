@@ -162,15 +162,17 @@ $user_role = $this->session->userdata('role');
                                     <div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
                                         <label class="text-large text-bold">Millicast Stream Name</label><br>
                                         <select name="embed_html_code" class="form-control">
-                                            <option name="" value=""></option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="khp0e54u"?"selected":""):""?> value="khp0e54u"> Gravity One Stream (khp0e54u)</option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="kkd5l4jp"?"selected":""):""?> value="kkd5l4jp"> Gravity Two Stream (kkd5l4jp)</option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="kkq00xz5"?"selected":""):""?> value="kkq00xz5"> Gravity Three Stream (kkq00xz5)</option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="kkx0qeia"?"selected":""):""?> value="kkx0qeia"> Gravity Four Stream (kkx0qeia)</option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="klvigx7t"?"selected":""):""?> value="klvigx7t"> Gravity Five Stream (klvigx7t)</option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="khdrz2bq"?"selected":""):""?> value="khdrz2bq"> OW Stream One (khdrz2bq)</option>
-                                            <option <?=isset($sessions_edit)?($sessions_edit->embed_html_code=="kl2qyz3z"?"selected":""):""?> value="kl2qyz3z"> OW Stream Two (kl2qyz3z)</option>
+                                            <option <?=isset($sessions_edit)?(!empty($sessions_edit->embed_html_code)?"selected":""):""?>
+                                                    value="<?= isset($sessions_edit)?(!empty($sessions_edit->embed_html_code))? $sessions_edit->embed_html_code:'':''?>">
+                                                <?= isset($sessions_edit) && !empty($sessions_edit->embed_html_code)?"Saved: (".$sessions_edit->embed_html_code.")":''?>
+                                            </option>
+                                           <?php foreach ($millicast_stream_names as $strm_name){
+                                                ?>
+                                               <option value="<?=$strm_name->stream_link?>"><?=$strm_name->stream_name.' ('.$strm_name->stream_link.')'?></option>
+                                               <?php
+                                           }?>
                                         </select>
+                                        <a href="<?=base_url().'admin/sessions/streamNames'?>" class="btn btn-secondary btn-sm" id="manage-stream-btn" style="float:right">Manage Stream Names</a><br>
                                     </div>
                                     <div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
                                         <label class="text-large text-bold">Embed HTML Code <b>(Presenter)</b></label>
@@ -599,4 +601,5 @@ $user_role = $this->session->userdata('role');
 
 
     });
+
 </script>
