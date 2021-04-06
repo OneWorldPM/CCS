@@ -10,7 +10,7 @@
         <section id="page-title">
             <div class="row">
                 <div class="col-sm-8">
-                    <h1 class="mainTitle">Session Details</h1>
+                    <h1 class="mainTitle">Stream Details</h1>
                 </div>
             </div>
         </section>
