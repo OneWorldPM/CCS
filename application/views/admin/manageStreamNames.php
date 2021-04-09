@@ -10,12 +10,14 @@
         <section id="page-title">
             <div class="row">
                 <div class="col-sm-8">
-                    <h1 class="mainTitle">Session Details</h1>
+                    <h1 class="mainTitle">Stream Details</h1>
                 </div>
             </div>
         </section>
 <div>
-    <a id="show-add-stream" class="btn btn-green"><span class="fa fa-plus"></span>Add Stream</a><br><br><br>
+    <a id="show-add-stream" class="btn btn-green"><span class="fa fa-plus"></span>Add Stream</a>
+    <span style="float:right"><button class="btn btn-orange" onclick="history.go(-1);">Done</button></span>
+    <br><br><br>
 <table id="stream_names" class="display">
     <thead>
     <tr>
