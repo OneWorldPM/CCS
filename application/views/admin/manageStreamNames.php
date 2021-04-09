@@ -15,7 +15,9 @@
             </div>
         </section>
 <div>
-    <a id="show-add-stream" class="btn btn-green"><span class="fa fa-plus"></span>Add Stream</a><br><br><br>
+    <a id="show-add-stream" class="btn btn-green"><span class="fa fa-plus"></span>Add Stream</a>
+    <span style="float:right"><button class="btn btn-orange" onclick="history.go(-1);">Done</button></span>
+    <br><br><br>
 <table id="stream_names" class="display">
     <thead>
     <tr>

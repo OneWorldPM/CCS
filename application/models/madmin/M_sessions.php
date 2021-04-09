@@ -283,7 +283,13 @@ class M_sessions extends CI_Model {
         } else {
             $presenter_id = "";
         }
-		
+
+
+        if(isset($post['one_time_embed_html_code']) && !empty(trim($post['one_time_embed_html_code']))){
+            $embed_html_code=(trim($post['one_time_embed_html_code']));
+        }else{
+            $embed_html_code=(trim($post['embed_html_code']));
+        }
         $set = array(
             'presenter_id' => $presenter_id,
 			'moderator_id' => $moderator_id,
@@ -296,7 +302,7 @@ class M_sessions extends CI_Model {
              'zoom_link' => trim($post['zoom_link']),
              'zoom_number' => trim($post['zoom_number']),
             'zoom_password' => trim($post['zoom_password']),
-            'embed_html_code' => trim($post['embed_html_code']),
+            'embed_html_code' => $embed_html_code,
             'embed_html_code_presenter' => trim($post['embed_html_code_presenter']),
             'sessions_type_id' => $sessions_type_id,
             'sessions_tracks_id' => $sessions_tracks_id,
@@ -536,7 +542,12 @@ class M_sessions extends CI_Model {
             $presenter_id = "";
         }
 
-		
+        if(isset($post['one_time_embed_html_code']) && !empty(trim($post['one_time_embed_html_code']))){
+            $embed_html_code=(trim($post['one_time_embed_html_code']));
+        }else{
+            $embed_html_code=(trim($post['embed_html_code']));
+        }
+
         $set = array(
             'presenter_id' => $presenter_id,
 			'moderator_id' => $moderator_id,
@@ -549,7 +560,7 @@ class M_sessions extends CI_Model {
             'zoom_password' => trim($post['zoom_password']),
             'time_slot' => date("H:i", strtotime($post['time_slot'])),
             'end_time' => date("H:i", strtotime($post['end_time'])),
-            'embed_html_code' => trim($post['embed_html_code']),
+            'embed_html_code' => $embed_html_code,
             'embed_html_code_presenter' => trim($post['embed_html_code_presenter']),
             'sessions_type_id' => $sessions_type_id,
             'sessions_tracks_id' => $sessions_tracks_id,
