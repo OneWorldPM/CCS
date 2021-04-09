@@ -425,7 +425,7 @@ $(document).ready(function () {
                     socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":currently_chatting_with_attendee, 'current_question':currently_question_with_attendee });
 
                     $('#chatBody').append('' +
-                        '<span class="admin-to-user-text-admin">'+message+'</span>');
+                        '<span class="admin-to-user-text-admin"><strong style="float: left">'+cp_name+'</strong>'+message+'</span>');
 
                     $('#chatToAttendeeText').val('');
 

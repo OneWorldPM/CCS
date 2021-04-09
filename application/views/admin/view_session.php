@@ -740,7 +740,7 @@
                                 '<span class="admin-to-user-text-admin"><strong style="float: left">'+chat.presenter_name+'</strong>'+chat.chat_text+'</span>');
                         }else{
                             $('#chatBody').append('' +
-                                '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
+                                '<span class="admin-to-user-text-admin"><strong style="float:left">Admin </strong>'+chat.chat_text+'</span>');
                         }
 
                     }else{
