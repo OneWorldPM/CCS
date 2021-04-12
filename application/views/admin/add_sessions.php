@@ -173,7 +173,7 @@ $user_role = $this->session->userdata('role');
                                             </option>
                                            <?php foreach ($millicast_stream_names as $strm_name){
                                                 ?>
-                                               <option value="<?=$strm_name->stream_link?>"><?=$strm_name->stream_name.' ('.$strm_name->stream_link.')'?></option>
+                                               <option value="<?=$strm_name->link?>"><?=$strm_name->name.' ('.$strm_name->link.')'?></option>
                                                <?php
                                            }?>
                                         </select>
