@@ -31,9 +31,9 @@
             foreach ($millicast_stream_names as $strm_name){
     ?>
     <tr>
-        <td><?=$strm_name->stream_name?></td>
-        <td><?=$strm_name->stream_link?></td>
-        <td><a href="<?=base_url().'admin/sessions/deleteStreamName/'.$strm_name->stream_id?>" class="btn btn-danger"> <span class="fa fa-trash-o"></span> Delete </a> </td>
+        <td><?=$strm_name->name?></td>
+        <td><?=$strm_name->link?></td>
+        <td><a href="<?=base_url().'admin/sessions/deleteStreamName/'.$strm_name->id?>" class="btn btn-danger"> <span class="fa fa-trash-o"></span> Delete </a> </td>
     </tr>
     <?php } }?>
     </tbody>

@@ -2082,7 +2082,7 @@ class M_sessions extends CI_Model {
         function saveStreamName($post){
             $stream_name = $post['stream_name'];
             $stream_link = $post['stream_link'];
-            $result = $this->db->insert('tbl_millicast_stream_names',array('stream_name'=>$stream_name, 'stream_link'=>$stream_link));
+            $result = $this->db->insert('tbl_millicast_stream_names',array('name'=>$stream_name, 'link'=>$stream_link));
             if($result) {
                 return $result;
             }else{
@@ -2093,7 +2093,7 @@ class M_sessions extends CI_Model {
         function deleteStreamName($stream_id){
             $this->db->select('*');
             $this->db->from('tbl_millicast_stream_names');
-            $this->db->where('stream_id',$stream_id);
+            $this->db->where('id',$stream_id);
             $result = $this->db->delete();
 
             if($result){
