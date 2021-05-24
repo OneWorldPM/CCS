@@ -435,7 +435,7 @@ let href = $(this).attr('href-url');
 var cco_event_id = $(this).attr('data-cco_event_id');
 
 if(cco_event_id=='' ){
-       alertify.error('CCO Event ID is empty! ');
+       alertify.error('JSON cannot be sent until Event ID is added. ');
         return  false;
     }
 
@@ -459,7 +459,7 @@ $('#sessions_table').on('click','#btn-send-json',function(e){
     var cco_event_id = $(this).attr('data-cco_event_id');
 
     if(cco_event_id=='' ){
-        alertify.error('CCO Event ID is empty! ');
+        alertify.error('JSON cannot be sent until Event ID is added.');
         return  false;
     }else{
         window.location = $(this).attr('href');
