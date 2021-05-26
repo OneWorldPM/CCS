@@ -90,8 +90,8 @@ class M_sessions extends CI_Model {
             $this->db->where($where);
             $this->db->or_where('s.sessions_id=',25);
         }
-        $this->db->order_by("s.sessions_date", "asc");
-        $this->db->order_by("s.time_slot", "asc");
+        $this->db->order_by("s.sessions_date", "desc");
+        $this->db->order_by("s.time_slot", "desc");
         $sessions = $this->db->get();
         if ($sessions->num_rows() > 0) {
             $return_array = array();
@@ -283,7 +283,13 @@ class M_sessions extends CI_Model {
         } else {
             $presenter_id = "";
         }
-		
+
+
+        if(isset($post['one_time_embed_html_code']) && !empty(trim($post['one_time_embed_html_code']))){
+            $embed_html_code=(trim($post['one_time_embed_html_code']));
+        }else{
+            $embed_html_code=(trim($post['embed_html_code']));
+        }
         $set = array(
             'presenter_id' => $presenter_id,
 			'moderator_id' => $moderator_id,
@@ -296,7 +302,7 @@ class M_sessions extends CI_Model {
              'zoom_link' => trim($post['zoom_link']),
              'zoom_number' => trim($post['zoom_number']),
             'zoom_password' => trim($post['zoom_password']),
-            'embed_html_code' => trim($post['embed_html_code']),
+            'embed_html_code' => $embed_html_code,
             'embed_html_code_presenter' => trim($post['embed_html_code_presenter']),
             'sessions_type_id' => $sessions_type_id,
             'sessions_tracks_id' => $sessions_tracks_id,
@@ -536,7 +542,12 @@ class M_sessions extends CI_Model {
             $presenter_id = "";
         }
 
-		
+        if(isset($post['one_time_embed_html_code']) && !empty(trim($post['one_time_embed_html_code']))){
+            $embed_html_code=(trim($post['one_time_embed_html_code']));
+        }else{
+            $embed_html_code=(trim($post['embed_html_code']));
+        }
+
         $set = array(
             'presenter_id' => $presenter_id,
 			'moderator_id' => $moderator_id,
@@ -549,7 +560,7 @@ class M_sessions extends CI_Model {
             'zoom_password' => trim($post['zoom_password']),
             'time_slot' => date("H:i", strtotime($post['time_slot'])),
             'end_time' => date("H:i", strtotime($post['end_time'])),
-            'embed_html_code' => trim($post['embed_html_code']),
+            'embed_html_code' => $embed_html_code,
             'embed_html_code_presenter' => trim($post['embed_html_code_presenter']),
             'sessions_type_id' => $sessions_type_id,
             'sessions_tracks_id' => $sessions_tracks_id,
@@ -2054,5 +2065,42 @@ class M_sessions extends CI_Model {
                 } 
                   return false;
         }
-    
+
+//        this will get the stream names from database
+        function getMillicast_Stream_Name(){
+
+            $this->db->select('*');
+            $this->db->from('tbl_millicast_stream_names');
+            $qstr=$this->db->get();
+//            print_r($qstr->result());
+            if ($qstr->num_rows() > 0) {
+                return $qstr->result();
+            }
+            return '';
+        }
+
+        function saveStreamName($post){
+            $stream_name = $post['stream_name'];
+            $stream_link = $post['stream_link'];
+            $result = $this->db->insert('tbl_millicast_stream_names',array('name'=>$stream_name, 'link'=>$stream_link));
+            if($result) {
+                return $result;
+            }else{
+                return '';
+            }
+        }
+
+        function deleteStreamName($stream_id){
+            $this->db->select('*');
+            $this->db->from('tbl_millicast_stream_names');
+            $this->db->where('id',$stream_id);
+            $result = $this->db->delete();
+
+            if($result){
+                return $result;
+
+            }else{
+                return '';
+            }
+        }
 }

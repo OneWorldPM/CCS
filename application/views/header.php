@@ -217,6 +217,8 @@
                     width: 115px;
                 }
             }
+
+
         </style>
 
     </head>
@@ -225,8 +227,8 @@
         <div class="wrapper">
             <!-- HEADER -->
             <header id="header" class="header-transparent header-sticky">
-                <div id="header-wrap">
-                    <div style="height: 4px;background-color: #52c4ad;"></div>
+                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 115)?'style="height:'.$sesions_logo_height.'px"':'style="height:115px"':'';?>>
+                <div style="height: 4px;background-color: #52c4ad;"></div>
                     <div class="container">
                         <!--LOGO-->
                         <?php
@@ -253,7 +255,7 @@
                                 <?php if($sponsor_type!=''):?>
                                 <span><?= $sponsor_type ?></span>
                                 <?php endif;?>
-                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: <?=$sesions_logo_width?>px;height: <?=$sesions_logo_height?>px;">
+                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: <?=$sesions_logo_width?>px;height: <?=$sesions_logo_height?>px;<?=(($sesions_logo_height) < 90 )?'margin-top:10px;':''?>">
                             </div>
                             <?php
                         }

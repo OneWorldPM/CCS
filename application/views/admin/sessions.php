@@ -226,7 +226,7 @@ $user_role = $this->session->userdata('role');
                                                             $chatPresCount=explode(',',($value->presenter_id));
                                                             $sessionChatCount = count  ($chatModCount)+count  ($chatPresCount);
                                                       ?>
-                                                        <small><?= (isset($value) && !empty($value)) ?'<span style="float: left;">Host Chat: '.$sessionChatCount.'/'.$total:""  ?></span><strong><span style="float:right;color:<?=($value->status==1)?'green':(($value->status==0)?'orange':'red')?>"><?=($value->status==1)?'Open':(($value->status==0)?'Pending':'Closed')?></small></span></strong><br>
+                                                             <small><span style="float: left;">Host Chat: <i <?=($sessionChatCount < $total)?'class="blink-element" style="color:red"':''?> ><?=$sessionChatCount.'/'.$total?></i></span><strong><span style="float:right;color:<?=($value->status==1)?'green':(($value->status==0)?'orange':'red')?>"><?=($value->status==1)?'Open':(($value->status==0)?'Pending':'Closed')?></small></span></strong><br>
                                                         <?php
                                                          } 
                                                         }
@@ -253,10 +253,10 @@ $user_role = $this->session->userdata('role');
                                                                 foreach ($val->check_send_json_exist as $status) {
                                                                     if ($status->send_json_status==1) {
                                                                         ?>
-                                                                         <a data-session-id="<?= $val->sessions_id ?>" class="btn btn-purple btn-sm send-json" style="margin-bottom: 5px;">JSON Sent</a>
+                                                                         <a data-session-id="<?= $val->sessions_id ?>"  data-cco_event_id="<?=$val->cco_envent_id?>"  class="btn btn-purple btn-sm send-json" style="margin-bottom: 5px;">JSON Sent</a>
                                                                         <?php
                                                                     } else {
-                                                                        ?>  <a data-session-id="<?= $val->sessions_id ?>" href="<?= base_url() ?>admin/sessions/send_json/<?= $val->sessions_id ?>" class="btn btn-success btn-sm" style="margin-bottom: 5px;">Send JSON</a><?php
+                                                                        ?>  <a data-session-id="<?= $val->sessions_id ?>" data-cco_event_id="<?=$val->cco_envent_id?>" id="btn-send-json" href="<?= base_url() ?>admin/sessions/send_json/<?= $val->sessions_id ?>" class="btn btn-success btn-sm" style="margin-bottom: 5px;">Send JSON</a><?php
                                                                     }
                                                                 }
                                                          }?>
@@ -432,6 +432,12 @@ $('#sessions_table').on('click','.send-json', function () {
 
 let sesionId = $(this).data("session-id");
 let href = $(this).attr('href-url');
+var cco_event_id = $(this).attr('data-cco_event_id');
+
+if(cco_event_id=='' ){
+       alertify.error('JSON cannot be sent until Event ID is added. ');
+        return  false;
+    }
 
 Swal.fire({
     title: 'Are you sure?',
@@ -446,6 +452,18 @@ Swal.fire({
         window.location.href = "<?=base_url()?>admin/sessions/send_json/"+sesionId;
     }
 })
+});
+
+$('#sessions_table').on('click','#btn-send-json',function(e){
+    e.preventDefault();
+    var cco_event_id = $(this).attr('data-cco_event_id');
+
+    if(cco_event_id=='' ){
+        alertify.error('JSON cannot be sent until Event ID is added.');
+        return  false;
+    }else{
+        window.location = $(this).attr('href');
+    }
 });
 // 
     });

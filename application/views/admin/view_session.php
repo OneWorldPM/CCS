@@ -690,6 +690,12 @@
 
     var app_name = "<?=getAppName($sessions->sessions_id) ?>";
 
+    let currently_chatting_with_attendee = '';
+    let currently_question_with_attendee = '';
+    let sessions_current_question_id = ''
+    let comment_listkey_id = '';
+    let comment_id='';
+
     socket.emit("getSessionViewUsers", "<?=getAppName($sessions->sessions_id) ?>", function (resp) {
         if (resp) {
             var totalUsers = resp.users ? resp.users.length : 0;
@@ -698,7 +704,7 @@
         }
     });
 
-    function attendeeChatPopup(cust_id, cust_name,cust_question)
+    function attendeeChatPopup(cust_id, cust_name,cust_question, withPopUp=true)
     {
         $('#chatAttendeeName').text(cust_name);
         $('#chattAttendeeQuestion').text(cust_question);
@@ -729,8 +735,14 @@
                 $.each(chats, function(index, chat)
                 {
                     if (chat.from_id == 'admin'){
-                        $('#chatBody').append('' +
-                            '<span class="admin-to-user-text-admin">'+chat.chat_text+'</span>');
+                        if(chat.presenter_name){
+                            $('#chatBody').append('' +
+                                '<span class="admin-to-user-text-admin"><strong style="float: left">'+chat.presenter_name+'</strong>'+chat.chat_text+'</span>');
+                        }else{
+                            $('#chatBody').append('' +
+                                '<span class="admin-to-user-text-admin"><strong style="float:left">Admin </strong>'+chat.chat_text+'</span>');
+                        }
+
                     }else{
                         $('#chatBody').append('' +
                             '<span class="user-to-admin-text-admin"><strong style="margin-right: 10px">'+cust_name+'</strong>'+chat.chat_text+'</span>');
@@ -744,7 +756,9 @@
             toastr.error('Unable to load the chat.');
         });
 
-        $('#attendeeChatModal').modal('show');
+        if(withPopUp){
+            $('#attendeeChatModal').modal('show');
+        }
 
     }
 
@@ -754,7 +768,12 @@
         $('#question_list').on('click', '.question_attendee_name', function () {
             let cust_id = $(this).attr('cust-id');
             let cust_name = $(this).attr('cust-name');
+            currently_chatting_with_attendee = cust_name;
             let cust_question = $(this).attr('cust-question');
+            currently_question_with_attendee = cust_question;
+            sessions_current_question_id=$(this).attr('cust-question-id');
+            comment_question_id = $(this).attr('comment-question-id');
+
 
             attendeeChatPopup(cust_id, cust_name, cust_question);
         });
@@ -775,6 +794,15 @@
                 return false;
             }
 
+
+
+            $.get(base_url+"admin/sessions/markAsReplied/"+sessions_current_question_id,function( data ) {
+                console.log(comment_question_id);
+                if(data == 1){
+                    $('#' + comment_question_id).addClass('fa fa-commenting-o');
+                }
+            });
+
             $.post(base_url+"admin/sessions/saveAdminToAttendeeChat",
 
                 {
@@ -788,7 +816,8 @@
                     if (data == 1)
                     {
                         socket.emit('new-attendee-to-admin-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "from_id":"admin", "to_id":userId, "chat_text":message});
-                        socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":$('#chatAttendeeName').val() });
+                        socket.emit('update-admin-attendee-chat', {"socket_session_name":socket_session_name, "session_id":sessionId, "to_id":userId, "to_name":currently_chatting_with_attendee, 'current_question':currently_question_with_attendee, 'replied_status':comment_question_id });
+
                         $('#chatBody').append('' +
                             '<span class="admin-to-user-text-admin">'+message+'</span>');
 
@@ -819,6 +848,7 @@
             {
                 if (data.from_id != 'admin')
                 {
+                    console.log(data);
                     attendeeChatPopup(data.from_id, data.user_name);
                 }
             }
@@ -827,7 +857,7 @@
         socket.on('update-admin-attendee-chat', function (data) {
             if (data.socket_session_name == socket_session_name)
             {
-                attendeeChatPopup(data.to_id, data.to_name);
+                attendeeChatPopup(data.to_id, data.to_name, data.current_question, false);
             }
         });
 
@@ -966,11 +996,11 @@
         var session_start_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->time_slot . ' UTC-4'?>";
         var session_end_datetime = "<?=date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time . ' UTC-4'?>";
 
-        console.log(session_end_datetime);
+        //console.log(session_end_datetime);
         function timeleft() {
             // Set the date we're counting down to
             var countDownDate = new Date(session_end_datetime).getTime();
-            console.log(countDownDate)
+            //console.log(countDownDate)
 
 
             // Update the count down every 1 second
@@ -978,12 +1008,12 @@
 
                 // Get today's date and time
                 var now = new Date().getTime();
-                console.log(now);
+                //console.log(now);
 
                 // Find the distance between now and the count down date
                 var distance = countDownDate - now;
 
-                console.log("distance:"+distance);
+                //console.log("distance:"+distance);
 
                 // Time calculations for days, hours, minutes and seconds
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -1329,9 +1359,14 @@
                         } else {
                             var add_star_class = 'fa fa-star cust_class_star_remove';
                         }
+                        if(val.marked_replied == 1){
+                            var add_comment_class = 'fa fa-commenting-o';
+                        }else{
+                            var add_comment_class='';
+                        }
                         $("#last_sessions_cust_question_id").val(val.sessions_cust_question_id);
 
-                        $('#question_list').prepend('<div id="question_list_key_' + key + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span class="question_attendee_name" cust-question="'+ val.question +'" cust-id="'+val.cust_id+'" cust-name="' + val.first_name + ' ' + val.last_name + '" style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <span class="' + add_star_class + ' " data-sessions_cust_question_id=' + val.sessions_cust_question_id + '></span> <a href="javascript:void(0)" class="hide_question" data-q-id="' + val.sessions_cust_question_id + '" data-listkey-id="question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"><input type="hidden" ' + readonly_value + ' id="answer_' + key + '" data-key_id="' + key + '" class="form-control input_class" placeholder="Enter Answer"  data-cust_id="' + val.cust_id + '" data-last_id="' + val.sessions_cust_question_id + '" value="' + answer_value + '"><a  class="btn btn-success btn_publish" id="btn_publish" data-answer_btn="answer_' + key + '" ' + disabled_value + ' style="border-radius: 0px; display:none">Send</a></div></div>');
+                        $('#question_list').prepend('<div id="question_list_key_' + key + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span class="question_attendee_name" comment-question-id="comment_question_id_' + val.sessions_cust_question_id + '" marked-replied="'+val.marked_replied+'" cust-question-id="'+val.sessions_cust_question_id+'" cust-question="'+ val.question +'" cust-id="'+val.cust_id+'" cust-name="' + val.first_name + ' ' + val.last_name + '" style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <span class="' + add_star_class + ' " data-sessions_cust_question_id=' + val.sessions_cust_question_id + '></span><a href="javascript:void(0)" class="hide_question" data-q-id="' + val.sessions_cust_question_id + '" data-listkey-id="question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a><span data-comment-id="' + val.sessions_cust_question_id + '" id="comment_question_id_' + val.sessions_cust_question_id+ '" comment-question-id="comment_id_' + val.sessions_cust_question_id + '" class="'+ add_comment_class +'"></span></h5><div style="display: flex;"><input type="hidden" ' + readonly_value + ' id="answer_' + key + '" data-key_id="' + key + '" class="form-control input_class" placeholder="Enter Answer"  data-cust_id="' + val.cust_id + '" data-last_id="' + val.sessions_cust_question_id + '" value="' + answer_value + '"><a  class="btn btn-success btn_publish" id="btn_publish" data-answer_btn="answer_' + key + '" ' + disabled_value + ' style="border-radius: 0px; display:none">Send</a></div></div>');
                         //$('#question_list').prepend('<div id="question_list_key_' + key + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <span class="' + add_star_class + ' " data-sessions_cust_question_id=' + val.sessions_cust_question_id + '></span> <a href="javascript:void(0)" class="hide_question" data-q-id="' + val.sessions_cust_question_id + '" data-listkey-id="question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"><input type="hidden" ' + readonly_value + ' id="answer_' + key + '" data-key_id="' + key + '" class="form-control input_class" placeholder="Enter Answer"  data-cust_id="' + val.cust_id + '" data-last_id="' + val.sessions_cust_question_id + '" value="' + answer_value + '"><a  class="btn btn-success btn_publish" id="btn_publish" data-answer_btn="answer_' + key + '" ' + disabled_value + ' style="border-radius: 0px; display:none">Send</a></div></div>');
                     });
                 }

@@ -169,7 +169,7 @@ class Sessions extends CI_Controller {
         if (!empty($result_data)) {
             $result_array = array("status" => "success", "question_list" => $result_data);
         } else {
-            $result_array = array("status" => "error");
+            $result_array = array("status" => "empty", "question_list" => $result_data);
         }
         echo json_encode($result_array);
     }
@@ -390,6 +390,23 @@ class Sessions extends CI_Controller {
         );
 
         $this->db->insert('admin_to_attendee_chat', $data);
+
+        if ($this->db->affected_rows() > 0)
+            echo 1;
+        else
+            echo 0;
+
+        return;
+    }
+
+    public function markAsReplied($sessions_current_question_id)
+    {
+        $data = array(
+            'sessions_cust_question_id' => $sessions_current_question_id
+        );
+
+        $this->db->where($data);
+        $this->db->update('sessions_cust_question', array('marked_replied'=>1));
 
         if ($this->db->affected_rows() > 0)
             echo 1;
