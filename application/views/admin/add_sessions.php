@@ -165,7 +165,7 @@ $user_role = $this->session->userdata('role');
                                               <small style="color:red;"> Place one time code at the textbox below </small>
                                               <input type="text" class="form-control text-blue input-embedCode" name="one_time_embed_html_code" value="" placeholder="Input One Time Code Here !!" >
                                           </div>
-                                        <select name="embed_html_code" class="form-control select-embedCode">
+                                        <select name="embed_html_code" class="form-control select-embedCode" style="height: auto">
                                             <option value=""></option>
                                             <option <?=isset($sessions_edit)?(!empty($sessions_edit->embed_html_code)?"selected":""):""?>
                                                     value="<?= isset($sessions_edit)?(!empty($sessions_edit->embed_html_code))? $sessions_edit->embed_html_code:'':''?>">
@@ -221,7 +221,7 @@ $user_role = $this->session->userdata('role');
                                     </div>
                                     <div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
                                         <label class="text-large text-bold">Select Sessions Status</label>
-                                        <select class="form-control" id="sessions_type_status" name="sessions_type_status" <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
+                                        <select class="form-control" id="sessions_type_status" style="height: auto" name="sessions_type_status" <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
                                             <option <?= (isset($sessions_edit) && !empty($sessions_edit) ) ? ($sessions_edit->sessions_type_status == "Regular") ? "selected" : "" : "selected" ?> value="Regular">Regular Session</option>
                                             <option <?= (isset($sessions_edit) && !empty($sessions_edit) ) ? ($sessions_edit->sessions_type_status == "Private") ? "selected" : "" : "" ?> value="Private">Private Session</option> 
                                         </select>
@@ -324,7 +324,7 @@ $user_role = $this->session->userdata('role');
                                         <div class="form-group">
                                             <label class="col-md-12 text-large text-bold" for="sel1">Select Sponsor Text &nbsp;(this text will appear above the Sponsor logo)</label>
 
-                                            <select class="form-control" name="sponsor_type" <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
+                                            <select class="form-control" name="sponsor_type"  style="height: auto" <?=($user_role != 'super_admin')?"style='pointer-events:none;' readonly":''?>>
                                                 <option value="" <?=isset($sessions_edit)?($sessions_edit->sponsor_type==""?"selected":""):""?>>___No Text___</option>
                                                 <option value="SPONSORED BY" <?=isset($sessions_edit)?($sessions_edit->sponsor_type=="SPONSORED BY"?"selected":""):""?>>SPONSORED BY</option>
                                                 <option value="EDUCATED BY" <?=isset($sessions_edit)?($sessions_edit->sponsor_type=="EDUCATED BY"?"selected":""):""?>>EDUCATED BY</option>
@@ -374,8 +374,8 @@ $user_role = $this->session->userdata('role');
                                                         <div class='col-md-6'>
                                                             <div class='form-group'>
                                                                 <label class='text-large'>Presenter:</label>
-                                                                <select class='form-control select_presenter_id' id='select_presenter_id' name='select_presenter_id[]'>
-                                                                    <option selected='' value=''>Select Presenter</option>
+                                                                <select class='form-control select_presenter_id' id='select_presenter_id' name='select_presenter_id[]' style='height: auto;' >
+                                                                    <option selected='' value='' >Select Presenter</option>
                                                                     <?php
                                                                     if (isset($presenter) && !empty($presenter)) {
                                                                         foreach ($presenter as $val) {
@@ -477,7 +477,7 @@ $user_role = $this->session->userdata('role');
                                         </div></div>\n\
                                         <div class='col-md-6'><div class='form-group'>\n\
                                             <label class='text-large'>Presenter:</label>\n\
-                                            <select class='form-control select_presenter_id' id='select_presenter_id' name='select_presenter_id[]'>\n\
+                                            <select class='form-control select_presenter_id' id='select_presenter_id' name='select_presenter_id[]' style='height: auto;'>\n\
                                                 <option selected='' value=''>Select Presenter</option>\n\
                                                 \n\<?php if (isset($presenter) && !empty($presenter)) {
                 foreach ($presenter as $val) {

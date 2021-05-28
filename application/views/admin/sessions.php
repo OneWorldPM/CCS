@@ -186,13 +186,19 @@ $user_role = $this->session->userdata('role');
                                                           echo preg_replace('/([^\s]{10})(?=[^\s])/', '$1'.'</br>', $val->embed_html_code);
                                                         }
                                                         else{
-                                                            echo $val->embed_html_code;
+                                                            echo $val->embed_html_code.'<br><hr>';
                                                         }
-                                                       
-                                                           
                                                     }else{
                                                         echo "";
-                                                    } ?></td>
+                                                    }
+
+                                                    if(isset($val->get_stream_name) && !empty ($val->get_stream_name)){
+                                                        echo $val->get_stream_name[0]->name;
+                                                    }
+
+
+                                                    ?>
+                                                    </td>
                                                     <td><?=(isset($val->embed_html_code_presenter) && !empty($val->embed_html_code_presenter))? 'Yes':'<span style="color:red">X</span>'?> </td>
                                                     <td> <?=(isset($val->session_notes) && !empty($val->session_notes))?$val->session_notes:''?></td>
                                                     <td>
