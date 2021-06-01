@@ -227,6 +227,11 @@ $user_role = $this->session->userdata('role');
                                         </select>
                                         <hr style="border: 2px solid;"/>
                                     </div>
+                                <div>
+                                    <label class="text-large text-bold">Set Session End Message</label> <span class="badge badge-success"> new</span>
+                                    <input class="form-control" type="text" name="session_end_message" id="session-end-message" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?>" placeholder="This session is now closed.">
+                                </div>
+                                <hr style="border: 2px solid;"/>
                                     <?php if (isset($sessions_edit)) { ?>
                                         <div class="row">
                                             <label class="col-md-12 text-large text-bold">Tool Box</label>
