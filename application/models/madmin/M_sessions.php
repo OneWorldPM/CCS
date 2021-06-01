@@ -321,6 +321,7 @@ class M_sessions extends CI_Model {
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
             'session_notes' => $post['session_notes'],
+            'session_end_message'=>$post['session_end_message']
 
 
         );
@@ -579,6 +580,7 @@ class M_sessions extends CI_Model {
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
             'session_notes' => $post['session_notes'],
+            'session_end_message'=>$post['session_end_message']
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
