@@ -37,7 +37,7 @@
 <section class="parallax fullscreen">
 <div class="container container-fullscreen">
     <div class="jumbotron">
-        <h2>Content Managed.</h2>
+        <h2>This session is now closed.</h2>
     </div>
 </div>
 </section>
