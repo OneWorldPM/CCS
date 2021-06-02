@@ -1,4 +1,3 @@
-<?php //print_r(); exit;?>
 <style>
     .jumbotron{
         width: 900px;
@@ -38,10 +37,8 @@
 <section class="parallax fullscreen">
 <div class="container container-fullscreen">
     <div class="jumbotron">
-        <h2><?= (isset($sessions[0]->session_end_message) && !empty($sessions[0]->session_end_message))?$sessions[0]->session_end_message : 'This session is now closed.'?></h2>
+        <h2>This session is now closed.</h2>
     </div>
 </div>
 </section>
-<script>
 
-</script>
