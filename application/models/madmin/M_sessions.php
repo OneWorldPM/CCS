@@ -42,11 +42,13 @@ class M_sessions extends CI_Model {
         if ($sessions->num_rows() > 0) {
             $return_array = array();
             foreach ($sessions->result() as $val) {
+
                 $val->presenter = $this->common->get_presenter($val->presenter_id, $val->sessions_id);
                 $val->moderators = $this->getModerators($val->sessions_id);
                 $val->groupchatPresenter= $this->getGroupChatDetailsPresenter($val->sessions_id);
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
+                $val->get_stream_name =  $this->get_stream_name($val->embed_html_code);
             
                 $return_array[] = $val;
             }
@@ -101,6 +103,7 @@ class M_sessions extends CI_Model {
                 $val->groupchatPresenter= $this->getGroupChatDetailsPresenter($val->sessions_id);
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
+                $val->get_stream_name =  $this->get_stream_name($val->embed_html_code);
 
                 $return_array[] = $val;
             }
@@ -318,6 +321,7 @@ class M_sessions extends CI_Model {
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
             'session_notes' => $post['session_notes'],
+            'session_end_message'=>$post['session_end_message']
 
 
         );
@@ -576,6 +580,7 @@ class M_sessions extends CI_Model {
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
             'session_notes' => $post['session_notes'],
+            'session_end_message'=>$post['session_end_message']
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
@@ -2102,5 +2107,24 @@ class M_sessions extends CI_Model {
             }else{
                 return '';
             }
+        }
+
+        function get_stream_name($stream_link){
+            if($stream_link)
+            {
+                $this->db->select('name');
+                $this->db->from('tbl_millicast_stream_names');
+                $this->db->where('link',$stream_link);
+                $result = $this->db->get();
+
+                if($result){
+                    return $result->result();
+                }else{
+                    return '';
+                }
+            }else{
+                return '' ;
+            }
+
         }
 }

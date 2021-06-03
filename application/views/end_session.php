@@ -1,3 +1,4 @@
+<?php //print_r(); exit;?>
 <style>
     .jumbotron{
         width: 900px;
@@ -41,3 +42,6 @@
     </div>
 </div>
 </section>
+<script>
+
+</script>
