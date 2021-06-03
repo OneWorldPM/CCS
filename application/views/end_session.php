@@ -38,7 +38,7 @@
 <section class="parallax fullscreen">
 <div class="container container-fullscreen">
     <div class="jumbotron">
-        <h2>This session is now closed.</h2>
+        <h2><?= (isset($sessions[0]->session_end_message) && !empty($sessions[0]->session_end_message))?$sessions[0]->session_end_message : 'This session is now closed.'?></h2>
     </div>
 </div>
 </section>
