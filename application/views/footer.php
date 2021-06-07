@@ -74,8 +74,7 @@
 <script>
     var user_id = <?= $this->session->userdata("cid") ?>;
     var user_name = "<?= $this->session->userdata('fullname') ?>";
-    var socketServer = "https://socket.yourconference.live:443";
-    var socket = io(socketServer);
+
     function extract(variable) {
         for (var key in variable) {
             window[key] = variable[key];
@@ -127,13 +126,10 @@
     });
 </script>
 <script type="text/javascript">
-
     $(document).ready(function () {
         var app_name_main = "<?=getAppName("") ?>";
         push_notification_admin();
         //setInterval(push_notification_admin, 2000);
-        var socketServer = "https://socket.yourconference.live:443";
-        var socket = io(socketServer);
         socket.on('push_notification_change', (socket_app_name) => {
             if (socket_app_name == app_name_main)
                 push_notification_admin();
