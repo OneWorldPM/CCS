@@ -240,7 +240,7 @@ else{
     });
 </script>
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/presenter/view_session.js?v=11"></script>
+<script src="<?= base_url() ?>front_assets/presenter/view_session.js?v=12"></script>
 
 <script>
 window.onscroll = function() {myFunction()};
