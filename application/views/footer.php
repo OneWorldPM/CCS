@@ -74,8 +74,7 @@
 <script>
     var user_id = <?= $this->session->userdata("cid") ?>;
     var user_name = "<?= $this->session->userdata('fullname') ?>";
-    var socketServer = "https://socket.yourconference.live:443";
-    var socket = io(socketServer);
+
     function extract(variable) {
         for (var key in variable) {
             window[key] = variable[key];
