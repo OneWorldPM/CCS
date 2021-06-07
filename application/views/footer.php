@@ -28,7 +28,7 @@
 <script src="<?= base_url() ?>assets/alertify/alertify.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
 
-    +<script src="//cdn.jsdelivr.net/npm/sweetalert2@9.17.0/dist/sweetalert2.all.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@9.17.0/dist/sweetalert2.all.min.js"></script>
 
 <!-- Live Support Chat -->
 <script>
@@ -74,6 +74,8 @@
 <script>
     var user_id = <?= $this->session->userdata("cid") ?>;
     var user_name = "<?= $this->session->userdata('fullname') ?>";
+    var socketServer = "https://socket.yourconference.live:443";
+    var socket = io(socketServer);
     function extract(variable) {
         for (var key in variable) {
             window[key] = variable[key];
