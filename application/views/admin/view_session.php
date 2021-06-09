@@ -429,7 +429,7 @@
                 </div>
             </div>
             <span style="margin-right: 25px;"
-                  class="pull-right text-red totalAttende totalAttende<?= getAppName($sessions->sessions_id) ?>">Total attendees: <b>0</b></span>
+                  class="pull-right text-red totalAttende totalAttende<?= getAppName($sessions->sessions_id) ?>">Total attendees: <b id="totalAttendeeOnThisSession">0</b></span>
 
         </div>
         <!-- end: DYNAMIC TABLE -->
@@ -696,13 +696,13 @@
     let comment_listkey_id = '';
     let comment_id='';
 
-    socket.emit("getSessionViewUsers", "<?=getAppName($sessions->sessions_id) ?>", function (resp) {
-        if (resp) {
-            var totalUsers = resp.users ? resp.users.length : 0;
-            var sessionId = resp.sessionId;
-            $(".totalAttende" + sessionId + " b").html(totalUsers);
-        }
-    });
+    //socket.emit("getSessionViewUsers", "<?//=getAppName($sessions->sessions_id) ?>//", function (resp) {
+    //    if (resp) {
+    //        var totalUsers = resp.users ? resp.users.length : 0;
+    //        var sessionId = resp.sessionId;
+    //        $(".totalAttende" + sessionId + " b").html(totalUsers);
+    //    }
+    //});
 
     function attendeeChatPopup(cust_id, cust_name,cust_question, withPopUp=true)
     {
@@ -1808,4 +1808,11 @@
             get_group_chat_section_status();
     });
     /********* End of socket IO codes by Athul **********/
+
 </script>
+
+<!--****** PubNub Stuff *****-->
+<!-- DO NOT use production keys on the localhost-->
+<script>let pubnub_channel = "PCE_Session_<?=$sessions->sessions_id?>";</script>
+<script src="<?= base_url() ?>front_assets/js/pubnub/pubnub_live_users_admin.js?v=3"></script>
+
