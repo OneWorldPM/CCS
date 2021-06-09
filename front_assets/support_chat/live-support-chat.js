@@ -14,8 +14,7 @@ $(document).ready(function () {
     }
 
     supportSocket.on("supportChatStatusChange", function (data){
-
-        if(data.room == "CCS_live_support") {
+        if(data.room == "CCS_live_support" || data.room == "CCS-Staging_live_support") {
 
             if (data.room == live_support_chat_room)
                 supportChatStatus = data.status;
