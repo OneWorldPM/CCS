@@ -286,7 +286,7 @@
                                     if ($this->session->userdata('cid') != "") {
                                         $profile_data = $this->common->get_user_details($this->session->userdata('cid'));
                                         ?>
-                                            <?php print_r(liveSupportChatStatus());?>
+                                          
                                         <button class="live-support-open-button nav navbar-nav navbar-right" onclick="openLiveSupportChat()"  style="background-color: #EF5D21; display: <?=(liveSupportChatStatus())?'block':'none'?>;"><i class="far fa-life-ring"></i> Live Technical Support</button>
 
                                         <ul class="main-menu nav navbar-nav navbar-right">
