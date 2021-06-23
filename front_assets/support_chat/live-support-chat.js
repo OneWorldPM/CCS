@@ -18,10 +18,12 @@ $(document).ready(function () {
 
             if (data.room == live_support_chat_room)
                 supportChatStatus = data.status;
-
+                 $('#helpdesk-link').hide();
             if (data.status == 1) {
+                $('#helpdesk-link').hide();
                 $('.live-support-open-button').show();
             } else {
+                $('#helpdesk-link').show();
                 $('.live-support-open-button').hide();
                 $('#liveSupportChatForm').hide();
             }
