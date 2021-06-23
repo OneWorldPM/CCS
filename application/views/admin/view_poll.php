@@ -39,6 +39,7 @@
                                             <th>Session Comparison ID</th>
                                             <th>Slide Number</th>
                                             <th>Poll Instruction</th>
+                                            <th>Correct Answer</th>
                                             <th>Modify</th>
                                             <th>Action</th>
                                         </tr>
@@ -61,6 +62,10 @@
                                                     <td><?= $val->poll_comparisons_id ?></td>
                                                     <td><?= $val->slide_number ?></td>
                                                     <td><?= $val->poll_instruction ?></td>
+                                                    <td style="width: 80px">
+                                                        Answer 1: <strong style="font-size: 18px; color: red"><?=($val->correct_answer1 !=='0')?$val->correct_answer1:''?></strong><br>
+                                                        Answer 2: <strong style="font-size: 18px; color: orangered"><?=($val->correct_answer2 !=='0')?$val->correct_answer2:''?></strong>
+                                                    </td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="<?= base_url() . 'admin/sessions/editPollQuestion/' . $val->sessions_poll_question_id ?>">
                                                             <i class="fa fa-pencil"></i> Edit
