@@ -329,7 +329,7 @@
                                             <?php } ?>
                                         </ul>
                                         <ul class="main-menu nav navbar-nav navbar-right">
-                                            <li><a href="https://yourconference.live/support" target="_blank">HELP DESK</a></li>
+                                            <li><a href="https://yourconference.live/support" target="_blank" id="helpdesk-link">HELP DESK</a></li>
                                         </ul>
                                         <ul class="main-menu nav navbar-nav navbar-right">
                                             <?php
