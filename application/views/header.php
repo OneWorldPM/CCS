@@ -228,6 +228,7 @@
         </style>
 
     </head>
+
     <body class="wide">
         <!-- WRAPPER -->
         <div class="wrapper">
@@ -344,6 +345,22 @@
                                         </ul>
                                         <ul class="nav navbar-nav navbar-right">
                                             <?php
+
+                                            if (isset($custom_header_button1) && !empty($custom_header_button1)) {
+                                                ?>
+                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                    <a target="_blank" href="<?=(!empty($custom_header_button1_link))?$custom_header_button1_link:''?>" ><?=$custom_header_button1?></a>
+                                                </li>
+                                                <?php
+                                            }
+                                            if (isset($custom_header_button2) && !empty($custom_header_button2)) {
+                                                ?>
+                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                    <a target="_blank" href="<?=(!empty($custom_header_button2_link))?$custom_header_button2_link:''?>"><?=$custom_header_button2?></a>
+                                                </li>
+                                                <?php
+                                            }
+
                                             if (isset($right_bar) &&  sessionRightBarControl($right_bar, "resources")) {
                                                 ?>
                                                 <li class="sticky_resources_open" data-type="resourcesSticky"><a data-type2="off">RESOURCES</a></li>
@@ -354,6 +371,7 @@
                                                 <a target="_blank" id="toolbox">TOOLBOX</a>
                                                 <ul class="toolboxCustomDrop">
                                                     <?php
+
                                                     if (isset($right_bar) && isset($tool_box_status)) {
                                                         if ($tool_box_status == "1") {
                                                             if (sessionRightBarControl($right_bar, "questions")) {
