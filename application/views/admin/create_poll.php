@@ -128,6 +128,21 @@
                                                 <input type="text" name="option_10" id="option_10" placeholder="Option 10"class="form-control input_cust_class">
                                             <?php } ?>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="text-large">Correct Answer1:</label><br>
+                                            <select class="form-control" name="correct_answer1" id="correct_answer1">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="text-large">Correct Answer 2:</label><br>
+                                            <select class="form-control" name="correct_answer2" id="correct_answer2">
+                                                <option value=""></option>
+                                            </select>
+                                            <p><small style="color:red"> If answers are empty, no correct answer will be indicated on poll result. If correct answer will be activated, then a green checkmark appears beside the correct answer on the poll result </small></p>
+                                        </div>
+
                                         <?php
                                         if (!isset($sessions_data)) {
                                             ?>
@@ -299,9 +314,45 @@ switch ($msg) {
                 return true;
             }
         });
+
     });
 </script>
+<script>
+    var correct_answer1 = "<?=$sessions_data->correct_answer1?>";
+    var correct_answer2 = "<?=$sessions_data->correct_answer2?>";
+</script>
+<script>
+    $(function(){
 
+        option_answer('correct_answer1', correct_answer1);
+        option_answer('correct_answer2', correct_answer2);
+
+        $('.input_cust_class').change(function(){
+            option_answer('correct_answer1', correct_answer1);
+            option_answer('correct_answer2', correct_answer2);
+
+        });
+
+        function option_answer(answer_index, correct_answer){
+
+            var selected = '';
+            var max_option =10;
+            $('#'+answer_index+'').html('').append('<option value=""></option>');
+            for (var i=1; i <= max_option; i++){
+                if(correct_answer == i){
+                    selected = 'selected';
+                }else{
+                    selected ='';
+                }
+                if($("#option_"+i+".input_cust_class").val() !== ''){
+                    $('#'+answer_index+'').append('<option value="'+i+'" id="opttion_'+i+'" '+selected+'>Option '+i+'</option>');
+                }else{
+                    $('#'+answer_index+' #option_'+i+'').remove();
+                }
+            }
+        }
+    });
+</script>
 
 
 
