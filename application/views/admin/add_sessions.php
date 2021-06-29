@@ -301,6 +301,32 @@ $user_role = $this->session->userdata('role');
                                             </div>
                                     </div>
 
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="custom-header-buttons">
+                                            <fieldset>
+                                                <legend class="text-dark text-large text-bold"> Custom Header Buttons <i class="badge badge-success">new</i></legend>
+                                               <div class="row">
+                                                   <div class="col-md-6">
+                                                       <label class="col-md-12 text-dark"> Button Name (left) </label><br>
+                                                       <input type="text" class="form-control" name="custom_header_button1" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button1 : "" ?>">
+                                                       <label class="col-md-12 text-dark"> Button Link (left) </label><br>
+                                                       <input type="text" class="form-control" name="custom_header_button1_link" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button1_link : "" ?>">
+                                                   </div>
+                                                   <div class="col-md-6">
+                                                       <label class="col-md-12 text-dark"> Button Name (right) </label><br>
+                                                       <input type="text" class="form-control" name="custom_header_button2" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button2 : "" ?>">
+                                                       <label class="col-md-12 text-dark"> Button Link (right)</label>
+                                                       <input type="text" class="form-control" name="custom_header_button2_link" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button2_link : "" ?>">
+                                                   </div>
+                                               </div><br>
+                                                <small style="color: red">Buttons will only be visible if names are set</small>
+                                            </fieldset>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group" style="position: unset !important; <?=($user_role != 'super_admin')?'display:none':''?>" >
                                     <hr style="border: 2px solid;">
                                     <label class="col-md-12 text-large text-bold">Sponsor Logo &nbsp; (uploaded logo is displayed on right side of client logo in attendee view)</label>

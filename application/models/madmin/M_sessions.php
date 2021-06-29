@@ -321,7 +321,11 @@ class M_sessions extends CI_Model {
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
             'session_notes' => $post['session_notes'],
-            'session_end_message'=>$post['session_end_message']
+            'session_end_message'=>$post['session_end_message'],
+            'custom_header_button1'=>$post['custom_header_button1'],
+            'custom_header_button2'=>$post['custom_header_button2'],
+            'custom_header_button1_link'=>$post['custom_header_button1_link'],
+            'custom_header_button2_link'=>$post['custom_header_button2_link']
 
 
         );
@@ -580,7 +584,11 @@ class M_sessions extends CI_Model {
             'ppt_uploaded' => (isset($post['ppt_uploaded'])) ? $post['ppt_uploaded'] : 0,
             'ppt_link_shared' => (isset($post['ppt_link_shared'])) ? $post['ppt_link_shared'] : 0,
             'session_notes' => $post['session_notes'],
-            'session_end_message'=>$post['session_end_message']
+            'session_end_message'=>$post['session_end_message'],
+            'custom_header_button1'=>$post['custom_header_button1'],
+            'custom_header_button2'=>$post['custom_header_button2'],
+            'custom_header_button1_link'=>$post['custom_header_button1_link'],
+            'custom_header_button2_link'=>$post['custom_header_button2_link']
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));

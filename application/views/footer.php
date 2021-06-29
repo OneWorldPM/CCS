@@ -127,6 +127,8 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
+        var socketServer = "https://socket.yourconference.live:443";
+        let socket = io(socketServer);
         var app_name_main = "<?=getAppName("") ?>";
         push_notification_admin();
         //setInterval(push_notification_admin, 2000);
