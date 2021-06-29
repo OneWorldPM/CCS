@@ -367,6 +367,8 @@
                                                 <?php
                                             }
                                             ?>
+                                    <!-- #######  Hide Toolbox #########  -->
+                                            <?php if (1==2):?>
                                             <li>
                                                 <a target="_blank" id="toolbox">TOOLBOX</a>
                                                 <ul class="toolboxCustomDrop">
@@ -412,6 +414,8 @@
                                                     ?>
                                                 </ul>
                                             </li>
+                                            <?php endif;?>
+                                            <!-- #######  Hide Toolbox #########  -->
                                         </ul>
                                     <?php } else { ?>
                                         <ul class="main-menu nav navbar-nav navbar-right">
