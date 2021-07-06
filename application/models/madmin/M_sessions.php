@@ -325,7 +325,8 @@ class M_sessions extends CI_Model {
             'custom_header_button1'=>$post['custom_header_button1'],
             'custom_header_button2'=>$post['custom_header_button2'],
             'custom_header_button1_link'=>$post['custom_header_button1_link'],
-            'custom_header_button2_link'=>$post['custom_header_button2_link']
+            'custom_header_button2_link'=>$post['custom_header_button2_link'],
+            'header_toolbox_status'=>$post['header_toolbox_status'],
 
 
         );
@@ -588,7 +589,8 @@ class M_sessions extends CI_Model {
             'custom_header_button1'=>$post['custom_header_button1'],
             'custom_header_button2'=>$post['custom_header_button2'],
             'custom_header_button1_link'=>$post['custom_header_button1_link'],
-            'custom_header_button2_link'=>$post['custom_header_button2_link']
+            'custom_header_button2_link'=>$post['custom_header_button2_link'],
+            'header_toolbox_status'=>$post['header_toolbox_status'],
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
