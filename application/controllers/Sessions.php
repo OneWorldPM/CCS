@@ -86,6 +86,8 @@ class Sessions extends CI_Controller {
         $header_data["custom_header_button1_link"] = $sesions->custom_header_button1_link;
         $header_data["custom_header_button2_link"] = $sesions->custom_header_button2_link;
 
+        $header_data["header_toolbox_status"] = $sesions->header_toolbox_status;
+
         $data['isMobile'] = $this->MobileDetect->isMobile();
 
         $this->load->view('header', $header_data);

@@ -367,6 +367,7 @@
                                                 <?php
                                             }
                                             ?>
+                                            <?php if(isset($header_toolbox_status) && $header_toolbox_status =='1'):?>
                                             <li>
                                                 <a target="_blank" id="toolbox">TOOLBOX</a>
                                                 <ul class="toolboxCustomDrop">
@@ -412,7 +413,7 @@
                                                     ?>
                                                 </ul>
                                             </li>
-
+                                        <?php endif;?>
                                         </ul>
                                     <?php } else { ?>
                                         <ul class="main-menu nav navbar-nav navbar-right">
