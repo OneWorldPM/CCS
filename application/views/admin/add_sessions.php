@@ -232,16 +232,27 @@ $user_role = $this->session->userdata('role');
                                     <input class="form-control" type="text" name="session_end_message" id="session-end-message" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?>" placeholder="This session is now closed.">
                                 </div>
                                 <hr style="border: 2px solid;"/>
+                                <div class="row">
+                                    <fieldset>
+                                        <legend>Toolbox</legend>
+                                        <label class="col-md-12 text-large text-bold">Header Tool Box</label>
+                                        <div class="form-group col-md-6" style="color: #000;">
+                                            <input type="radio" class="col-md-1"  name="header_toolbox_status"  id="header_tool_box" <?= (isset($sessions_edit) && !empty($sessions_edit)) ? ($sessions_edit->header_toolbox_status == "1") ? 'checked' : '' : 'checked' ?> value="1">ON<br>
+                                        </div>
+                                        <div class="form-group col-md-6" style="color: #000;">
+                                            <input type="radio" class="col-md-1"  name="header_toolbox_status"  id="header_tool_box2" <?= (isset($sessions_edit) && !empty($sessions_edit)) ? ($sessions_edit->header_toolbox_status == "0") ? 'checked' : '' : '' ?>  value="0">OFF<br>
+                                        </div>
+
                                     <?php if (isset($sessions_edit)) { ?>
-                                        <div class="row">
-                                            <label class="col-md-12 text-large text-bold">Tool Box</label>
+
+                                            <label class="col-md-12 text-large text-bold">Right Side Tool Box</label>
                                             <div class="form-group col-md-6" style="color: #000;">
                                                 <input type="radio" class="col-md-1"  name="tool_box_status"  id="tool_box" <?= (isset($sessions_edit) && !empty($sessions_edit)) ? ($sessions_edit->tool_box_status == "1") ? 'checked' : '' : 'checked' ?> value="1">ON<br>
                                             </div>
                                             <div class="form-group col-md-6" style="color: #000;">
                                                 <input type="radio" class="col-md-1"  name="tool_box_status"  id="tool_box_2" <?= (isset($sessions_edit) && !empty($sessions_edit)) ? ($sessions_edit->tool_box_status == "0") ? 'checked' : '' : '' ?>  value="0">OFF<br>
                                             </div>
-                                        </div>
+
                                     <?php } ?>
 										<?php
                                             $right_bar=isset($sessions_edit->right_bar)?$sessions_edit->right_bar:"";
@@ -256,7 +267,8 @@ $user_role = $this->session->userdata('role');
                                             <label class="checkbox-inline"><input type="checkbox" name="session_right_bar[]" <?=$right_bar?sessionRightBarControl($right_bar, "askarep", "checked"):""?> value="askarep" >Ask A Rep</label>
                                         </div>
                                     </div>
-
+                                    </fieldset>
+                                </div>
                                     <hr style="border: 2px solid;">
                                     <div class="form-group" style="position: unset !important;  <?=($user_role != 'super_admin')?'display:none':''?>">
                                         <label class="col-md-12 text-large text-bold">Sessions Photo</label>
