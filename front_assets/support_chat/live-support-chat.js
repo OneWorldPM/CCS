@@ -159,17 +159,16 @@ function openLiveSupportChat() {
     // If not already in the queue, add to the queue
     supportSocket.emit("addMeToLiveSupportQueue", {'room':live_support_chat_room, 'attendeeName':attendee_name, 'attendeeId':attendee_id});
 
-    document.getElementById("liveSupportChatForm").style.display = "block";
-    document.getElementById("live-support-chat-texts").scrollTop = document.getElementById("live-support-chat-texts").scrollHeight;
 }
 
-// supportSocket.on("liveSupportChatStarted", function (data) {
-//
-// });
-//
-// supportSocket.on("liveSupportChatOffline", function (data) {
-//     toastr.error("Live support chat is unavailable at this moment");
-// });
+supportSocket.on("liveSupportChatStarted", function (data) {
+    document.getElementById("liveSupportChatForm").style.display = "block";
+    document.getElementById("live-support-chat-texts").scrollTop = document.getElementById("live-support-chat-texts").scrollHeight;
+});
+
+supportSocket.on("liveSupportChatOffline", function (data) {
+    toastr.error("Live support chat is unavailable at this moment");
+});
 
 function endLiveSupportChat() {
     Swal.fire({
