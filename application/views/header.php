@@ -373,8 +373,8 @@
                                                 <ul class="toolboxCustomDrop">
                                                     <?php
 
-                                                    if (isset($right_bar) && isset($tool_box_status)) {
-                                                        if ($tool_box_status == "1") {
+                                                    if (isset($right_bar)){
+
                                                             if (sessionRightBarControl($right_bar, "questions")) {
                                                                 ?>
                                                                 <li data-type="questionsSticky"><a data-type2="off"><i class="fa fa-question" aria-hidden="true"></i> ASK QUESTIONS</a></li>
@@ -407,7 +407,7 @@
                                                                 </script>
                                                                 <li id="askarepLi" data-type="askarepSticky"><a data-type2="off"><img class="askarep-header-img" src="<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>" style="width: 20px;margin-left: 4px;margin-right: 2px;"> ASK A REP</a></li>
                                                                 <?php
-                                                            }
+
                                                         }
                                                     }
                                                     ?>
