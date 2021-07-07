@@ -16,16 +16,18 @@ $(document).ready(function () {
     supportSocket.on("supportChatStatusChange", function (data){
         if(data.room == "CCS_live_support" || data.room == "CCS-Staging_live_support") {
 
-            if (data.room == live_support_chat_room)
+            if (data.room == live_support_chat_room){
                 supportChatStatus = data.status;
-                 $('#helpdesk-link').hide();
-            if (data.status == 1) {
                 $('#helpdesk-link').hide();
-                $('.live-support-open-button').show();
-            } else {
-                $('#helpdesk-link').show();
-                $('.live-support-open-button').hide();
-                $('#liveSupportChatForm').hide();
+
+                if (data.status == 1) {
+                    $('#helpdesk-link').hide();
+                    $('.live-support-open-button').show();
+                } else {
+                    $('#helpdesk-link').show();
+                    $('.live-support-open-button').hide();
+                    $('#liveSupportChatForm').hide();
+                }
             }
         }
     });
@@ -60,14 +62,14 @@ function fillAllPreviousChats()
             {
                 $('#live-support-chat-texts').append(
                     '<span class="live-support-text-admin">\n' +
-                    '  <span class="live-support-admin-desc"><i class="fas fa-user-tie"></i> Admin</span><br>\n' +
+                    '  <span class="live-support-admin-desc"><i class="fa fa-user-tie"></i> Admin</span><br>\n' +
                     '  <span class="live-support-admin-text">'+chat.text+'</span>\n' +
                     '</span>'
                 );
             }else{
                 $('#live-support-chat-texts').append(
                     '<span class="live-support-text-attendee">\n' +
-                    '  <span class="live-support-attendee-desc">You <i class="fas fa-user"></i></span><br>\n' +
+                    '  <span class="live-support-attendee-desc">You <i class="fa fa-user"></i></span><br>\n' +
                     '  <span class="live-support-attendee-text">'+chat.text+'</span>\n' +
                     '</span>'
                 );
@@ -111,27 +113,28 @@ function sendNewText()
                 $('#liveSupportText').val('');
                 $('#live-support-chat-texts').append(
                     '<span class="live-support-text-attendee">\n' +
-                    '  <span class="live-support-attendee-desc">You <i class="fas fa-user"></i></span><br>\n' +
+                    '  <span class="live-support-attendee-desc">You <i class="fa fa-user"></i></span><br>\n' +
                     '  <span class="live-support-attendee-text">'+text+'</span>\n' +
                     '</span>'
                 );
                 document.getElementById("live-support-chat-texts").scrollTop = document.getElementById("live-support-chat-texts").scrollHeight;
-            }else{
+            } else {
                 toastr.error("Unable to send");
             }
 
-        }).fail(()=>{
-            toastr.error("Unable to send");
+        }).fail(() => {
+        toastr.error("Unable to send");
     });
 
-
+}
     /*** Listen for new texts ***/
     supportSocket.on("newLiveSupportText", function (data) {
+        console.log(data)
         if (data.room == live_support_chat_room && data.fromType == "admin" && data.to_id == attendee_id) // Chat is to this user in this app
         {
             $('#live-support-chat-texts').append(
                 '<span class="live-support-text-admin">\n' +
-                '  <span class="live-support-admin-desc"><i class="fas fa-user-tie"></i> Admin</span><br>\n' +
+                '  <span class="live-support-admin-desc"><i class="fa fa-user-tie"></i> Admin</span><br>\n' +
                 '  <span class="live-support-admin-text">'+data.text+'</span>\n' +
                 '</span>'
             );
@@ -149,12 +152,13 @@ function sendNewText()
             }, 1000);
         }
     });
-}
+
 
 
 function openLiveSupportChat() {
     // If not already in the queue, add to the queue
     supportSocket.emit("addMeToLiveSupportQueue", {'room':live_support_chat_room, 'attendeeName':attendee_name, 'attendeeId':attendee_id});
+
 }
 
 supportSocket.on("liveSupportChatStarted", function (data) {
