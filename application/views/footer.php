@@ -47,7 +47,7 @@
 
 <script src="https://athulak.com/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="<?=base_url()?>front_assets/support_chat/style.css?v=2">
-<script src="<?= base_url() ?>front_assets/support_chat/live-support-chat.js?v=3"></script>
+<script src="<?= base_url() ?>front_assets/support_chat/live-support-chat.js?v=4"></script>
 <div class="live-support-chat-popup" id="liveSupportChatForm">
     <span class="live-support-chat-title"><i class="fa fa-life-ring"></i> Live Technical Support</span>
     <div class="live-support-chat-body">
