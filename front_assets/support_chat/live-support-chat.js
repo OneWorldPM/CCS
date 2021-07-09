@@ -62,7 +62,7 @@ function fillAllPreviousChats()
             {
                 $('#live-support-chat-texts').append(
                     '<span class="live-support-text-admin">\n' +
-                    '  <span class="live-support-admin-desc"><i class="fa fa-user-tie"></i> Admin</span><br>\n' +
+                    '  <span class="live-support-admin-desc"><i class="fa fa-user"></i> Admin</span><br>\n' +
                     '  <span class="live-support-admin-text">'+chat.text+'</span>\n' +
                     '</span>'
                 );
