@@ -264,7 +264,7 @@ $user_role = $this->session->userdata('role');
                                                 Session End  <span class="badge badge-success"> new</span>
                                             </legend>
                                             <label class="text-large text-bold">Set Session End Message</label>
-                                            <input class="form-control" type="text" name="session_end_message" id="session-end-message" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?>" placeholder="This session is now closed.">
+                                            <textarea class="form-control" type="text" name="session_end_message" id="session-end-message" placeholder="This session is now closed."><?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?></textarea>
                                             <label class="text-large text-bold " style="margin-top: 5px;">Set Session End Image</label>
                                             <input type="file" class="form-control" name="session_end_image">
                                             <?php if(isset($sessions_edit) && $sessions_edit->session_end_image):?>
@@ -556,7 +556,8 @@ $user_role = $this->session->userdata('role');
     </div>
 </div>
 </div>
-
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -706,13 +707,13 @@ $user_role = $this->session->userdata('role');
             event.preventDefault()
             var sesionId = $(this).attr("data-sessions-id");
 
-            alertify.confirm('Are you sure?', 'This will end image in this session', function (e) {
+            alertify.confirm('Are you sure?', 'This will delete session end image', function (e) {
                 if (e) {
                     $.post("<?= base_url() ?>admin/sessions/delete_session_end_image/", {
                         'session_id': sesionId,
                     }, function (response) {
                         if (response == "success") {
-                            alertify.success('Session Photo Deleted!');
+                            alertify.success('Session End Image Deleted!');
                             $('#delete_session_end_image').hide();
                             $('#session_end_img').hide();
 
@@ -726,6 +727,22 @@ $user_role = $this->session->userdata('role');
             });
         });
 
+        $('#session-end-message').summernote({
+            height: 100,
+            toolbar:
+                [
+                    ["history", ["undo", "redo"]],
+                    ["style", ["style"]],
+                    ["font", ["bold", "italic", "underline", "fontname", "strikethrough", "superscript", "subscript", "clear"]],
+                    ['fontsize', ['fontsize']],
+                    ["color", ["forecolor", "backcolor", "color"]],
+                    ["paragraph", ["ul", "ol", "paragraph", "height"]],
+                    ["table", ["table"]],
+                    ["insert", ["link", "resizedDataImage", "picture", "video"]],
+                    ["view", ["codeview"] ]
+                ],
+            fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '36', '48' , '64', '82', '150']
+        });
 
     });
 
