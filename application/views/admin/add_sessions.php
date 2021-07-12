@@ -257,9 +257,29 @@ $user_role = $this->session->userdata('role');
                                         </select>
                                         <hr style="border: 2px solid;"/>
                                     </div>
-                                <div>
-                                    <label class="text-large text-bold">Set Session End Message</label> <span class="badge badge-success"> new</span>
-                                    <input class="form-control" type="text" name="session_end_message" id="session-end-message" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?>" placeholder="This session is now closed.">
+                                <div class="row">
+                                    <div class="col">
+                                        <fieldset>
+                                            <legend>
+                                                Session End  <span class="badge badge-success"> new</span>
+                                            </legend>
+                                            <label class="text-large text-bold">Set Session End Message</label>
+                                            <input class="form-control" type="text" name="session_end_message" id="session-end-message" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?>" placeholder="This session is now closed.">
+                                            <label class="text-large text-bold " style="margin-top: 5px;">Set Session End Image</label>
+                                            <input type="file" class="form-control" name="session_end_image">
+                                            <div class="row" style="margin-top: 10px;">
+                                                <div class="col-md-6">
+                                                    <label >Image width</label>
+                                                    <input type="number" name="end_image_width" class="form-group" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->end_image_width:''?>"><small style="color:red">(pixels)</small>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label >Image height</label>
+                                                    <input type="number" name="end_image_height" class="form-group" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->end_image_height:''?>"><small style="color:red">(pixels)</small>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </div>
                                 </div>
                                 <hr style="border: 2px solid;"/>
                                 <div class="row">
