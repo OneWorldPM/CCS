@@ -521,7 +521,7 @@ class M_sessions extends CI_Model {
         $randname = random_string('numeric', '8');
         $config = array();
         $config['upload_path'] = './uploads/session_end/';
-        $config['allowed_types'] = 'jpg|png';
+        $config['allowed_types'] = 'jpg|png|jpeg';
         $config['overwrite'] = FALSE;
         $config['file_name'] = "session_end_" . $randname;
         return $config;
@@ -2178,4 +2178,19 @@ class M_sessions extends CI_Model {
             }
 
         }
+
+    // Delete each session end image
+    function delete_session_end_image($session_id) {
+        $set = array(
+            'session_end_image'=>null,
+        );
+        $result= $this->db->update("sessions", $set, array("sessions_id" => $session_id));
+        if ($result){
+            $res=$result;
+        }else {
+            $res = false;
+        }
+
+        return $res;
+    }
 }
