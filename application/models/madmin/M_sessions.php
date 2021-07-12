@@ -361,6 +361,15 @@ class M_sessions extends CI_Model {
                 $this->db->update('sessions', array('sessions_photo' => $file_upload_name['file_name']), array('sessions_id' => $sessions_id));
             }
 
+            if ($_FILES['session_end_image']['name'] != "") {
+
+                $this->load->library('upload');
+                $this->upload->initialize($this->set_upload_session_end_image());
+                $this->upload->do_upload('session_end_image');
+                $file_upload_name = $this->upload->data();
+                $this->db->update('sessions', array('session_end_image' => $file_upload_name['file_name']), array('sessions_id' => $sessions_id));
+            }
+
             if (isset($post['select_presenter_id']) && !empty($post['select_presenter_id'])) {
                 $array_size_limit = sizeof($post['select_presenter_id']);
                 $file_upload_name = array();
@@ -505,6 +514,17 @@ class M_sessions extends CI_Model {
         return $config;
     }
 
+    function set_upload_session_end_image() {
+        $this->load->helper('string');
+        $randname = random_string('numeric', '8');
+        $config = array();
+        $config['upload_path'] = './uploads/session_end/';
+        $config['allowed_types'] = 'jpg|png';
+        $config['overwrite'] = FALSE;
+        $config['file_name'] = "session_end_" . $randname;
+        return $config;
+    }
+
     function generateRandomString($length = 8) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
@@ -613,6 +633,15 @@ class M_sessions extends CI_Model {
                 $this->upload->do_upload('sessions_logo');
                 $file_upload_name = $this->upload->data();
                 $this->db->update('sessions', array('sessions_logo' => $file_upload_name['file_name']), array('sessions_id' => $sessions_id));
+            }
+
+            if ($_FILES['session_end_image']['name'] != "") {
+
+                $this->load->library('upload');
+                $this->upload->initialize($this->set_upload_session_end_image());
+                $this->upload->do_upload('session_end_image');
+                $file_upload_name = $this->upload->data();
+                $this->db->update('sessions', array('session_end_image' => $file_upload_name['file_name']), array('sessions_id' => $sessions_id));
             }
 
             if ($_FILES['sessions_photo']['name'] != "") {
