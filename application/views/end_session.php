@@ -38,6 +38,7 @@
 <section class="parallax fullscreen">
 <div class="container container-fullscreen">
     <div class="jumbotron">
+         <?= (isset($sessions[0]->session_end_image) && !empty($sessions[0]->session_end_image))? '<img style="width:'.$sessions[0]->end_image_width.'px; height:'.$sessions[0]->end_image_height.'px" src="'.base_url().'uploads/session_end/'.$sessions[0]->session_end_image .'">' : ''?>
         <h2><?= (isset($sessions[0]->session_end_message) && !empty($sessions[0]->session_end_message))?$sessions[0]->session_end_message : 'This session is now closed.'?></h2>
     </div>
 </div>
