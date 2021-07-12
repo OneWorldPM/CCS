@@ -268,7 +268,8 @@ $user_role = $this->session->userdata('role');
                                             <label class="text-large text-bold " style="margin-top: 5px;">Set Session End Image</label>
                                             <input type="file" class="form-control" name="session_end_image">
                                             <?php if(isset($sessions_edit) && $sessions_edit->session_end_image):?>
-                                            <img src="<?= base_url() ?>uploads/session_end/<?= $sessions_edit->session_end_image ?>" style="height: 100px; width: 100px; margin-top: 5px">
+                                            <img id="session_end_img" src="<?= base_url() ?>uploads/session_end/<?= $sessions_edit->session_end_image ?>" style="height: 100px; width: 100px; margin-top: 5px">
+                                            <span style="float: right"><a href="" data-sessions-id="<?= $sessions_edit->sessions_id ?>" id="delete_session_end_image" class="btn btn-warning btn-sm mt" style="margin-top: 5px">Delete</a></span>
                                             <?php endif; ?>
                                             <div class="row" style="margin-top: 10px;">
                                                 <div class="col-md-6">
@@ -691,6 +692,30 @@ $user_role = $this->session->userdata('role');
                         if (response == "success") {
                             alertify.success('Session Photo Deleted!');
                             window.setTimeout('location.reload()', 2000);
+                        } else {
+                            alertify.success('No Session Photo to Delete!');
+                            window.setTimeout('location.reload()', 2000);
+                        }
+                    });
+                }
+            }, function () {
+            });
+        });
+
+        $('#delete_session_end_image').on("click", function (event) {
+            event.preventDefault()
+            var sesionId = $(this).attr("data-sessions-id");
+
+            alertify.confirm('Are you sure?', 'This will end image in this session', function (e) {
+                if (e) {
+                    $.post("<?= base_url() ?>admin/sessions/delete_session_end_image/", {
+                        'session_id': sesionId,
+                    }, function (response) {
+                        if (response == "success") {
+                            alertify.success('Session Photo Deleted!');
+                            $('#delete_session_end_image').hide();
+                            $('#session_end_img').hide();
+
                         } else {
                             alertify.success('No Session Photo to Delete!');
                             window.setTimeout('location.reload()', 2000);
