@@ -267,7 +267,9 @@ $user_role = $this->session->userdata('role');
                                             <input class="form-control" type="text" name="session_end_message" id="session-end-message" value="<?=(isset($sessions_edit) && !empty($sessions_edit))?$sessions_edit->session_end_message:''?>" placeholder="This session is now closed.">
                                             <label class="text-large text-bold " style="margin-top: 5px;">Set Session End Image</label>
                                             <input type="file" class="form-control" name="session_end_image">
-                                            <img src="<?= base_url() ?>uploads/session_end/<?= $sessions_edit->session_end_image ?>" style="height: 100px; width: 100px;">
+                                            <?php if(isset($sessions_edit) && $sessions_edit->session_end_image):?>
+                                            <img src="<?= base_url() ?>uploads/session_end/<?= $sessions_edit->session_end_image ?>" style="height: 100px; width: 100px; margin-top: 5px">
+                                            <?php endif; ?>
                                             <div class="row" style="margin-top: 10px;">
                                                 <div class="col-md-6">
                                                     <label >Image width</label>
