@@ -3,17 +3,26 @@
 
 
 <div class="main-content">
-    <div class="jumbotron">
-        <h2 style="text-align: center"> Admin Shared Files </h2>
-        <p style="text-align: center"></p>
-    </div>
-    <div class="container-fluid" style="margin: 20px">
+    <div class="wrap-content container" id="container">
+        <section id="page-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="mainTitle">List Of Admin Files</h1>
+                </div>
+            </div>
+        </section>
+    <div class="container-fluid " style="margin-left: 20px; margin-right: 20px" >
         <div class="row">
             <div class="col">
                 <?php if($this->session->userdata['role']==='publisher'):?>
-                <a id="upload-btn" href="" class="btn btn-primary pull-right" style="margin-right: 40px">Upload</a>
+                    <a id="upload-btn" href="" class="btn btn-primary pull-right" style="margin-right: 40px; margin-bottom: 10px;margin-top: 10px;"><i class="fa fa-upload"></i> Upload File</a>
                 <?php endif;?>
-                <table class="table table-striped" id="upload_list_table">
+            </div>
+        </div>
+        <div class="row" style="overflow: scroll">
+            <div class="col">
+                <div class=" panel ">
+                <table class="table table-bordered table-striped text-center " id="upload_list_table" >
                     <thead>
                         <th>#</th>
                         <th>Subject</th>
@@ -25,25 +34,26 @@
                     <tbody id="upload_list_body">
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload Files</h5>
+                <h3 class="modal-title" id="exampleModalLabel">Upload Files</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input type="text" name="title" value="" placeholder="Title | Subject" id="title" >
+                    <input type="text" name="title" value="" placeholder="Title | Subject" id="title" class="form-control"><br>
                     <input class="form-control" type="file" name="user_file" id="user_file">
                 </div>
             </div>
