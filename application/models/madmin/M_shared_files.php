@@ -11,6 +11,8 @@ class M_shared_files extends CI_Model
     function upload_file(){
         $post = $this->input->post();
         $admin_id = $this->session->userdata['aid'];
+        $session_id = $post['session_id'];
+
         if ($_FILES['user_file']['name'] != "") {
 
             $this->load->library('upload');
@@ -21,20 +23,20 @@ class M_shared_files extends CI_Model
             $name = pathinfo($_FILES['user_file']['name'], PATHINFO_FILENAME);
             $extension = pathinfo($_FILES['user_file']['name'], PATHINFO_EXTENSION);
 
-            if($this->check_upload_resubmission($admin_id, $name)){
-                $increment_name = $this->check_upload_resubmission($admin_id, $name);
+            if($this->check_upload_resubmission($admin_id, $name, $session_id)){
+                $increment_name = $this->check_upload_resubmission($admin_id, $name, $session_id);
                 $new_name= $increment_name.'.'.$extension;
             }else{
                 $new_name = $name.'.'.$extension;
             }
-
 
             $field_set = array(
                 'user_id'=>$this->session->userdata['aid'],
                 'date_time'=>date('Y-m-d H:i:s'),
                 'file_name'=> $file_upload_name['file_name'] ,
                 'name'=>$new_name,
-                'title'=>$post['title']
+                'title'=>$post['title'],
+                'session_id'=>$session_id,
             );
             $this->db->insert('admin_shared_files', $field_set);
             $insert_id = $this->db->insert_id();
@@ -63,6 +65,38 @@ class M_shared_files extends CI_Model
     }
 
     function getUploadedData(){
+        $post = $this->input->post();
+        if($this->session->userdata['role']=="super_admin"){
+            $this->db->select('*')
+                ->from('admin_shared_files asf')
+                ->join('admin a', 'asf.user_id=a.admin_id', 'left')
+                ->where('asf.session_id', $post['session_id']);
+            $data = $this->db->get();
+
+            if($data->num_rows() > 0){
+                echo json_encode($data->result_array());
+            }else{
+                echo json_encode(json_last_error_msg());
+            }
+        }else{
+            $this->db->select('*')
+                ->from('admin_shared_files asf')
+                ->join('admin a', 'asf.user_id=a.admin_id', 'left')
+                ->where('user_id', $this->session->userdata['aid'])
+                ->where('asf.session_id', $post['session_id']);
+
+            $data = $this->db->get();
+            if($data->num_rows() > 0){
+                echo json_encode($data->result_array());
+            }else{
+                echo json_encode(json_last_error_msg());
+            }
+        }
+
+    }
+
+    function getAllUploadedData(){
+        $post = $this->input->post();
         if($this->session->userdata['role']=="super_admin"){
             $this->db->select('*')
                 ->from('admin_shared_files asf')
@@ -105,9 +139,9 @@ class M_shared_files extends CI_Model
 
     }
 
-    function check_upload_resubmission($admin_id, $new_name){
+    function check_upload_resubmission($admin_id, $new_name, $session_id){
 
-        $result = $this->db->query("SELECT COUNT(*) as count FROM admin_shared_files WHERE user_id='".$admin_id."' and  name REGEXP '".$new_name."' ");
+        $result = $this->db->query("SELECT COUNT(*) as count FROM admin_shared_files WHERE user_id='".$admin_id."' and session_id='".$session_id."'  and  name REGEXP '".$new_name."' ");
 
         if ($result->num_rows() > 0) {
 

@@ -21,6 +21,7 @@ class Shared_files extends CI_Controller
     public function index(){
         $this->load->view('admin/header');
         $this->load->view('admin/shared_files');
+        $this->load->view('admin/share_files_modal');
         $this->load->view('admin/footer');
     }
 
@@ -31,6 +32,10 @@ class Shared_files extends CI_Controller
 
     public function getUploadedData(){
         $this->mshared->getUploadedData();
+    }
+
+    public function getAllUploadedData(){
+        $this->mshared->getAllUploadedData();
     }
 
     public function deleteUploadedData(){
