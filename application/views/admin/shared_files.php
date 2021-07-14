@@ -41,29 +41,7 @@
 </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Upload Files</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input type="text" name="title" value="" placeholder="Title | Subject" id="title" class="form-control"><br>
-                    <input class="form-control" type="file" name="user_file" id="user_file">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success upload-btn">Upload</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
@@ -78,45 +56,6 @@
             $('#upload-modal').modal('show');
         });
 
-        //  ****  Upload Image ***
-        $('.upload-btn').on('click', function() {
-            let formData = new FormData();
-            formData.append('user_file', $('.modal-body #user_file')[0].files[0]);
-            formData.append('title', $('#title').val());
-
-            swal.showLoading();
-            $.ajax({
-                url: "<?=base_url()?>/admin/shared_files/upload_file/",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data) {
-                    data = JSON.parse(data);
-                    console.log(data);
-                    getUploadedData();
-                    $('#upload-modal').modal('hide');
-
-                    Swal.fire(
-                        'Success!',
-                        ''+data[0].name+' Successfully Uploaded',
-                        'success'
-                    )
-                }, error: function (e) {
-                    Swal.fire(
-                        'Problem!',
-                        e.responseText,
-                        'error'
-                    ).then(() => {
-
-                    });
-                }
-
-            })
-            swal.close();
-
-        })
 
 
 
@@ -169,7 +108,7 @@
         });
 
         function getUploadedData(){
-            $.post("<?=base_url()?>/admin/shared_files/getUploadedData/",function(data){
+            $.post("<?=base_url()?>/admin/shared_files/getAllUploadedData/",function(data){
 
 
                 if ( $.fn.DataTable.isDataTable('#upload_list_table') ) {
@@ -204,7 +143,6 @@
                     initComplete: function() {
                         $(this.api().table().container()).find('input').attr('autocomplete', 'off');
                         $(this.api().table().container()).find('input').attr('type', 'text');
-                        $(this.api().table().container()).find('input').val('upload');
                         //$(this.api().table().container()).find('input').val('');
                     },
 

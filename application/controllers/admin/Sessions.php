@@ -32,6 +32,7 @@ class Sessions extends CI_Controller {
 		$data['session_types'] = $this->msessions->getSessionTypes();
         $this->load->view('admin/header');
         $this->load->view('admin/sessions', $data);
+        $this->load->view('admin/share_files_modal');
         $this->load->view('admin/footer');
     }
 	

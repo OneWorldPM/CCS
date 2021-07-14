@@ -223,6 +223,8 @@ $user_role = $this->session->userdata('role');
                                                                 ?><small><span style="float: left;">Host Chat Participants</span><span style="float:right"><?=$sessionChatCount.'</span>'?></small><br><?php
                                                             }
                                                         }}?>
+                                                        <small><span style="float: left;">PPT Submitted </span> <i class="fa fa-circle " aria-hidden="true" style="color:   <?= (isset($val->get_shared_file_status) && $val->get_shared_file_status )?'#0ab50a':'#ff2525'?>;float: right;"></i></small><br>
+
                                                             <hr style="width:100%;height:2px"> 
                                                          <?php if(isset($val->getChatAll) && !empty($val->getChatAll)){
 
@@ -253,7 +255,10 @@ $user_role = $this->session->userdata('role');
                                                         <a href="<?= base_url() ?>admin/groupchat/sessions_groupchat/<?= $val->sessions_id ?>" class="btn btn-blue btn-sm" style="margin-bottom: 5px;">Create Chat</a>
                                                         <a href="<?= base_url() ?>admin/sessions/resource/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-success btn-sm" >Resources</a>
                                                         <?php } ?>
+                                                        <br>
+                                                        <a href="" class="btn btn-warning" id="share-files-btn" data-session_id="<?=$val->sessions_id?>">Shared Files</a>
                                                     </td>
+
                                                     <td>
                                                          <?php if(isset($val->check_send_json_exist) && !empty($val->check_send_json_exist)){
                                                                 foreach ($val->check_send_json_exist as $status) {
@@ -542,5 +547,17 @@ $('#sessions_table').on('click','#btn-send-json',function(e){
     });
 
 
+    $(function(){
+        $('#sessions_table').on('click', '#share-files-btn', function(e){
 
+            var session_id = $(this).attr('data-session_id');
+            e.preventDefault();
+
+            $('#upload-modal').modal('show');
+            $('#upload-modal #title').val('');
+            $('#upload-modal #user_file').val('');
+            $('#upload-modal #modal-upload-btn').attr('data-session_id', session_id);
+            getUploadedData(session_id);
+        })
+    })
 </script>
