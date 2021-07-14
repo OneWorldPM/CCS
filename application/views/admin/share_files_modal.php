@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Upload Files</h3>
+                <h3 class="modal-title" id="exampleModalLabel"></h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -91,6 +91,63 @@
         })
 
     })
+
+    $('#upload_list_table').on('click', '#deleteBtn', function(e){
+        e.preventDefault();
+
+        var session_id = $(this).attr('data-session_id');
+        var id = $(this).attr('data-id');
+        var name = $(this).attr('data-name');
+        var file_name = $(this).attr('data-file_name');
+        $('#upload-modal').modal('hide');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post("<?=base_url()?>/admin/shared_files/deleteUploadedData/",
+                    {
+                        'id':id,
+                        'file_name':file_name
+                    },
+                    function(data){
+                        console.log(data)
+                        if(data==="success"){
+                            Swal.fire(
+                                'Deleted!',
+                                ''+name+'<br> file has been deleted.',
+                                'success'
+                            ).then((result) => {
+                                if(result.isConfirmed){
+                                    getUploadedData(session_id);
+                                    $('#upload-modal').modal('show');
+                                }
+                            });
+
+                        }else{
+                            Swal.fire(
+                                'Error!',
+                                '"'+data+'"',
+                                'error'
+                            )
+                            getUploadedData(session_id);
+                        }
+                    },'json');
+
+
+            }else{
+                $('#upload-modal').modal('show');
+            }
+        })
+
+
+    });
+
     function getUploadedData(session_id){
 
         $.post("<?=base_url()?>/admin/shared_files/getUploadedData/",
@@ -109,7 +166,7 @@
                     let base_url = "<?=base_url()?>"
                     let deleteBtn='';
                     if(val.user_id === user_id){
-                        deleteBtn = "<a href='' id='deleteBtn' class='btn btn-danger btn-sm' data-id='"+val.id+"' data-name='"+val.name+"' data-file_name='"+val.file_name+"'><i class='fa fa-trash-o'></i> Delete</a>"
+                        deleteBtn = "<a href='' id='deleteBtn' class='btn btn-danger btn-sm' data-id='"+val.id+"' data-session_id='"+val.session_id+"' data-name='"+val.name+"' data-file_name='"+val.file_name+"'><i class='fa fa-trash-o'></i> Delete</a>"
                     }
                     let openBtn = "<a href='"+base_url+'uploads/admin_shared_files/'+val.file_name+"' download='"+val.name+"' enBtn' class='btn btn-success btn-sm' data-id='"+val.id+"' data-name='"+val.name+"' data-file_name='"+val.file_name+"'><i class='fa fa-download'></i> Open</a>"
 

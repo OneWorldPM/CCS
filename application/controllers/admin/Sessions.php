@@ -1018,6 +1018,7 @@ public function archive_session() {
     $this->session->set_userdata('session_viewing','Archived');
     $this->load->view('admin/header');
     $this->load->view('admin/sessions', $data);
+    $this->load->view('admin/share_files_modal');
     $this->load->view('admin/footer');
 }
 
