@@ -105,6 +105,7 @@ class M_sessions extends CI_Model {
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
                 $val->get_stream_name =  $this->get_stream_name($val->embed_html_code);
+                $val->get_shared_file_status =  $this->get_shared_file_status($val->sessions_id);
 
                 $return_array[] = $val;
             }

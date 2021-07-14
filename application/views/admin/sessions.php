@@ -256,7 +256,7 @@ $user_role = $this->session->userdata('role');
                                                         <a href="<?= base_url() ?>admin/sessions/resource/<?= $val->sessions_id ?>" style="margin-bottom: 5px;" class="btn btn-success btn-sm" >Resources</a>
                                                         <?php } ?>
                                                         <br>
-                                                        <a href="" class="btn btn-warning" id="share-files-btn" data-session_id="<?=$val->sessions_id?>">Shared Files</a>
+                                                        <a href="" class="btn btn-warning" id="share-files-btn" data-session_id="<?=$val->sessions_id?>">Submitted Files</a>
                                                     </td>
 
                                                     <td>
@@ -557,6 +557,7 @@ $('#sessions_table').on('click','#btn-send-json',function(e){
             $('#upload-modal #title').val('');
             $('#upload-modal #user_file').val('');
             $('#upload-modal #modal-upload-btn').attr('data-session_id', session_id);
+            $('#upload-modal .modal-title').html('<h3>Submitted Files <span class="badge badge-warning " style="font-size: 20px ">Session '+session_id+'</badge></h3>')
             getUploadedData(session_id);
         })
     })
