@@ -49,7 +49,8 @@ class M_sessions extends CI_Model {
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
                 $val->get_stream_name =  $this->get_stream_name($val->embed_html_code);
-            
+                $val->get_shared_file_status =  $this->get_shared_file_status($val->sessions_id);
+
                 $return_array[] = $val;
             }
             return $return_array;
@@ -104,6 +105,7 @@ class M_sessions extends CI_Model {
                 $val->getChatAll= $this->getChatAll($val->sessions_id);
                 $val->check_send_json_exist= $this->check_send_json_exist($val->sessions_id);
                 $val->get_stream_name =  $this->get_stream_name($val->embed_html_code);
+                $val->get_shared_file_status =  $this->get_shared_file_status($val->sessions_id);
 
                 $return_array[] = $val;
             }
@@ -1202,7 +1204,7 @@ class M_sessions extends CI_Model {
                 $this->upload->initialize($this->set_upload_options_resource());
                 $this->upload->do_upload('resource_file');
                 $file_upload_name = $this->upload->data();
-                $this->db->update('session_resource', array('resource_file' => $file_upload_name['file_name']), array('session_resource_id' => $id));
+                $this->db->update('session_resource', array('resource_file' => $file_upload_name['file_name'],  'file_name' =>   $file_upload_name['client_name']), array('session_resource_id' => $id));
             }
             return TRUE;
         } else {
@@ -2192,5 +2194,19 @@ class M_sessions extends CI_Model {
         }
 
         return $res;
+    }
+
+    # Get Shared File
+    function get_shared_file_status($session_id){
+        $this->db->select('*')
+            ->from('admin_shared_files')
+            ->where('session_id', $session_id);
+        $shared_files= $this->db->get();
+
+        if($shared_files->num_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
