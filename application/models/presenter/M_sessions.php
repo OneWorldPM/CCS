@@ -213,39 +213,19 @@ class M_sessions extends CI_Model {
         $this->db->select('*');
         $this->db->from('sessions_cust_question s');
         $this->db->join('customer_master c', 's.cust_id=c.cust_id');
-        $this->db->where(array("s.sessions_id" => $post['sessions_id']));
+        $this->db->where(array("s.sessions_id" => $post['sessions_id'], 'hide_status' => 0));
         $this->db->order_by("s.sessions_cust_question_id", "DESC");
         $result = $this->db->get();
-
-        $result_array = array();
         //print_r($this->db->last_query()); exit;
         $response_array = array();
         if ($result->num_rows() > 0) {
-
             foreach ($result->result() as $val) {
-                
                 $val->favorite_status = $this->common->get_question_favorite_status($this->session->userdata("pid"), $val->sessions_cust_question_id);
-                if($this->checkHiddenQuestions($val->sessions_cust_question_id)){
-                    $response_array[] = $val;
-                }
+                $response_array[] = $val;
             }
             return $response_array;
         } else {
             return '';
-        }
-    }
-
-    function checkHiddenQuestions($id){
-        $this->db->select('*')
-            ->from('cust_question_hide_status')
-            ->where('sessions_cust_question_id', $id)
-            ->where('hidden_from', 'presenter')
-            ->where('hidden_from_id', $this->session->userdata['pid']);
-        $return =$this->db->get();
-        if($return->num_rows()>0){
-            return false;
-        }else{
-            return true;
         }
     }
 
