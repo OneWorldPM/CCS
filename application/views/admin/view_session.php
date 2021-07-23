@@ -855,8 +855,10 @@
         });
 
         socket.on('update-admin-attendee-chat', function (data) {
+            console.log(data);
             if (data.socket_session_name == socket_session_name)
             {
+                $('#'+ data.replied_status).addClass('fa fa-commenting-o');
                 attendeeChatPopup(data.to_id, data.to_name, data.current_question, false);
             }
         });
