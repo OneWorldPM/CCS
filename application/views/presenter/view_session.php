@@ -221,7 +221,7 @@ else{
 
     var base_url = "<?=base_url()?>";
     var site_url = "<?= site_url() ?>";
-    var user_id = "<?=$this->session->userdata('cid')?>";
+    var user_id = "<?=$this->session->userdata('pid')?>";
     var app_name = "<?=getAppName($sessions->sessions_id) ?>";
     var session_id = "<?=$sessions->sessions_id?>";
     let sessionId= "<?=$sessions->sessions_id?>";
@@ -243,7 +243,7 @@ else{
     });
 </script>
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/presenter/view_session.js?v=13"></script>
+<script src="<?= base_url() ?>front_assets/presenter/view_session.js?v=14"></script>
 
 <script>
 window.onscroll = function() {myFunction()};
