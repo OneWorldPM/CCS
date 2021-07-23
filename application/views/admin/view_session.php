@@ -1328,6 +1328,7 @@
     });
 
     function get_question_list() {
+
         var sessions_id = $("#sessions_id").val();
         var last_sessions_cust_question_id = $("#last_sessions_cust_question_id").val();
         var list_last_id = 0;
@@ -1342,6 +1343,7 @@
             dataType: "json",
             success: function (resultdata, textStatus, jqXHR) {
                 if (resultdata.status == 'success') {
+                    $('#question_list').html('');
                     $.each(resultdata.question_list, function (key, val) {
 
                         key++;
@@ -1425,6 +1427,7 @@
             data: {'sessions_id': sessions_id, 'list_last_id': list_last_id},
             dataType: "json",
             success: function (resultdata, textStatus, jqXHR) {
+                $('#favorite_question_list').html('');
                 if (resultdata.status == 'success') {
                     $.each(resultdata.question_list, function (key, val) {
                         console.log(val);
@@ -1789,8 +1792,10 @@
     });
 
     socket.on('like_question_notification', (poll_app_name) => {
-        if (poll_app_name == app_name)
+        if (poll_app_name == app_name){
             get_favorite_question_list();
+            get_question_list();
+        }
     });
 
     socket.on('session_new_message_notification', (poll_app_name) => {
