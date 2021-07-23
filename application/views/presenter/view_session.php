@@ -221,7 +221,7 @@ else{
 
     var base_url = "<?=base_url()?>";
     var site_url = "<?= site_url() ?>";
-    var user_id = "<?=$this->session->userdata('cid')?>";
+    var user_id = "<?=$this->session->userdata('pid')?>";
     var app_name = "<?=getAppName($sessions->sessions_id) ?>";
     var session_id = "<?=$sessions->sessions_id?>";
     let sessionId= "<?=$sessions->sessions_id?>";

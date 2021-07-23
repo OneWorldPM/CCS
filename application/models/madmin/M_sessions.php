@@ -898,33 +898,14 @@ class M_sessions extends CI_Model {
         $this->db->select('*');
         $this->db->from('sessions_cust_question s');
         $this->db->join('customer_master c', 's.cust_id=c.cust_id');
-        $this->db->where(array("s.sessions_id" => $post['sessions_id'], 'sessions_cust_question_id >' => $post['list_last_id']));
+        $this->db->where(array("s.sessions_id" => $post['sessions_id'], 'hide_status'=>'0'));
         //  $this->db->order_by("s.sessions_cust_question_id", "DESC");
         $result = $this->db->get();
-        $result_array = array();
+
         if ($result->num_rows() > 0) {
-            foreach ($result->result() as $val){
-                if($this->checkHiddenQuestions($val->sessions_cust_question_id)){
-                    $result_array[]=$val;
-                }
-            }
-            return $result_array;
+            return $result->result();
         } else {
             return '';
-        }
-    }
-
-    function checkHiddenQuestions($id){
-        $this->db->select('*')
-            ->from('cust_question_hide_status')
-            ->where('sessions_cust_question_id', $id)
-            ->where('hidden_from', 'admin')
-            ->where('hidden_from_id', $this->session->userdata['aid']);
-        $return =$this->db->get();
-        if($return->num_rows()>0){
-            return false;
-        }else{
-            return true;
         }
     }
 
