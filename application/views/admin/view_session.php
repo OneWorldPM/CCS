@@ -1407,14 +1407,16 @@
 
     $(document).on('click', '.favorite_hide_question', function () {
         var qid = $(this).attr('data-q-id');
+        console.log(qid)
         var data_listkey_id = $(this).attr('data-listkey-id');
 
         $.ajax({
             url: "<?= base_url() ?>admin/sessions/favorite_hide_question",
             type: "POST",
-            data: {'tbl_favorite_question_admin_id': qid},
+            data: {'tbl_favorite_question_id': qid},
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
+                console.log(data);
                 //   location.reload();
                 $("#" + data_listkey_id).hide();
                 socket.emit('like_question', app_name);
@@ -1423,7 +1425,7 @@
     });
 
     function questionFavoriteElement(key,val){
-        return '<div id="fav_question_list_key_' + val.tbl_favorite_question_id + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <a href="javascript:void(0)" class="favorite_hide_question" data-q-id="' + val.tbl_favorite_question_admin_id + '" data-listkey-id="fav_question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"></h5> <input type="hidden" class="favorite_input_class" data-last_id="' + val.tbl_favorite_question_admin_id + '"></div>';
+        return '<div id="fav_question_list_key_' + val.tbl_favorite_question_id + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <a href="javascript:void(0)" class="favorite_hide_question" data-q-id="' + val.tbl_favorite_question_id + '" data-listkey-id="fav_question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"></h5> <input type="hidden" class="favorite_input_class" data-last_id="' + val.tbl_favorite_question_admin_id + '"></div>';
     }
     function get_favorite_question_list() {
         var sessions_id = $("#sessions_id").val();

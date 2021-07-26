@@ -306,8 +306,8 @@ class Sessions extends CI_Controller {
 
     public function favorite_hide_question() {
         $post = $this->input->post();
-        if ($post['tbl_favorite_question_admin_id'] != '') {
-            $this->db->update('tbl_favorite_question_admin', array('hide_status' => 1), array('tbl_favorite_question_admin_id' => $post['tbl_favorite_question_admin_id']));
+        if ($post['tbl_favorite_question_id'] != '') {
+            $this->db->update('tbl_favorite_question', array('hide_status' => 1), array('tbl_favorite_question_id' => $post['tbl_favorite_question_id']));
             if ($this->db->affected_rows()) {
                 $result_array = array("status" => "success");
             } else {
