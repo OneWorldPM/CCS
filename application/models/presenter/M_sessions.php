@@ -230,18 +230,18 @@ class M_sessions extends CI_Model {
         }
     }
 
-    function get_admin_favorite($cust_question_id){
-        $this->db->select('*')
-            ->from('tbl_favorite_question')
-            ->where(array('sessions_cust_question_id'=>$cust_question_id, 'hide_status'=>0));
-       $admin_fav_qtn =  $this->db->get();
-        if($admin_fav_qtn->num_rows()>0){
-            return $admin_fav_qtn->resutl();
-        }else{
-            return '';
-        }
-
-    }
+//    function get_admin_favorite($cust_question_id){
+//        $this->db->select('*')
+//            ->from('tbl_favorite_question')
+//            ->where(array('sessions_cust_question_id'=>$cust_question_id, 'hide_status'=>0));
+//       $admin_fav_qtn =  $this->db->get();
+//        if($admin_fav_qtn->num_rows()>0){
+//            return $admin_fav_qtn->resutl();
+//        }else{
+//            return '';
+//        }
+//
+//    }
 
     function get_favorite_question_list() {
         $post = $this->input->post();
