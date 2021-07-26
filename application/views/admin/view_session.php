@@ -797,7 +797,7 @@
 
 
             $.get(base_url+"admin/sessions/markAsReplied/"+sessions_current_question_id,function( data ) {
-                console.log(comment_question_id);
+                // console.log(comment_question_id);
                 if(data == 1){
                     $('#' + comment_question_id).addClass('fa fa-commenting-o');
                 }
@@ -848,14 +848,14 @@
             {
                 if (data.from_id != 'admin')
                 {
-                    console.log(data);
+                    // console.log(data);
                     attendeeChatPopup(data.from_id, data.user_name);
                 }
             }
         });
 
         socket.on('update-admin-attendee-chat', function (data) {
-            console.log(data);
+            // console.log(data);
             if (data.socket_session_name == socket_session_name)
             {
                 $('#'+ data.replied_status).addClass('fa fa-commenting-o');
@@ -1191,7 +1191,12 @@
                 data: {'sessions_id': sessions_id, 'sessions_cust_question_id': sessions_cust_question_id},
                 dataType: "json",
                 success: function (data) {
-
+                    console.log(data)
+                    socket.emit('presenter_like_questions', {
+                        "app_name": app_name,
+                        "type": "like",
+                        "question": data["data"],
+                    });
                 }
             });
         });
@@ -1207,7 +1212,11 @@
                 data: {'sessions_id': sessions_id, 'sessions_cust_question_id': sessions_cust_question_id},
                 dataType: "json",
                 success: function (data) {
-
+                    socket.emit('presenter_like_questions', {
+                        "app_name": app_name,
+                        "type": "unlike",
+                        "question": data["data"],
+                    });
                 }
             });
         });
@@ -1344,6 +1353,7 @@
             data: {'sessions_id': sessions_id, 'list_last_id': list_last_id},
             dataType: "json",
             success: function (resultdata, textStatus, jqXHR) {
+                console.log(resultdata);
                 if (resultdata.status == 'success') {
                     $('#question_list').html('');
                     $.each(resultdata.question_list, function (key, val) {
@@ -1432,7 +1442,7 @@
                 $('#favorite_question_list').html('');
                 if (resultdata.status == 'success') {
                     $.each(resultdata.question_list, function (key, val) {
-                        console.log(val);
+                        // console.log(val);
                         key++;
                         $("#favorite_last_sessions_cust_question_id").val(val.tbl_favorite_question_admin_id);
                         $('#favorite_question_list').prepend(questionFavoriteElement(key,val));
