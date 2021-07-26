@@ -24,8 +24,8 @@ listener_total = {
     message(response) {
     },
     presence(response) {
-        console.log("presence response:");
-        console.log(response);
+        // console.log("presence response:");
+        // console.log(response);
 
         if (response.occupancy > 1)
             $('#online-users-count').text((response.occupancy)-1);
@@ -104,7 +104,7 @@ function hereNowTotal(channels) {
             function (status, response) {
                 if(response !== undefined)
                 {
-                    console.log("hereNow Response: ", response);
+                    // console.log("hereNow Response: ", response);
 
                     if (response.channels[pubnub_channel_total].occupancy > 1)
                         $('#online-users-count').text((response.channels[pubnub_channel_total].occupancy)-1);

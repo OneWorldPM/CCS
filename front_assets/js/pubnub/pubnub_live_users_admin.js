@@ -21,8 +21,8 @@ listener = {
     message(response) {
     },
     presence(response) {
-        console.log("presence response - per session:");
-        console.log(response);
+        // console.log("presence response - per session:");
+        // console.log(response);
         if (response.occupancy > 1)
             $('#totalAttendeeOnThisSession').text((response.occupancy)-1);
         else
@@ -74,7 +74,7 @@ listener = {
                 }
             }
         }
-        console.log("Presence UUIDs:", playerList);
+        // console.log("Presence UUIDs:", playerList);
 
         let totalAttendees = 0;
         if (playerList.length > 1)
