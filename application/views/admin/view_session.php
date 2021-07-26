@@ -797,7 +797,7 @@
 
 
             $.get(base_url+"admin/sessions/markAsReplied/"+sessions_current_question_id,function( data ) {
-                console.log(comment_question_id);
+                // console.log(comment_question_id);
                 if(data == 1){
                     $('#' + comment_question_id).addClass('fa fa-commenting-o');
                 }
@@ -848,14 +848,14 @@
             {
                 if (data.from_id != 'admin')
                 {
-                    console.log(data);
+                    // console.log(data);
                     attendeeChatPopup(data.from_id, data.user_name);
                 }
             }
         });
 
         socket.on('update-admin-attendee-chat', function (data) {
-            console.log(data);
+            // console.log(data);
             if (data.socket_session_name == socket_session_name)
             {
                 $('#'+ data.replied_status).addClass('fa fa-commenting-o');
@@ -1191,7 +1191,12 @@
                 data: {'sessions_id': sessions_id, 'sessions_cust_question_id': sessions_cust_question_id},
                 dataType: "json",
                 success: function (data) {
-
+                    console.log(data)
+                    socket.emit('presenter_like_questions', {
+                        "app_name": app_name,
+                        "type": "like",
+                        "question": data["data"],
+                    });
                 }
             });
         });
@@ -1207,7 +1212,11 @@
                 data: {'sessions_id': sessions_id, 'sessions_cust_question_id': sessions_cust_question_id},
                 dataType: "json",
                 success: function (data) {
-
+                    socket.emit('presenter_like_questions', {
+                        "app_name": app_name,
+                        "type": "unlike",
+                        "question": data["data"],
+                    });
                 }
             });
         });
@@ -1344,6 +1353,7 @@
             data: {'sessions_id': sessions_id, 'list_last_id': list_last_id},
             dataType: "json",
             success: function (resultdata, textStatus, jqXHR) {
+                console.log(resultdata);
                 if (resultdata.status == 'success') {
                     $('#question_list').html('');
                     $.each(resultdata.question_list, function (key, val) {
@@ -1397,14 +1407,16 @@
 
     $(document).on('click', '.favorite_hide_question', function () {
         var qid = $(this).attr('data-q-id');
+        console.log(qid)
         var data_listkey_id = $(this).attr('data-listkey-id');
 
         $.ajax({
             url: "<?= base_url() ?>admin/sessions/favorite_hide_question",
             type: "POST",
-            data: {'tbl_favorite_question_admin_id': qid},
+            data: {'tbl_favorite_question_id': qid},
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
+                console.log(data);
                 //   location.reload();
                 $("#" + data_listkey_id).hide();
                 socket.emit('like_question', app_name);
@@ -1413,7 +1425,7 @@
     });
 
     function questionFavoriteElement(key,val){
-        return '<div id="fav_question_list_key_' + val.tbl_favorite_question_id + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <a href="javascript:void(0)" class="favorite_hide_question" data-q-id="' + val.tbl_favorite_question_admin_id + '" data-listkey-id="fav_question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"></h5> <input type="hidden" class="favorite_input_class" data-last_id="' + val.tbl_favorite_question_admin_id + '"></div>';
+        return '<div id="fav_question_list_key_' + val.tbl_favorite_question_id + '" style="padding-bottom: 15px;"><h5 style="font-weight: 800; font-size: 15px; "><span style="font-size: 12px;">(' + val.first_name + ' ' + val.last_name + ') </span>' + val.question + ' <a href="javascript:void(0)" class="favorite_hide_question" data-q-id="' + val.tbl_favorite_question_id + '" data-listkey-id="fav_question_list_key_' + key + '" title="Hide" ><span class="fa fa-eye-slash" ></span></a></h5><div style="display: flex;"></h5> <input type="hidden" class="favorite_input_class" data-last_id="' + val.tbl_favorite_question_admin_id + '"></div>';
     }
     function get_favorite_question_list() {
         var sessions_id = $("#sessions_id").val();
@@ -1432,7 +1444,7 @@
                 $('#favorite_question_list').html('');
                 if (resultdata.status == 'success') {
                     $.each(resultdata.question_list, function (key, val) {
-                        console.log(val);
+                        // console.log(val);
                         key++;
                         $("#favorite_last_sessions_cust_question_id").val(val.tbl_favorite_question_admin_id);
                         $('#favorite_question_list').prepend(questionFavoriteElement(key,val));
