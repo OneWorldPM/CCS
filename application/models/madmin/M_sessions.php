@@ -903,11 +903,28 @@ class M_sessions extends CI_Model {
         $result = $this->db->get();
 
         if ($result->num_rows() > 0) {
-            return $result->result();
+            foreach ($result->result() as $val) {
+                $val->favorite_status = $this->common->get_question_favorite_status($this->session->userdata("aid"), $val->sessions_cust_question_id);
+                $response_array[] = $val;
+            }
+            return $response_array;
         } else {
             return '';
         }
     }
+
+//    function get_admin_favorite($cust_question_id){
+//        $this->db->select('*')
+//            ->from('tbl_favorite_question')
+//            ->where(array('sessions_cust_question_id'=>$cust_question_id, 'hide_status'=>0));
+//        $admin_fav_qtn =  $this->db->get();
+//        if($admin_fav_qtn->num_rows()>0){
+//            return $admin_fav_qtn->result();
+//        }else{
+//            return '';
+//        }
+//
+//    }
 
     function addQuestionAnswer() {
         $post = $this->input->post();
@@ -1158,18 +1175,44 @@ class M_sessions extends CI_Model {
 
     function likeQuestion() {
         $post = $this->input->post();
+        $sessions_cust_question_id=$post['sessions_cust_question_id'];
         $insert_array = array(
             'cust_id' => $this->session->userdata("aid"),
             'sessions_id' => $post['sessions_id'],
-            'sessions_cust_question_id' => $post['sessions_cust_question_id']
+            'sessions_cust_question_id' => $sessions_cust_question_id
         );
-        $favorite_question_row = $this->db->get_where('tbl_favorite_question_admin', $insert_array)->row();
+        $favorite_question_row = $this->db->get_where('tbl_favorite_question', $insert_array)->row();
         if (!empty($favorite_question_row)) {
-            $this->db->delete("tbl_favorite_question_admin", $insert_array);
+            $this->db->delete("tbl_favorite_question", $insert_array);
         } else {
-            $this->db->insert("tbl_favorite_question_admin", $insert_array);
+            $this->db->insert("tbl_favorite_question", $insert_array);
         }
-        return TRUE;
+//        var_dump($post['sessions_cust_question_id']);
+
+
+        $favorite_question_id=$this->db->insert_id();
+        $favorite_question="";
+        if($favorite_question_id){
+            $favorite_question=$this->get_favorite_question_list_one($favorite_question_id);
+        }else{
+            $favorite_question=$favorite_question_row;
+        }
+        return array(true,$favorite_question);
+    }
+
+    function get_favorite_question_list_one($favorite_question_id) {
+        $this->db->select('*');
+        $this->db->from('tbl_favorite_question fq');
+        $this->db->join('sessions_cust_question s', 's.sessions_cust_question_id = fq.sessions_cust_question_id');
+        $this->db->join('customer_master c', 's.cust_id=c.cust_id');
+        $this->db->where(array("fq.tbl_favorite_question_id" => $favorite_question_id, 'fq.hide_status' => 0));
+        $this->db->group_by('fq.tbl_favorite_question_id');
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->row_array();
+        } else {
+            return '';
+        }
     }
 
     function get_resource($sessions_id) {
