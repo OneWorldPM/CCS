@@ -38,7 +38,7 @@
         padding: 0 40px
     }
 }
-@media (max-width: 991px) {
+@media (max-width: 1300px) {
     #topbar.topbar-dark {
         background-color: #111 !important;
     }
