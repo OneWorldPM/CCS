@@ -376,18 +376,35 @@ $user_role = $this->session->userdata('role');
                                                 <legend class="text-dark text-large text-bold"> Custom Header Buttons <i class="badge badge-success">new</i></legend>
                                                <div class="row">
                                                    <div class="col-md-6">
-                                                       <label class="col-md-12 text-dark"> Button Name (left) </label><br>
+                                                       <label class="col-md-6 text-dark"> Button Name (1) </label><br>
                                                        <input type="text" class="form-control" name="custom_header_button1" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button1 : "" ?>">
-                                                       <label class="col-md-12 text-dark"> Button Link (left) </label><br>
-                                                       <input type="text" class="form-control" name="custom_header_button1_link" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button1_link : "" ?>">
                                                    </div>
                                                    <div class="col-md-6">
-                                                       <label class="col-md-12 text-dark"> Button Name (right) </label><br>
+                                                       <label class="col-md-6 text-dark"> Button Link (1) </label><br>
+                                                       <input type="text" class="form-control" name="custom_header_button1_link" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button1_link : "" ?>">
+                                                   </div>
+                                               </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                       <label class="col-md-6 text-dark"> Button Name (2) </label><br>
                                                        <input type="text" class="form-control" name="custom_header_button2" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button2 : "" ?>">
-                                                       <label class="col-md-12 text-dark"> Button Link (right)</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                       <label class="col-md-6 text-dark"> Button Link (2)</label>
                                                        <input type="text" class="form-control" name="custom_header_button2_link" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button2_link : "" ?>">
                                                    </div>
-                                               </div><br>
+                                               </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="col-md-6 text-dark"> Button Name (3) </label><br>
+                                                        <input type="text" class="form-control" name="custom_header_button3" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button3 : "" ?>">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="col-md-6 text-dark"> Button Link (3) </label><br>
+                                                        <input type="text" class="form-control" name="custom_header_button3_link" value="<?= (isset($sessions_edit) && !empty($sessions_edit) ) ? $sessions_edit->custom_header_button3_link : "" ?>">
+                                                    </div>
+                                                </div>
+                                                <br>
                                                 <small style="color: red">Buttons will only be visible if names are set</small>
                                             </fieldset>
 
