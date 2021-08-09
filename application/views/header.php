@@ -257,8 +257,7 @@
                         <?php
                         if (isset($sesions_logo)) {
                             ?>
-
-                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style="<?=($sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
+                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style="<?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
                             <?php if($sponsor_type!=''):?>
                                 <span><?= $sponsor_type ?></span>
                                 <?php endif;?>
