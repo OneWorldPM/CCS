@@ -315,12 +315,6 @@ iframe{
         object-fit: contain;
         padding: 0 !important;
     }
-    .logo2 img{
-        width: 155px;
-        height: 38px !important;
-        object-fit: contain;
-        padding: 0 !important;
-    }
     #mainMenu2{
         margin-right: 120px;
     }
