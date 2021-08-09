@@ -440,7 +440,6 @@
                 '-ms-transform': 'scale(' + val + ')',
                 '-o-transform': 'scale(' + val + ')',
                 'transform': 'scale(' + val + ')',
-                'transform-origin': '0 0',
                 'background-color':'white'
             });
         });
