@@ -83,8 +83,10 @@ class Sessions extends CI_Controller {
 
         $header_data["custom_header_button1"] = $sesions->custom_header_button1;
         $header_data["custom_header_button2"] = $sesions->custom_header_button2;
+        $header_data["custom_header_button3"] = $sesions->custom_header_button3;
         $header_data["custom_header_button1_link"] = $sesions->custom_header_button1_link;
         $header_data["custom_header_button2_link"] = $sesions->custom_header_button2_link;
+        $header_data["custom_header_button3_link"] = $sesions->custom_header_button3_link;
 
         $header_data["header_toolbox_status"] = $sesions->header_toolbox_status;
 

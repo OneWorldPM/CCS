@@ -360,6 +360,13 @@
                                                 </li>
                                                 <?php
                                             }
+                                            if (isset($custom_header_button3) && !empty($custom_header_button3)) {
+                                                ?>
+                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                    <a target="_blank" href="<?=(!empty($custom_header_button3_link))?$custom_header_button3_link:''?>"><?=$custom_header_button3?></a>
+                                                </li>
+                                                <?php
+                                            }
 
                                             if (isset($right_bar) &&  sessionRightBarControl($right_bar, "resources")) {
                                                 ?>
