@@ -88,20 +88,19 @@
 
             .logo2 {
                 float: left;
-                padding-left: 15px;
-                margin-top: 15px;
+                padding-left: 0px;
             }
 
             .logo2 img {
-                object-fit: contain;
-                width: 79px;
-                height: 50px;
+                /*object-fit: contain;*/
             }
             .logo2 span {
                 position: absolute;
-                top: 5px;
+                top: 0;
+                margin-top: -30px;
                 font-family: sans-serif;
                 font-size: 11px;
+                float:left;
             }
 
             #mainMenu2 {
@@ -234,7 +233,7 @@
         <div class="wrapper">
             <!-- HEADER -->
             <header id="header" class="header-transparent header-sticky">
-                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 115)?'style="height:'.$sesions_logo_height.'px"':'style="height:115px"':'';?>>
+                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 115)?'style="min-height:'.$sesions_logo_height.'px"':'style="height:115px"':'';?>>
                 <div style="height: 4px;background-color: #52c4ad;"></div>
                     <div class="container">
                         <!--LOGO-->
@@ -242,13 +241,13 @@
                         if ($this->session->userdata('cid') != "") {
                             $profile_data = $this->common->get_user_details($this->session->userdata('cid'));
                             ?>
-                            <div id="logo">
-                                <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="margin-top: 12px; cursor: auto">
+                            <div class="col-lg-2 " id="logo">
+                                <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="<?=(isset($sponsor_type) && $sponsor_type)?'margin-top: 30px; ':'margin-top: 12px; '?>cursor: auto">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
                             </div>
                         <?php } else { ?>
-                            <div id="logo">
+                            <div class="col-lg-2" id="logo">
                                 <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
@@ -258,11 +257,11 @@
                         <?php
                         if (isset($sesions_logo)) {
                             ?>
-                            <div class="logo2">
-                                <?php if($sponsor_type!=''):?>
+                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style="<?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
+                            <?php if($sponsor_type!=''):?>
                                 <span><?= $sponsor_type ?></span>
                                 <?php endif;?>
-                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: <?=$sesions_logo_width?>px;height: <?=$sesions_logo_height?>px;<?=(($sesions_logo_height) < 90 )?'margin-top:10px;':''?>">
+                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: 100%;height:100%;">
                             </div>
                             <?php
                         }
@@ -348,21 +347,21 @@
 
                                             if (isset($custom_header_button1) && !empty($custom_header_button1)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                <li class="">
                                                     <a target="_blank" href="<?=(!empty($custom_header_button1_link))?$custom_header_button1_link:''?>" ><?=$custom_header_button1?></a>
                                                 </li>
                                                 <?php
                                             }
                                             if (isset($custom_header_button2) && !empty($custom_header_button2)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                <li class="">
                                                     <a target="_blank" href="<?=(!empty($custom_header_button2_link))?$custom_header_button2_link:''?>"><?=$custom_header_button2?></a>
                                                 </li>
                                                 <?php
                                             }
                                             if (isset($custom_header_button3) && !empty($custom_header_button3)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                <li class="">
                                                     <a target="_blank" href="<?=(!empty($custom_header_button3_link))?$custom_header_button3_link:''?>"><?=$custom_header_button3?></a>
                                                 </li>
                                                 <?php
