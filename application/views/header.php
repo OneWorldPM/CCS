@@ -347,21 +347,21 @@
 
                                             if (isset($custom_header_button1) && !empty($custom_header_button1)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                <li class="">
                                                     <a target="_blank" href="<?=(!empty($custom_header_button1_link))?$custom_header_button1_link:''?>" ><?=$custom_header_button1?></a>
                                                 </li>
                                                 <?php
                                             }
                                             if (isset($custom_header_button2) && !empty($custom_header_button2)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                <li class="">
                                                     <a target="_blank" href="<?=(!empty($custom_header_button2_link))?$custom_header_button2_link:''?>"><?=$custom_header_button2?></a>
                                                 </li>
                                                 <?php
                                             }
                                             if (isset($custom_header_button3) && !empty($custom_header_button3)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
+                                                <li class="">
                                                     <a target="_blank" href="<?=(!empty($custom_header_button3_link))?$custom_header_button3_link:''?>"><?=$custom_header_button3?></a>
                                                 </li>
                                                 <?php
