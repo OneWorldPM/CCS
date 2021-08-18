@@ -59,6 +59,7 @@ class Sessions extends CI_Controller {
         $data['session_tracks'] = $this->msessions->getSessionTracks();
         $data['unique_identifier_id'] = $this->msessions->getSession_Unique_Identifier_ID();
         $data['millicast_stream_names']=$this->msessions->getMillicast_Stream_Name();
+        $data['default_moderators']=$this->msessions->moderatorCheckedList();
         $this->load->view('admin/header');
         $this->load->view('admin/add_sessions', $data);
         $this->load->view('admin/footer');
@@ -1075,5 +1076,24 @@ public function deleteStreamName($stream_id){
         else{
             echo "error";
         }
+    }
+
+    public function moderatorCheckedList(){
+        $this->load->view('admin/header');
+        $this->load->view('admin/moderatorCheckedList');
+        $this->load->view('admin/footer');
+    }
+
+    public function getPresentersJson(){
+        echo json_encode($this->msessions->getPresenters());
+//        echo json_encode($this->msessions->getSelectedModerators());
+    }
+
+    public function getSelectedModerators(){
+        echo json_encode($this->msessions->getSelectedModerators());
+    }
+
+    public function addSelectedModerator(){
+        echo json_encode($this->msessions->addSelectedModerator());
     }
 }
