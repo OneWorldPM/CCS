@@ -762,16 +762,16 @@ function get_poll_vot_section() {
                                     $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label>");
 
                                 }
-
-                                $("#result_section").append("<div class='progress' style='margin-bottom: 25px;'><div class='progress_bar_new "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + (parseInt(result_calculate.toFixed(0))+5) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
+                                $("#result_section").css('margin-left','30px');
+                                $("#result_section").append("<div class='progress' style='margin-bottom: 25px;'><div class='progress_bar_new "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + result_calculate.toFixed(0) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
                             } else {
                                 if(!window.isComparisonpoll)
                                 {
                                     $('.progress_bar_new').css('background', '#45c0ea');
                                     $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label>");
                                 }
-
-                                $("#result_section").append("<div class='progress' style='margin-bottom: 25px;'><div class='progress-bar assesment-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + (parseInt(result_calculate.toFixed(0))+5) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
+                                $("#result_section").css('margin-left','30px');
+                                $("#result_section").append("<div class='progress' style='margin-bottom: 25px;'><div class='progress-bar assesment-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + result_calculate.toFixed(0) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
                             }
 
                             pollIteration++;
@@ -779,10 +779,10 @@ function get_poll_vot_section() {
                             if(data.result.correct_answer1 !== "0" || data.result.correct_answer2 !=='0'){
                                 console.log(data.result.correct_answer);
                                 if(data.result.correct_answer1 ==  key) {
-                                    $("#result_section #label_"+data.result.correct_answer1).prepend('<span class="fa fa-check fa-2x "></span>').css({'margin-left':'-30px', 'color':'#22B14C'});
+                                    $("#result_section #label_"+data.result.correct_answer1).prepend('<span class="fa fa-check fa-2x " style="position: absolute; margin-left:-30px"></span>').css({'color':'#22B14C'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }else if (data.result.correct_answer2 ==  key){
-                                    $("#result_section #label_"+data.result.correct_answer2).prepend('<span class="fa fa-check fa-2x "></span>').css({'margin-left':'-30px', 'color':'#22B14C'});
+                                    $("#result_section #label_"+data.result.correct_answer2).prepend('<span class="fa fa-check fa-2x " style="position: absolute; margin-left:-30px"></span>').css({'color':'#22B14C'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }
                                 else{
