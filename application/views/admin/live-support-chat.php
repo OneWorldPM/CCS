@@ -377,8 +377,8 @@
             order = order +1;
             if (data.room == live_support_chat_room && data.fromType == "attendee")
             {
-                $('.users-list li[user-id="' + data.fromId + '"]').attr('new-text', 1);
                 $('.users-list li[user-id="' + data.fromId + '"]').attr('new-text-order', order);
+                $('.users-list li[user-id="' + data.fromId + '"]').attr('new-text', 1);
                 $('.users-list li[user-id="' + data.fromId + '"] > .badge').show();
                 $(".users-list li").sort(newtext_dec_sort).appendTo('.users-list');
                 $(".users-list li").sort(newtext_order_dec_sort).appendTo('.users-list');
