@@ -17,13 +17,13 @@
         <link href="<?= base_url() ?>front_assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
         <!-- Template base -->
-        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=5" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=6" rel="stylesheet">
 
         <!-- Template elements -->
         <link href="<?= base_url() ?>front_assets/css/theme-elements.css" rel="stylesheet">
 
         <!-- Responsive classes -->
-        <link href="<?= base_url() ?>front_assets/css/responsive.css" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/responsive.css?v=1" rel="stylesheet">
 
         <!-- [if lt IE 9]>
         <script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
