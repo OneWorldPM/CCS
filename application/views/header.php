@@ -17,13 +17,13 @@
         <link href="<?= base_url() ?>front_assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
         <!-- Template base -->
-        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=5" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=6" rel="stylesheet">
 
         <!-- Template elements -->
         <link href="<?= base_url() ?>front_assets/css/theme-elements.css" rel="stylesheet">
 
         <!-- Responsive classes -->
-        <link href="<?= base_url() ?>front_assets/css/responsive.css" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/responsive.css?v=1" rel="stylesheet">
 
         <!-- [if lt IE 9]>
         <script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -172,13 +172,14 @@
 
             @media screen and (max-width: 1290px) {
                 #header-wrap {
-                    padding: 16px 30px;
+
+                    /*padding: 16px 30px;*/
                 }
             }
 
             @media screen and (max-width: 1200px) {
                 #header-wrap {
-                    padding: 16px 10px;
+                    /*padding: 16px 10px;*/
                 }
 
                 #header .container {
@@ -233,21 +234,21 @@
         <div class="wrapper">
             <!-- HEADER -->
             <header id="header" class="header-transparent header-sticky">
-                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 115)?'style="min-height:'.$sesions_logo_height.'px"':'style="height:115px"':'';?>>
+                <div id="header-wrap" style="<?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 70)? $sesions_logo_height.'px; padding-bottom:3px !important':'':'';?>; height: auto; ">
                 <div style="height: 4px;background-color: #52c4ad;"></div>
-                    <div class="container">
+                    <div class="container" >
                         <!--LOGO-->
                         <?php
                         if ($this->session->userdata('cid') != "") {
                             $profile_data = $this->common->get_user_details($this->session->userdata('cid'));
                             ?>
-                            <div class="col-lg-2 " id="logo">
+                            <div class="" id="logo">
                                 <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="<?=(isset($sponsor_type) && $sponsor_type)?'margin-top: 30px; ':'margin-top: 12px; '?>cursor: auto">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
                             </div>
                         <?php } else { ?>
-                            <div class="col-lg-2" id="logo">
+                            <div class="" id="logo">
                                 <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
@@ -257,9 +258,9 @@
                         <?php
                         if (isset($sesions_logo)) {
                             ?>
-                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style="<?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
+                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style="margin-left:10px !important; <?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
                             <?php if($sponsor_type!=''):?>
-                                <span><?= $sponsor_type ?></span>
+                                <span style="white-space: nowrap"><?= $sponsor_type ?></span>
                                 <?php endif;?>
                                 <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: 100%;height:100%;">
                             </div>
@@ -280,7 +281,7 @@
 
                         <!--NAVIGATION-->
                         <div class="navbar-collapse collapse main-menu-collapse navigation-wrap">
-                            <div class="container" style="text-transform: uppercase;">
+                            <div class="container" style="text-transform: uppercase;" >
                                 <nav id="mainMenu2" class="main-menu mega-menu" style="margin-top: 10px;">
                                     <?php
                                     if ($this->session->userdata('cid') != "") {
