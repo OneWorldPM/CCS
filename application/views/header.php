@@ -89,6 +89,7 @@
             .logo2 {
                 float: left;
                 padding-left: 0px;
+                margin-left:30px !important;
             }
 
             .logo2 img {
@@ -216,7 +217,7 @@
 
             @media screen and (max-width: 493px) {
                 .logo2 {
-                    margin-left: 5px;
+                    margin-left: 10px !important;
                 }
 
                 .logo2 img {
@@ -258,7 +259,7 @@
                         <?php
                         if (isset($sesions_logo)) {
                             ?>
-                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style="margin-left:10px !important; <?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
+                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style=" <?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
                             <?php if($sponsor_type!=''):?>
                                 <span style="white-space: nowrap"><?= $sponsor_type ?></span>
                                 <?php endif;?>
