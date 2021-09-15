@@ -17,13 +17,13 @@
         <link href="<?= base_url() ?>front_assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
         <!-- Template base -->
-        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=6" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=9" rel="stylesheet">
 
         <!-- Template elements -->
         <link href="<?= base_url() ?>front_assets/css/theme-elements.css" rel="stylesheet">
 
         <!-- Responsive classes -->
-        <link href="<?= base_url() ?>front_assets/css/responsive.css?v=1" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/responsive.css?v=5" rel="stylesheet">
 
         <!-- [if lt IE 9]>
         <script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -235,7 +235,7 @@
         <div class="wrapper">
             <!-- HEADER -->
             <header id="header" class="header-transparent header-sticky">
-                <div id="header-wrap" style="<?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 70)? $sesions_logo_height.'px; padding-bottom:3px !important':'':'';?>; height: auto; ">
+                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 80)?'style="height:'.$sesions_logo_height.'px"':'style="height:87px"':'';?>>
                 <div style="height: 4px;background-color: #52c4ad;"></div>
                     <div class="container" >
                         <!--LOGO-->
@@ -244,7 +244,7 @@
                             $profile_data = $this->common->get_user_details($this->session->userdata('cid'));
                             ?>
                             <div class="" id="logo">
-                                <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="<?=(isset($sponsor_type) && $sponsor_type)?'margin-top: 30px; ':'margin-top: 12px; '?>cursor: auto">
+                                <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="<?=(isset($sponsor_type) && $sponsor_type)?'margin-top: 25px; ':'margin-top: 12px; '?>cursor: auto">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
                             </div>
