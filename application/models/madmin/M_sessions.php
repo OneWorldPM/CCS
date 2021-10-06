@@ -751,7 +751,7 @@ class M_sessions extends CI_Model {
                 if ($post['option_' . $i] != "") {
                     $set_array = array(
                         'sessions_poll_question_id' => $insert_id,
-                        'sessions_id' => preg_replace("/^<p.*?>/", "",trim($post['sessions_id'])),
+                        'sessions_id' =>trim($post['sessions_id']),
                         'option' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "", $post['option_' . $i])),
                         "total_vot" => 0
                     );
