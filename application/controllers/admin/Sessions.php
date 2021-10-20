@@ -552,7 +552,6 @@ class Sessions extends CI_Controller {
 
     public function poll_chart($session_id)
     {
-        ob_start();
         $sesstion_title = $this->getSessionName($session_id);
         $poll_data = $this->getPollData($session_id);
 
@@ -700,7 +699,7 @@ class Sessions extends CI_Controller {
                  </table>';
             $pdf->writeHTML($result_table, true, false, false, false, 'center');
         }
-        ob_end_clean();
+
         $pdf->Output(__DIR__.'/Poll Overview - '.$sesstion_title.'.pdf', 'FD');
 
         return;
