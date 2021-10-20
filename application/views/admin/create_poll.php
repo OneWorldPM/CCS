@@ -122,7 +122,7 @@
                                                 <textarea type="text" name="option_4" id="option_4" placeholder="Option 4" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_5" id="option_5" placeholder="Option 5"  class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_6" id="option_6" placeholder="Option 6" class="form-control input_cust_class"></textarea>
-                                                <textarea type="text" name="option_7" id="option_7" placeholder="Option 7" class="form-control input_cust_class"></textarea
+                                                <textarea type="text" name="option_7" id="option_7" placeholder="Option 7" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_8" id="option_8" placeholder="Option 8" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_9" id="option_9" placeholder="Option 9" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_10" id="option_10" placeholder="Option 10"class="form-control input_cust_class"></textarea>
@@ -338,14 +338,18 @@ switch ($msg) {
         option_answer('correct_answer1', correct_answer1);
         option_answer('correct_answer2', correct_answer2);
 
-        $('.input_cust_class').change(function(){
+        $('.input_cust_class').on('summernote.change',function(){
             option_answer('correct_answer1', correct_answer1);
             option_answer('correct_answer2', correct_answer2);
 
         });
+        $('.input_cust_class').on('summernote.empty',function(){
+            option_answer('correct_answer1', correct_answer1);
+            option_answer('correct_answer2', correct_answer2);
 
+        });
         function option_answer(answer_index, correct_answer){
-
+            console.log();
             var selected = '';
             var max_option =10;
             $('#'+answer_index+'').html('').append('<option value=""></option>');
@@ -355,7 +359,8 @@ switch ($msg) {
                 }else{
                     selected ='';
                 }
-                if($("#option_"+i+".input_cust_class").val() !== ''){
+                if( !($("#option_"+i+".input_cust_class").summernote('isEmpty'))){
+
                     $('#'+answer_index+'').append('<option value="'+i+'" id="opttion_'+i+'" '+selected+'>Option '+i+'</option>');
                 }else{
                     $('#'+answer_index+' #option_'+i+'').remove();
