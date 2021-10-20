@@ -735,7 +735,7 @@ class M_sessions extends CI_Model {
         $set = array(
             'sessions_id' => trim($post['sessions_id']),
             'poll_type_id' => $post['poll_type_id'],
-            'question' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "",trim($post['question']))),
+            'question' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "",trim($post['question']))),
             'poll_name' => trim($post['poll_name']),
             'slide_number' => trim($post['slide_number']),
             'correct_answer1' => trim($post['correct_answer1']),
@@ -752,7 +752,7 @@ class M_sessions extends CI_Model {
                     $set_array = array(
                         'sessions_poll_question_id' => $insert_id,
                         'sessions_id' =>trim($post['sessions_id']),
-                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "", $post['option_' . $i])),
+                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "", $post['option_' . $i])),
                         "total_vot" => 0
                     );
                     $this->db->insert("poll_question_option", $set_array);
@@ -769,7 +769,7 @@ class M_sessions extends CI_Model {
         $set = array(
             'sessions_id' => trim($post['sessions_id']),
             'poll_type_id' => $post['poll_comparisons_with_us'],
-            'question' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "",trim($post['question']))),
+            'question' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "",trim($post['question']))),
             'poll_name' => trim($post['poll_name']),
 			'slide_number' => trim($post['slide_number']),
             'correct_answer1' => trim($post['correct_answer1']),
@@ -786,7 +786,7 @@ class M_sessions extends CI_Model {
                     $set_array = array(
                         'sessions_poll_question_id' => $insert_new_id,
                         'sessions_id' => trim($post['sessions_id']),
-                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "",$post['option_' . $i])),
+                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "",$post['option_' . $i])),
                         "total_vot" => 0
                     );
                     $this->db->insert("poll_question_option", $set_array);
