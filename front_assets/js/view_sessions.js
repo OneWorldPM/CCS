@@ -683,7 +683,7 @@ function get_poll_vot_section() {
 
 
                         $("#poll_vot_section").html("<form id='frm_reg' name='frm_reg' method='post' action=''>\n\
-            \n\<h2 id='popup_title_lbl' style='margin-bottom: 20px; color: #000; padding: 15px 5px 25px 10px; background-color: #ebeaea;'>" + data.result.question + "</h2>\n\
+            \n\<h2 id='popup_title_lbl' style='margin-bottom: 20px; color: #000; font-weight: 800;font-size: 24px; padding: 15px 5px 25px 10px; background-color: #ebeaea;'>" + data.result.question + "</h2>\n\
 <div class='col-md-12'>\n\
 \n\<input type='hidden' id='sessions_poll_question_id' value='" + data.result.sessions_poll_question_id + "'>\n\
 \n\<input type='hidden' id='sessions_id' value='" + data.result.sessions_id + "'>\n\
