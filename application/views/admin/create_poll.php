@@ -103,7 +103,7 @@
                                                 foreach ($sessions_data->option as $key => $value) {
                                                     $key++;
                                                     ?>
-                                                    <textarea type="text" name="option_<?= $key ?>" id="option_<?= $key ?>" value="<?= $value->option ?>" placeholder="Option <?= $key ?>" class="form-control input_cust_class"><?=htmlspecialchars($value->option)?></textarea>
+                                                    <textarea type="text" name="option_<?= $key ?>" id="option_<?= $key ?>" placeholder="Option <?= $key ?>" class="form-control input_cust_class"><?=htmlspecialchars($value->option)?></textarea>
                                                     <?php
                                                 }
                                                 $total = 10;
@@ -111,7 +111,7 @@
                                                 $edit = $edit + 1;
                                                 for ($i = $edit; $i <= $total; $i++) {
                                                     ?>
-                                                    <textarea type="text" name="option_<?= $i ?>" id="option_<?= $i ?>" value="" placeholder="Option <?= $i ?>" class="form-control input_cust_class"></textarea>
+                                                    <textarea type="text" name="option_<?= $i ?>" id="option_<?= $i ?>" placeholder="Option <?= $i ?>" class="form-control input_cust_class"></textarea>
                                                     <?php
                                                 }
                                             } else {
