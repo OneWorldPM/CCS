@@ -129,7 +129,7 @@
                                             <?php } ?>
                                         </div>
 
-                                        <div class="form-group">7
+                                        <div class="form-group">
                                             <label class="text-large">Correct Answer1:</label><br>
                                             <select class="form-control" name="correct_answer1" id="correct_answer1">
                                                 <option value=""></option>
