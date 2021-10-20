@@ -220,18 +220,6 @@ switch ($msg) {
                 ],
             fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '36', '48' , '64', '82', '150'],
             inheritPlaceholder: true,
-            callbacks: {
-                onPaste: function (e) {
-                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-
-                    e.preventDefault();
-
-                    // Firefox fix
-                    setTimeout(function () {
-                        document.execCommand('insertText', false, bufferText);
-                    }, 10);
-                }
-            }
         });
 
 <?php if ($msg): ?>
