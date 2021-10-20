@@ -103,7 +103,7 @@
                                                 foreach ($sessions_data->option as $key => $value) {
                                                     $key++;
                                                     ?>
-                                                    <textarea type="text" name="option_<?= $key ?>" id="option_<?= $key ?>" value="<?= $value->option ?>" placeholder="Option <?= $key ?>" class="form-control input_cust_class"><?=htmlspecialchars($value->option)?></textarea>
+                                                    <textarea type="text" name="option_<?= $key ?>" id="option_<?= $key ?>" placeholder="Option <?= $key ?>" class="form-control input_cust_class"><?=htmlspecialchars($value->option)?></textarea>
                                                     <?php
                                                 }
                                                 $total = 10;
@@ -111,7 +111,7 @@
                                                 $edit = $edit + 1;
                                                 for ($i = $edit; $i <= $total; $i++) {
                                                     ?>
-                                                    <textarea type="text" name="option_<?= $i ?>" id="option_<?= $i ?>" value="" placeholder="Option <?= $i ?>" class="form-control input_cust_class"></textarea>
+                                                    <textarea type="text" name="option_<?= $i ?>" id="option_<?= $i ?>" placeholder="Option <?= $i ?>" class="form-control input_cust_class"></textarea>
                                                     <?php
                                                 }
                                             } else {
@@ -122,7 +122,7 @@
                                                 <textarea type="text" name="option_4" id="option_4" placeholder="Option 4" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_5" id="option_5" placeholder="Option 5"  class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_6" id="option_6" placeholder="Option 6" class="form-control input_cust_class"></textarea>
-                                                <textarea type="text" name="option_7" id="option_7" placeholder="Option 7" class="form-control input_cust_class"></textarea
+                                                <textarea type="text" name="option_7" id="option_7" placeholder="Option 7" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_8" id="option_8" placeholder="Option 8" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_9" id="option_9" placeholder="Option 9" class="form-control input_cust_class"></textarea>
                                                 <textarea type="text" name="option_10" id="option_10" placeholder="Option 10"class="form-control input_cust_class"></textarea>
@@ -216,8 +216,22 @@ switch ($msg) {
             toolbar:
                 [
                     ["font", ["bold", "italic", "underline", "fontname", "strikethrough", "superscript", "subscript", "clear"]],
+                    ['fontsize', ['fontsize']],
                 ],
+            fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '36', '48' , '64', '82', '150'],
             inheritPlaceholder: true,
+            callbacks: {
+                onPaste: function (e) {
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+
+                    e.preventDefault();
+
+                    // Firefox fix
+                    setTimeout(function () {
+                        document.execCommand('insertText', false, bufferText);
+                    }, 10);
+                }
+            }
         });
 
 <?php if ($msg): ?>
@@ -338,14 +352,18 @@ switch ($msg) {
         option_answer('correct_answer1', correct_answer1);
         option_answer('correct_answer2', correct_answer2);
 
-        $('.input_cust_class').change(function(){
+        $('.input_cust_class').on('summernote.change',function(){
             option_answer('correct_answer1', correct_answer1);
             option_answer('correct_answer2', correct_answer2);
 
         });
+        $('.input_cust_class').on('summernote.empty',function(){
+            option_answer('correct_answer1', correct_answer1);
+            option_answer('correct_answer2', correct_answer2);
 
+        });
         function option_answer(answer_index, correct_answer){
-
+            console.log();
             var selected = '';
             var max_option =10;
             $('#'+answer_index+'').html('').append('<option value=""></option>');
@@ -355,7 +373,8 @@ switch ($msg) {
                 }else{
                     selected ='';
                 }
-                if($("#option_"+i+".input_cust_class").val() !== ''){
+                if( !($("#option_"+i+".input_cust_class").summernote('isEmpty'))){
+
                     $('#'+answer_index+'').append('<option value="'+i+'" id="opttion_'+i+'" '+selected+'>Option '+i+'</option>');
                 }else{
                     $('#'+answer_index+' #option_'+i+'').remove();

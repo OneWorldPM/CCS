@@ -552,6 +552,7 @@ class Sessions extends CI_Controller {
 
     public function poll_chart($session_id)
     {
+        ob_start();
         $sesstion_title = $this->getSessionName($session_id);
         $poll_data = $this->getPollData($session_id);
 
@@ -599,12 +600,12 @@ class Sessions extends CI_Controller {
 
             $pdf->SetFont('helvetica', '', 8);
             $pdf->SetXY(5, 5);
-            $pdf->Write(0, $sesstion_title, '', 0, 'C', true, 0, false, false, 0);
+            $pdf->WriteHTML($sesstion_title, '', 0, 'C', true, 0, false, false, 0);
 
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('helvetica', 'B', 20);
             $pdf->SetXY(10, 30);
-            $pdf->Write(0, $poll->poll_name.': '.$poll->question, '', 0, 'C', true, 0, false, false, 0);
+            $pdf->WriteHTML(trim($poll->poll_name).': '.$poll->question, '', 0, '', true, 'C', false, false, 0);
 
 
             $xc = 80;
@@ -644,7 +645,7 @@ class Sessions extends CI_Controller {
                         $pdf->SetFont('helvetica', 'I', 10);
                         $pdf->SetTextColor(0,0,0);
                         $pdf->SetXY(142, $desc_y-12);
-                        $pdf->Write(0, $option->option, '', 0, '', true, 0, false, false, 0);
+                        $pdf->WriteHTML( trim($option->option), '', 0, '', true, 0, false, false, 0);
 
                     }
 
@@ -676,7 +677,7 @@ class Sessions extends CI_Controller {
                 if ($poll->total_votes != 0)
                 {
                     $result_table .= '<tr>
-                                    <td style="width: 500px; height: 10px;">'.htmlspecialchars($option->option).'</td>
+                                    <td style="width: 500px; height: 10px;">'.trim($option->option).'</td>
                                     <td style="width: 100px;">'.$option->total_vot.'</td>
                                     <td style="width: 100px;">'.number_format(($option->total_vot*100)/$poll->total_votes, 1).'%</td>
                                   </tr>';
@@ -699,7 +700,7 @@ class Sessions extends CI_Controller {
                  </table>';
             $pdf->writeHTML($result_table, true, false, false, false, 'center');
         }
-
+        ob_end_clean();
         $pdf->Output(__DIR__.'/Poll Overview - '.$sesstion_title.'.pdf', 'FD');
 
         return;
