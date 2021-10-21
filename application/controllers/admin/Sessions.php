@@ -647,10 +647,10 @@ class Sessions extends CI_Controller {
                         $desc_y = $desc_y+10;
 
 //                        $pdf->SetFont('helvetica', 'I', 10);
-                        $pdf->SetFont('dejavusans', 'I', 8,'', true);
+                        $pdf->SetFont('dejavusans', '', 8,'', true);
                         $pdf->SetTextColor(0,0,0);
-                        $pdf->SetXY(142, $desc_y-14.3);
-                        $pdf->WriteHTML( trim($option->option), '', 0, '', true, 'left', false, false, 0);
+                        $pdf->SetXY(142, $desc_y - 12);
+                        $pdf->WriteHTML( trim($option->option), '', 0, true, true, 'left', false, false, 0);
 
                     }
 
