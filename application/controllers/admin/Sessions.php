@@ -565,10 +565,14 @@ class Sessions extends CI_Controller {
         $pdf->setFooterMargin(20);
         $pdf->SetAutoPageBreak(true);
         $pdf->SetAuthor('Your Conference Live');
-
+        $pdf->AddFont('dejavusans', '', 'DejaVuSans.ttf', true);
+        $pdf->AddFont('dejavusans', 'B', 'DejaVuSans-Bold.ttf', true);
+        $pdf->AddFont('dejavusans', 'I', 'DejaVuSans-Oblique.ttf', true);
+        $pdf->AddFont('dejavusans', 'BI', 'DejaVuSans-BoldOblique.ttf', true);
         $pdf->AddPage('L', 'A4');
 
         $chart_title = $sesstion_title;
+//        $pdf->SetFont('helvetica', '', 45);
         $pdf->SetFont('helvetica', '', 45);
         $pdf->SetXY(10, 40);
         $pdf->Write(0, $chart_title, '', 0, 'C', true, 0, false, false, 0);
@@ -642,10 +646,11 @@ class Sessions extends CI_Controller {
                         $pdf->Circle(140, $desc_y, 2, 0, 360, 'DF', null, array($color_r, $color_g, $color_b));
                         $desc_y = $desc_y+10;
 
-                        $pdf->SetFont('helvetica', 'I', 10);
+//                        $pdf->SetFont('helvetica', 'I', 10);
+                        $pdf->SetFont('dejavusans', 'I', 8,'', true);
                         $pdf->SetTextColor(0,0,0);
-                        $pdf->SetXY(142, $desc_y-12);
-                        $pdf->WriteHTML( trim($option->option), '', 0, '', true, 0, false, false, 0);
+                        $pdf->SetXY(142, $desc_y-14.3);
+                        $pdf->WriteHTML( trim($option->option), '', 0, '', true, 'left', false, false, 0);
 
                     }
 
@@ -686,6 +691,7 @@ class Sessions extends CI_Controller {
             }
 
             $result_table .= '</table>';
+            $pdf->SetFont('dejavusans', '', 10,'', true);
             $pdf->writeHTML($result_table, true, false, false, false, 'center');
 
             $pdf->SetXY(30, 180);
