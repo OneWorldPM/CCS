@@ -1132,9 +1132,6 @@ public function deleteStreamName($stream_id){
         $poll_list[] = array_unshift($poll_list, array('text'=>'Email'));
         $poll_list[] = array_unshift($poll_list, array('text'=>'Name'));
 
-        array_pop($poll_list);
-        array_pop($poll_list);
-        array_pop($poll_list);
 
         $poll_name_arr = array();
         if (isset($poll_list) && !empty($poll_list)) {
@@ -1153,9 +1150,9 @@ public function deleteStreamName($stream_id){
         if(isset($flash_report_list) && !empty($flash_report_list)) {
             foreach ($flash_report_list as $index => $val) {
 
-                $name = ($val->first_name . ' ' . $val->last_name);
-                $email = ($val->email);
-                $identifier = ($val->identifier_id);
+                $name = $html->toRichTextObject($val->first_name . ' ' . $val->last_name);
+                $email = $html->toRichTextObject($val->email);
+                $identifier = $html->toRichTextObject($val->identifier_id);
 
                 $sheet->setCellValue('A' . ($index + 3), $name);
                 $sheet->setCellValue('B' . ($index + 3), $email);
