@@ -1132,6 +1132,9 @@ public function deleteStreamName($stream_id){
         $poll_list[] = array_unshift($poll_list, array('text'=>'Email'));
         $poll_list[] = array_unshift($poll_list, array('text'=>'Name'));
 
+        array_pop($poll_list);
+        array_pop($poll_list);
+        array_pop($poll_list);
 
         $poll_name_arr = array();
         if (isset($poll_list) && !empty($poll_list)) {
