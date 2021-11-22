@@ -1103,4 +1103,86 @@ public function deleteStreamName($stream_id){
     public function addSelectedModerator(){
         echo json_encode($this->msessions->addSelectedModerator());
     }
+
+
+    function letter($x){
+        $letter = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+        return $letter[$x];
+    }
+
+    public function phpExcelExport($session_id){
+
+        $this->load->library('excel');
+
+        $poll_list = $this->msessions->get_poll($session_id);
+        $flash_report_list= $this->msessions->get_polling_report_new($session_id, $poll_list);
+        $session_title= $this->msessions->get_session_title($session_id);;
+
+        $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+        $html = new PHPExcel_Helper_HTML;
+
+        $file_name = $session_title->session_title.'/'.date('Y-m-d').'.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=$file_name");
+
+        $this->excel->setActiveSheetIndex(0);
+        $sheet = $this->excel->getActiveSheet();
+
+        $poll_list[] = array_unshift($poll_list, array('text'=>'Identifier'));
+        $poll_list[] = array_unshift($poll_list, array('text'=>'Email'));
+        $poll_list[] = array_unshift($poll_list, array('text'=>'Name'));
+
+        array_pop($poll_list);
+        array_pop($poll_list);
+        array_pop($poll_list);
+
+        $poll_name_arr = array();
+        if (isset($poll_list) && !empty($poll_list)) {
+
+            $limit = count($poll_list);
+
+            for($i=0,$j='A';$i<$limit;$i++,$j++) {
+                $richText = $html->toRichTextObject( $poll_list[$i]['text']);
+                $sheet->setCellValue($j.'2', $richText);
+
+            }
+        }
+
+        $flash_limit = count($flash_report_list);
+
+        if(isset($flash_report_list) && !empty($flash_report_list)) {
+            foreach ($flash_report_list as $index => $val) {
+
+                $name = ($val->first_name . ' ' . $val->last_name);
+                $email = ($val->email);
+                $identifier = ($val->identifier_id);
+
+                $sheet->setCellValue('A' . ($index + 3), $name);
+                $sheet->setCellValue('B' . ($index + 3), $email);
+                $sheet->setCellValue('C' . ($index + 3), $identifier);
+
+                if (isset($val->polling_answer) && !empty($val->polling_answer)) {
+
+                    $limit = count($val->polling_answer);
+                    $i = 0;
+                    foreach ($val->polling_answer as $ans) {
+
+                        $ans = str_replace('×', 'x', $ans);
+                        $ans = str_replace('®', '&reg;', $ans);
+
+                        $rt = $html->toRichTextObject($ans);
+                        $sheet->setCellValue($this->letter($i + 3) . ($index + 3), ($rt));
+
+                        $i = $i + 1;
+                    }
+                }
+            }
+        }
+
+        $writer->save('php://output');
+//        $writer->save('test2.xlsx');
+
+        exit;
+
+    }
 }

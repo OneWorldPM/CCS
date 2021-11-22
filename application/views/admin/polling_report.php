@@ -90,6 +90,13 @@
                 {
                     text: '<i class="fa fa-pie-chart" aria-hidden="true"></i> Export Chart',
                     attr: {class: 'export-charts btn btn-warning'}
+                },
+                {
+                    text:  '<i class="fa exportExcel" aria-hidden="true"></i> Export XLSX (BETA)',
+                    action: function(){
+                        location.href = "<?=base_url()?>admin/sessions/phpExcelExport/<?=$session_id?>";
+                    },
+                    attr: {class: 'btn btn-blue'}
                 }
             ],
             "initComplete": function( settings, json ) {

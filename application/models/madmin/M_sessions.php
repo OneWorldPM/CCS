@@ -1989,6 +1989,41 @@ class M_sessions extends CI_Model {
         }
     }
 
+    function get_polling_report_new($sessions_id, $poll_list) {
+        $this->db->select('*');
+        $this->db->from('login_sessions_history l');
+        $this->db->join('customer_master c', 'c.cust_id=l.cust_id');
+        $this->db->where("l.sessions_id", $sessions_id);
+        $this->db->order_by('c.first_name','asc');
+        $sessions_history = $this->db->get();
+        if ($sessions_history->num_rows() > 0) {
+            $return_array = array();
+            foreach ($sessions_history->result() as $value) {
+                if (!empty($poll_list)) {
+                    foreach ($poll_list as $val) {
+                        $value->polling_answer[] = $this->get_polling_answer($val['poll_id'], $value->cust_id);
+                    }
+                }
+                $return_array[] = $value;
+            }
+            return $return_array;
+        } else {
+            return "";
+        }
+    }
+
+    function get_session_title($session_id){
+        $session_title = $this->db->select('session_title')
+            ->where('sessions_id', $session_id)
+            ->get('sessions');
+
+        if (!empty($session_title)){
+            return $session_title->result()[0];
+        }else{
+            return '';
+        }
+    }
+
     function get_polling_answer($poll_id, $cust_id) {
         $this->db->select('*');
         $this->db->from('tbl_poll_voting');
