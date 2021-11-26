@@ -408,8 +408,8 @@ body{
     position: relative;
     top: 5px;
     margin: 0 13px 0 0;
-    width: 20.5px;
-    height: 20.5px;
+    width: 2rem;
+    height: 2rem;
     border-radius: 100%;
     /*border: 2px solid red;*/
     background-color: transparent;
@@ -420,8 +420,8 @@ body{
     width: 12px;
     height: 12px;
     position: absolute;
-    top: 9.5px;
-    left: 15.6px;
+    top: 8.5px;
+    left: 14.6px;
     content: " ";
     display: block;
     /*background: red;*/
