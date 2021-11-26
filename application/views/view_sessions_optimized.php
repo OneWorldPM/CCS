@@ -75,8 +75,8 @@
                             <div class="modal-dialog">
                                 <div class="modal-content" style="padding: 0px; border: 0px solid #999; border-radius: 15px;">
                                     <div class="modal-header" style="height: 45px!important; background-color: #ebeaea; border-radius: 20px 20px 0 0;">
-                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px">Poll Type: Poll Name <timer class="badge" id="timer_sectiom" style="background-color: <?=$cust_timer_bg_color?>; right: 30px; position: absolute">
-                                                <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=$cust_timer_color?>;"></span>
+                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="background-color: <?=$cust_timer_bg_color?>; right: 30px; position: absolute">
+                                                <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=$cust_timer_color?>;">
                                         </timer></span>
 
                                         <button type="button" class="poll-modal-close close" data-dismiss="modal" aria-label="Close">
