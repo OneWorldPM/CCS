@@ -6,11 +6,11 @@
     height: 100%;
     padding: 3px;
     color: #fff;
-    background: rgb(3, 90, 118);
+    /*background: rgb(3, 90, 118);*/
 }
 
 .assesment-bar {
-    background: rgb(69, 192, 234) !important;
+    /*background: rgb(69, 192, 234) !important;*/
 }
 
 .progress-bar_1 {
@@ -23,7 +23,7 @@
 }
 
 .presurvey-bar{
-    background: rgb(3, 90, 118) !important;
+    /*background: rgb(3, 90, 118) !important;*/
     color: #fff !important;
     text-align: center !important;
 }
@@ -31,7 +31,8 @@
 .progress_bar_new {
     height: 100%;
     padding: 3px;
-    background: #45c0ea;
+    background: rgba(0, 0, 0, 0.15);
+    /*background: #45c0ea;*/
     box-shadow: none;
     text-align: center;
     color: #fff;
@@ -41,7 +42,7 @@
 .progress_bar_new_1 {
     height: 100%;
     padding: 3px;
-    background: #035a76;
+    /*background: #035a76;*/
     box-shadow: none;
     text-align: center;
     color: #fff;
@@ -49,13 +50,13 @@
 }
 
 .option_section_css {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
     padding-top: 4px;
     padding-left: 6px;
     border-radius: 9px;
     margin-bottom: 10px;
     display: flex;
-    display: flex;
+
 }
 
 .option_section_css_selected {
@@ -65,7 +66,7 @@
     border-radius: 9px;
     margin-bottom: 10px;
     display: flex;
-    display: flex;
+
 }
 
 .progress {
@@ -382,4 +383,51 @@ body{
 
 .zeroVotes{
     width: 30px!important;
+}
+
+.radio-item {
+    display: inline-block;
+    position: relative;
+    padding: 0 6px;
+    margin: 10px 0 0;
+}
+
+.radio-item input[type='radio'] {
+    display: none;
+}
+
+.radio-item label {
+    color: #666;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.radio-item label:before {
+    content: " ";
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin: 0 13px 0 0;
+    width: 20.5px;
+    height: 20.5px;
+    border-radius: 100%;
+    /*border: 2px solid red;*/
+    background-color: transparent;
+}
+
+.radio-item input[type=radio]:checked + label:after {
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 9.5px;
+    left: 15.6px;
+    content: " ";
+    display: block;
+    /*background: red;*/
+}
+.btn_vote_label {
+    font-size: 11px;
+    line-height: 5px !important;
+
 }

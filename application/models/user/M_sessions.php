@@ -414,4 +414,18 @@ class M_sessions extends CI_Model {
         return $query->result();
     }
 
+    function get_poll_style($session_id){
+        $poll_style_data = $this->db->select('cps.*, s.sessions_id')
+            ->from('sessions s')
+            ->join('custom_poll_style cps', 's.custom_poll_style_id = cps.id')
+            ->where('s.sessions_id', $session_id)
+            ->get();
+
+        if($poll_style_data->num_rows()> 0 ){
+            return $poll_style_data->result()[0];
+        }else{
+            return '';
+        }
+    }
+
 }

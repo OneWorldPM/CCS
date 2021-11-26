@@ -335,6 +335,7 @@ class M_sessions extends CI_Model {
             'custom_header_button2_link'=>$post['custom_header_button2_link'],
             'custom_header_button3_link'=>$post['custom_header_button3_link'],
             'header_toolbox_status'=>$post['header_toolbox_status'],
+            'custom_poll_style_id'=>$post['custom_poll_theme'],
 
 
         );
@@ -623,6 +624,7 @@ class M_sessions extends CI_Model {
             'custom_header_button2_link'=>$post['custom_header_button2_link'],
             'custom_header_button3_link'=>$post['custom_header_button3_link'],
             'header_toolbox_status'=>$post['header_toolbox_status'],
+            'custom_poll_style_id'=>$post['custom_poll_theme'],
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
@@ -2368,4 +2370,57 @@ class M_sessions extends CI_Model {
         }
     }
 
+    function save_poll_style(){
+        $post = $this->input->post();
+
+        if($post['poll_style_name'] == ''){
+            return 'empty';
+        }
+
+        if ($this->check_exist_poll_style($post['poll_style_name'])=='false') {
+            return 'error';
+        }
+        else{
+            $input_array = array(
+                'name' => trim(htmlspecialchars($post['poll_style_name'])),
+                'cust_theme_color' => trim(htmlspecialchars($post['cust_theme_color'])),
+                'cust_radio_color' => trim(htmlspecialchars($post['cust_radio_color'])),
+                'cust_timer_color' => trim(htmlspecialchars($post['cust_timer_color'])),
+                'cust_timer_bg_color' => trim(htmlspecialchars($post['cust_timer_bg_color'])),
+                'cust_assessment_color' => trim(htmlspecialchars($post['cust_assessment_color'])),
+                'cust_presurvey_color' => trim(htmlspecialchars($post['cust_presurvey_color'])),
+                'custom_progress_shadow_color' => trim(htmlspecialchars($post['custom_progress_shadow_color'])),
+                'cust_correct_color' => trim(htmlspecialchars($post['cust_correct_color'])),
+            );
+            $this->db->insert('custom_poll_style', $input_array);
+            return 'save';
+        }
+
+    }
+
+    function check_exist_poll_style($poll_style_name){
+//        print_r($poll_style_name);die;
+        $style = $this->db->select('*')
+            ->where('name', $poll_style_name)
+            ->get('custom_poll_style');
+
+//        print_r($style_exist);die;
+        if($style->num_rows()>0){
+            return 'false';
+        }else{
+            return 'true';
+        }
+
+    }
+
+    function getCustomPollTheme(){
+        $custom_poll_theme = $this->db->select('name,id')
+            ->get('custom_poll_style');
+
+        if($custom_poll_theme->num_rows()>0){
+            return $custom_poll_theme->result();
+        }else{
+            return '';
+        }
+    }
 }

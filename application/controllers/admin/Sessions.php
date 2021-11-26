@@ -60,6 +60,8 @@ class Sessions extends CI_Controller {
         $data['unique_identifier_id'] = $this->msessions->getSession_Unique_Identifier_ID();
         $data['millicast_stream_names']=$this->msessions->getMillicast_Stream_Name();
         $data['default_moderators']=$this->msessions->moderatorCheckedList();
+        $data['custom_poll_theme']=$this->msessions->getCustomPollTheme();
+//        print_r($data['custom_poll_theme']);die;
         $this->load->view('admin/header');
         $this->load->view('admin/add_sessions', $data);
         $this->load->view('admin/footer');
@@ -80,6 +82,7 @@ class Sessions extends CI_Controller {
         $data['sessions_type'] = $this->msessions->getSessionTypes();
         $data['session_tracks'] = $this->msessions->getSessionTracks();
         $data['millicast_stream_names']=$this->msessions->getMillicast_Stream_Name();
+        $data['custom_poll_theme']=$this->msessions->getCustomPollTheme();
         $this->load->view('admin/header');
         $this->load->view('admin/add_sessions', $data);
         $this->load->view('admin/footer');
@@ -1191,4 +1194,33 @@ public function deleteStreamName($stream_id){
         exit;
 
     }
+
+    public function customize_poll(){
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/customize_poll');
+        $this->load->view('admin/footer');
+    }
+
+    public function save_poll_style(){
+//        print_r($post);
+        $result = $this->msessions->save_poll_style();
+
+//        print_r($result);exit;
+        if ($result == 'empty') {
+            $this->session->set_flashdata('msg', 'Custom Theme Name is Empty');
+            redirect(base_url() . 'admin/sessions/customize_poll/' );
+        }
+        if ($result == 'error') {
+            $this->session->set_flashdata('msg', 'Custom Theme Already Exist');
+            redirect(base_url() . 'admin/sessions/customize_poll/' );
+        }
+        if ($result == 'save') {
+            $this->session->set_flashdata('msg', 'success');
+            redirect(base_url() . 'admin/sessions/customize_poll/' );
+        }
+
+
+    }
+
 }
