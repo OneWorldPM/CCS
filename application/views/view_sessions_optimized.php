@@ -1,9 +1,55 @@
 <link href="<?= base_url() ?>assets/css/attendee-session-view.css?v=200" rel="stylesheet">
 
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
-<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=27" rel="stylesheet">
+<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=28" rel="stylesheet">
 
+<style>
+    .color{
+        background-color: #54bea8;
+    }
 
+    .radio-item label:before {
+        border: 3px solid <?=isset($cust_radio_color) && !empty($cust_radio_color)?$cust_radio_color:'#54bea8'?>;
+    }
+    .radio-item input[type=radio]:checked + label:after {
+        background: <?=isset($cust_radio_color) && !empty($cust_radio_color)?$cust_radio_color:'#54bea8'?>;
+    }
+    #correct_answer_indicator{
+        color: <?=isset($cust_correct_color) && !empty($cust_correct_color)?$cust_correct_color:'red'?>;
+    }
+    .assesment-bar {
+        background:<?=isset($cust_assessment_color) && !empty($cust_assessment_color)?$cust_assessment_color:'#45C0EA'?>;
+    }
+    .progress-bar{
+        background: <?=isset($cust_assessment_color) && !empty($cust_assessment_color)?$cust_assessment_color:'#45C0EA'?>;
+    }
+    .presurvey-bar{
+        background:<?=isset($cust_presurvey_color) && !empty($cust_presurvey_color)?$cust_presurvey_color:'#035A76'?>;
+        /*background:#b2b7bb;*/
+    }
+    .progress_bar_new {
+        background: <?=isset($cust_assessment_color) && !empty($cust_assessment_color)?$cust_assessment_color:'#45C0EA'?>;
+    }
+    .progress_bar_new_1 {
+        background: <?=isset($cust_presurvey_color) && !empty($cust_presurvey_color)?$cust_presurvey_color:'#035A76'?>;
+    }
+    .assessment-legend{
+        color: <?=isset($cust_assessment_color) && !empty($cust_assessment_color)?$cust_assessment_color:'#45C0EA'?>;
+    }
+    .presurvey-legend{
+        color:<?=isset($cust_presurvey_color) && !empty($cust_presurvey_color)?$cust_presurvey_color:'#035A76'?>;
+    }
+    .vote-btn{
+        background:  url("<?= base_url()?>front_assets/images/other/button-180px.png") no-repeat 0 center;
+        width: 180px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #FFFFFF !important;
+        background-color:  <?=isset($cust_radio_color) && !empty($cust_radio_color)?$cust_radio_color:'#54bea8'?> !important ;
+        text-align: right;
+
+    }
+</style>
 <section class="parallax" style="background: url('<?= base_url() ?>front_assets/images/pres_bg.jpg') no-repeat;">
     <!--<section class="parallax" style="background-image: url(<?= base_url() ?>front_assets/images/Sessions_BG_screened.jpg); top: 0; padding-top: 0px;">-->
     <div class="container-fullscreen">
@@ -28,7 +74,11 @@
                         <div class="modal fade" id="modal" tabindex="-1" role="modal" aria-labelledby="modal-label" aria-hidden="true" style="display: none; text-align: left;" data-keyboard="false" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content" style="padding: 0px; border: 0px solid #999; border-radius: 15px;">
-                                    <div class="modal-header" style="height: 0">
+                                    <div class="modal-header" style="height: 45px!important; background-color: #ebeaea; border-radius: 20px 20px 0 0;">
+                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px">Poll Type: Poll Name <timer class="badge" id="timer_sectiom" style="background-color: <?=$cust_timer_bg_color?>; right: 30px; position: absolute">
+                                                <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=$cust_timer_color?>;"></span>
+                                        </timer></span>
+
                                         <button type="button" class="poll-modal-close close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -37,14 +87,10 @@
                                                                                                     <img class="kent_logo" src="<?= base_url() ?>assets/images/logo.png" alt="MLG">
                                                                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                                                 </div>-->
-                                    <div class="modal-body" style="padding: 0px;">
+                                    <div class="modal-body" style="padding: 0px; margin-top: 0;">
                                         <div class="row" style="padding-top: 0px; padding-bottom: 20px;">
                                             <div class="col-sm-12">
-                                                <div class="" id="timer_sectiom" style="padding-top: 0px; padding-bottom: 0px; display: none; border-top-right-radius: 15px; border-top-left-radius: 15px; background-color: #ebeaea; ">
-                                                    <div class=""  style="text-align: right; font-size: 20px; font-weight: 700; border-top-right-radius: 15px; border-top-left-radius: 15px;  ">
-                                                        TIME LEFT : <span id="id_day_time" style=" font-size: 20px; font-weight: 700; color: #ef5e25; padding: 0px 10px 0px 0px;"></span>
-                                                    </div>
-                                                </div>
+
                                                 <div id="poll_vot_section" style="padding: 0px 0px 0px 0px; margin-top: 0px; background-color: #fff; border-radius: 15px;">
                                                 </div>
                                             </div>
@@ -484,5 +530,5 @@ if (isset($sessions)) {
 
 
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=34"></script>
+<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=35"></script>
 <script src="<?= base_url() ?>front_assets/js/admin-to-attendee-chat.js?v=104"></script>

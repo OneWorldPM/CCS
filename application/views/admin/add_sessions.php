@@ -377,7 +377,7 @@ $user_role = $this->session->userdata('role');
                                     <div class="col">
                                         <div class="custom-header-buttons">
                                             <fieldset>
-                                                <legend class="text-dark text-large text-bold"> Custom Header Buttons <i class="badge badge-success">new</i></legend>
+                                                <legend class="text-dark text-large text-bold"> Custom Header Buttons</legend>
                                                <div class="row">
                                                    <div class="col-md-6">
                                                        <label class="col-md-6 text-dark"> Button Name (1) </label><br>
@@ -411,7 +411,21 @@ $user_role = $this->session->userdata('role');
                                                 <br>
                                                 <small style="color: red">Buttons will only be visible if names are set</small>
                                             </fieldset>
-
+                                            <fieldset>
+                                                <legend class="text-dark text-large text-bold" > Custom Poll Theme  <i class="badge badge-success">new</i></legend>
+                                                <div class="col-md-12">
+                                                    <label class="col-md-12 text-dark"> Select Custom Poll Theme Name </label><br>
+                                                    <select class="form-control" name="custom_poll_theme">
+                                                        <?php if (isset($custom_poll_theme) && !empty($custom_poll_theme)){
+                                                            foreach ($custom_poll_theme as $custom_theme){
+                                                                ?>
+                                                                <option value="<?=$custom_theme->id?>" <?=(isset($sessions_edit) ? ($sessions_edit->custom_poll_style_id == $custom_theme->id)?'selected':'':'')?>><?=$custom_theme->name?></option>
+                                                                <?php
+                                                            }
+                                                        }?>
+                                                    </select>
+                                                </div>
+                                            </fieldset>
                                         </div>
                                     </div>
                                 </div>

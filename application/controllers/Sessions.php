@@ -60,10 +60,24 @@ class Sessions extends CI_Controller {
 
         $sesions = $this->objsessions->viewSessionsData($sessions_id);
 
+        $poll_style= $this->objsessions->get_poll_style($sessions_id);
+
         if (date("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime($sesions->sessions_date . ' ' . $sesions->end_time)) && $sessions_id != 25) {
             header("location:" . base_url() . "sessions/session_end/".$sessions_id);
             die();
         }
+
+        $data['poll_theme_name']=$poll_style->name;
+        $data['cust_theme_color']=$poll_style->cust_theme_color;
+        $data['cust_radio_color']=$poll_style->cust_radio_color;
+        $data['cust_timer_color']=$poll_style->cust_timer_color;
+        $data['cust_timer_bg_color']=$poll_style->cust_timer_bg_color;
+        $data['cust_assessment_color']=$poll_style->cust_assessment_color;
+        $data['cust_presurvey_color']=$poll_style->cust_presurvey_color;
+        $data['custom_progress_shadow_color']=$poll_style->custom_progress_shadow_color;
+        $data['cust_correct_color']=$poll_style->cust_correct_color;
+
+
 
         $header_data["sesions_logo"] = $sesions->sessions_logo;
         $header_data["sesions_logo_width"] = $sesions->sessions_logo_width;
