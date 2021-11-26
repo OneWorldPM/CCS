@@ -647,6 +647,15 @@ function get_poll_vot_section() {
 
             if (data.status == "success") {
 
+                if(data.result['poll_type_id'] == '1'){
+                    var head_poll_type = 'Presurvey';
+                }else if(data.result['poll_type_id'] == '2'){
+                    var head_poll_type = 'Poll';
+                }else{
+                    var head_poll_type = 'Assessment';
+                }
+                $('#span_poll_name').html(head_poll_type+' : '+data.result['poll_name']);
+
                 if (poll_vot_section_id_status == "0") {
                     $("#poll_vot_section_id_status").val(data.result.sessions_poll_question_id);
                 }
