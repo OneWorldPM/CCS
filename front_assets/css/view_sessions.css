@@ -427,7 +427,9 @@ body{
     /*background: red;*/
 }
 .btn_vote_label {
-    font-size: 11px;
-    line-height: 5px !important;
-
+    /*font-size: 11px;*/
+    /*line-height: 5px !important;*/
+}
+.btn {
+    padding-top: 3px !important ;
 }
