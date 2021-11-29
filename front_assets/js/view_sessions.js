@@ -803,7 +803,7 @@ function get_poll_vot_section() {
                                 }
                                 $("#result_section").css('margin-left','30px');
                                 $("#result_section .progress_1").css('margin-bottom','4px');
-                                $("#result_section").append("<div class='progress'  id='progress_check_"+key+"' style='margin-bottom: 25px; background-color: #EBEAEA; border-radius: 20px'><div class='progress_bar_new "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px; width:" + result_calculate.toFixed(0) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
+                                $("#result_section").append("<div class='progress'  id='progress_check_"+key+"' style='margin-bottom: 25px; background-color: #EBEAEA; border-radius: 20px; text-align: right'><div class='progress_bar_new "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px; width:" + result_calculate.toFixed(0) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
                             } else {
                                 if(!window.isComparisonpoll)
                                 {
@@ -819,11 +819,14 @@ function get_poll_vot_section() {
                             if(data.result.correct_answer1 !== "0" || data.result.correct_answer2 !=='0'){
 
                                 if(data.result.correct_answer1 ==  key) {
-                                    $("#result_section  #progress_check_"+data.result.correct_answer1+"").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
-                                    // $("#result_section #label_"+data.result.correct_answer1).prepend('<span class="fa fa-check fa-2x " style="position: absolute; margin-left:-30px"></span>').css({'color':'#22B14C'});
+
+                                    $("#result_section  #label_"+data.result.correct_answer1+"").css({'color':'green','text-decoration': 'underline','font-weight':'800'});
+                                    // $("#result_section  #progress_check_'"+data.result.correct_answer1+"'").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
+                                    // $("#result_section #label_"+data.result.correct_answer1).prepend('<span class="fa fa-check fa-2x " style="position: absolute; m argin-left:-30px"></span>').css({'color':'#22B14C'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }else if (data.result.correct_answer2 ==  key){
-                                    $("#result_section  #progress_check_"+data.result.correct_answer2+"").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
+                                    $("#result_section  #label_"+data.result.correct_answer2+"").css({'color':'green','text-decoration': 'underline','font-weight':'800'});
+                                    // $("#result_section  #progress_check_'"+data.result.correct_answer2+"'").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
                                     // $("#result_section #label_"+data.result.correct_answer2).prepend('<span class="fa fa-check fa-2x " style="position: absolute; margin-left:-30px"></span>').css({'color':'#22B14C'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }
