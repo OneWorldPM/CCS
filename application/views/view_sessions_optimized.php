@@ -1,7 +1,7 @@
 <link href="<?= base_url() ?>assets/css/attendee-session-view.css?v=200" rel="stylesheet">
 
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
-<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=28" rel="stylesheet">
+<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=29" rel="stylesheet">
 
 <style>
     .color{
@@ -40,13 +40,12 @@
         color:<?=isset($cust_presurvey_color) && !empty($cust_presurvey_color)?$cust_presurvey_color:'#035A76'?>;
     }
     .vote-btn{
-        background:  url("<?= base_url()?>front_assets/images/other/button-180px.png") no-repeat 0 center;
-        width: 180px;
-        padding-top: 8px;
-        padding-bottom: 8px;
+        background:  url("<?= base_url()?>front_assets/images/other/button-180x50.png") no-repeat 0 center;
+        width: 160px;
         color: #FFFFFF !important;
         background-color:  <?=isset($cust_radio_color) && !empty($cust_radio_color)?$cust_radio_color:'#54bea8'?> !important ;
         text-align: right;
+        margin-top: 0;
 
     }
 </style>
@@ -72,11 +71,11 @@
                         </div>
                         </div>
                         <div class="modal fade" id="modal" tabindex="-1" role="modal" aria-labelledby="modal-label" aria-hidden="true" style="display: none; text-align: left;" data-keyboard="false" data-backdrop="static">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content" style="padding: 0px; border: 0px solid #999; border-radius: 15px;">
                                     <div class="modal-header" style="height: 45px!important; background-color: #ebeaea; border-radius: 20px 20px 0 0;">
-                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="background-color: <?=$cust_timer_bg_color?>; right: 30px; position: absolute">
-                                                <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=$cust_timer_color?>;">
+                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'gray'?>;right: 30px; position: absolute">
+                                                <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=isset($cust_timer_color)?$cust_timer_color:'green'?>">
                                         </timer></span>
 
                                         <button type="button" class="poll-modal-close close" data-dismiss="modal" aria-label="Close">
@@ -530,5 +529,5 @@ if (isset($sessions)) {
 
 
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=35"></script>
+<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=36"></script>
 <script src="<?= base_url() ?>front_assets/js/admin-to-attendee-chat.js?v=104"></script>

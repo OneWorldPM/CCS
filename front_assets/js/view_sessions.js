@@ -595,7 +595,7 @@ function update_viewsessions_history_open()
                     success: function (data) {
                         if (data.status == "success") {
                             $('#btn_vote_label').html('VOTED <i class="fa fa-check" id="fa_fa_check" style="font-size: 13px;"></i>');
-                            $('#btn_vote_label').css('margin-right','0');
+                            $('#btn_vote_label').css('margin-right','12px');
                             $('#fa_fa_check').show();
 
                         }
@@ -699,7 +699,7 @@ function get_poll_vot_section() {
 \n\<input type='hidden' id='sessions_id' value='" + data.result.sessions_id + "'>\n\
 <div class='col-md-12' id='option_section'></div>\n\
 \n\<span id='error_vote' style='color:red; margin-left: 20px;'></span><span id='success_voted' style='color:green; margin-left: 20px;'></span>\n\
-<div style='padding-right: 20px;text-align: center;'><a class='btn rounded vote-btn' id='btn_vote' style='background-color: #c3c3c3; border-color: #c3c3c3; font-size: 16px;'><span id='btn_vote_label' style='text-align: right !important; margin-right: 20px; font-weight: 500'>VOTE <i class='fa fa-check' id='fa_fa_check' style='font-size: 13px; display:none; '></i></span></a></div>\n\
+<div style='padding-right: 20px;text-align: center;'><a class='btn rounded vote-btn' id='btn_vote' style='height: 30px;background-color: #c3c3c3; border-color: #c3c3c3; font-size: 16px;text-shadow: 10px 10px 10px gray;'><span id='btn_vote_label' style='text-align: center !important; font-weight: 500'>VOTE NOW <i class='fa fa-check' id='fa_fa_check' style='font-size: 13px; display:none; '></i></span></a></div>\n\
 </form>");
                         if (data.result.exist_status == 1) {
                             $.each(data.result.option, function (key, val) {
@@ -722,7 +722,7 @@ function get_poll_vot_section() {
                         if (data.result.exist_status == 1) {
                             $(':radio:not(:checked)').attr('disabled', true);
                             $('#btn_vote_label').html('VOTED <i class="fa fa-check" id="fa_fa_check" style="font-size: 13px;"></i>');
-                            $('#btn_vote_label').css('margin-right','0px');
+                            $('#btn_vote_label').css('margin-right','12px');
 
 
                         }
@@ -870,7 +870,7 @@ function get_poll_vot_section() {
 \n\<input type='hidden' id='sessions_id' value='" + data.result.sessions_id + "'>\n\
 <div class='col-md-12' id='option_section'></div>\n\
 \n\<span id='error_vote' style='color:red; margin-left: 20px;'></span><span id='success_voted' style='color:green; margin-left: 20px;'></span>\n\
-<div style='text-align: center;'><p style='color:red; font-weight: 700;'>Poll Now Closed</p></div><div style='padding-right: 20px;text-align: right;'><a class='button small  rounded icon-left ' id='btn_vote' style='font-size: 16px;'><span>VOTE <i class='fa fa-check' id='fa_fa_check_close_poll' style='display:none'></i></span></a></div>\n\
+<div style='text-align: center;'><p style='color:red; font-weight: 700;'>Poll Now Closed</p></div><div style='padding-right: 20px;text-align: right;'><a class='button small  rounded icon-left ' id='btn_vote' style='font-size: 16px;'><span>VOTE NOW <i class='fa fa-check' id='fa_fa_check_close_poll' style='display:none'></i></span></a></div>\n\
 </form>");
 
                             $.each(data.result.option, function (key, val) {
@@ -1034,7 +1034,7 @@ function timer(status,timer_count)
 
                 stop_music();
                 $("#btn_vote").hide();
-                $("#id_day_time").css("color", "red");
+                // $("#id_day_time").css("color", "red");
             } else {
                 document.getElementById('id_day_time').innerHTML = timeLeft-1;
             }
