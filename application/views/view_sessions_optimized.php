@@ -46,6 +46,7 @@
         background-color:  <?=isset($cust_radio_color) && !empty($cust_radio_color)?$cust_radio_color:'#54bea8'?> !important ;
         text-align: right;
         margin-top: 0;
+        box-shadow: 5px 7px 10px grey;
 
     }
 </style>
@@ -74,7 +75,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content" style="padding: 0px; border: 0px solid #999; border-radius: 15px;">
                                     <div class="modal-header" style="height: 45px!important; background-color: #ebeaea; border-radius: 20px 20px 0 0;">
-                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'white'?>;right: 30px; position: absolute">
+                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="box-shadow: 3px 3px 10px grey;background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'white'?>;right: 30px; position: absolute">
                                                 <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=isset($cust_timer_color)?$cust_timer_color:'green'?>">
                                         </timer></span>
 
