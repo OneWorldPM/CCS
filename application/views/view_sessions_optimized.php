@@ -516,6 +516,7 @@ if (isset($sessions)) {
     var socket_session_name = "<?=getAppName('_admin-to-attendee-chat')?>";
 
     var cust_timer_color = "<?=isset($cust_timer_color)?$cust_timer_color:'#54bea8'?>";
+    var cust_correct_answer = "<?=isset($cust_correct_color) && !empty($cust_correct_color)?$cust_correct_color:'green'?>";
 </script>
 <?= getSocketScript()?>
 <script src="<?= base_url() ?>front_assets/js/custom-fullscreen.js"></script>

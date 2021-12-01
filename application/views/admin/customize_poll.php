@@ -38,7 +38,6 @@
                     <th>Assessment Color</th>
                     <th>Presurvey Color</th>
                     <th>Correct Answer </th>
-                    <th> Shadow Color </th>
                     <th> Option </th>
                     </thead>
                     <tbody>
@@ -54,7 +53,6 @@
                                 <td><?=$theme->cust_assessment_color?></td>
                                 <td><?=$theme->cust_presurvey_color?></td>
                                 <td><?=$theme->cust_correct_color?></td>
-                                <td><?=$theme->custom_progress_shadow_color?></td>
 
                                 <td> <a href="<?=base_url().'admin/sessions/deletePollTheme/'.$theme->id?>" class="btn btn-danger"> Delete </a></td>
 
@@ -118,17 +116,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="cust_correct_color" class="col-sm-4 col-form-label">Custom Correct Answer ProgressBar Color</label>
+                    <label for="cust_correct_color" class="col-sm-4 col-form-label">Custom Correct Answer Color</label>
                     <div class="col-sm-8">
                         <input type="text"  class="form-control" id="cust_correct_color" name="cust_correct_color">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="custom_progress_shadow_color" class="col-sm-4 col-form-label">Custom ProgressBar Shadow Color</label>
-                    <div class="col-sm-8">
-                        <input type="text"  class="form-control" id="custom_progress_shadow_color" name="custom_progress_shadow_color">
-                    </div>
-                </div>
+<!--                <div class="form-group row">-->
+<!--                    <label for="custom_progress_shadow_color" class="col-sm-4 col-form-label">Custom ProgressBar Shadow Color</label>-->
+<!--                    <div class="col-sm-8">-->
+<!--                        <input type="text"  class="form-control" id="custom_progress_shadow_color" name="custom_progress_shadow_color">-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div>
                     <button type="submit" class="btn btn-green " > Save Style </button>
                 </div>
