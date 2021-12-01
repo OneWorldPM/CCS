@@ -6,6 +6,7 @@
     height: 100%;
     padding: 3px;
     color: #fff;
+    font-size: 14px;
     /*background: rgb(3, 90, 118);*/
 }
 
@@ -381,9 +382,9 @@ body{
     color: #f37617 !important;
 }
 
-.zeroVotes{
-    width: 30px!important;
-}
+/*.zeroVotes{*/
+/*    width: 30px!important;*/
+/*}*/
 
 .radio-item {
     display: inline-block;

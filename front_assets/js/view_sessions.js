@@ -775,11 +775,23 @@ function get_poll_vot_section() {
                                     var zeroVotes = "";
                                 }
 
+                                if(parseInt(result_calculate_compere) <= 50)
+                                {
+                                    var progress_label_in = "display:none";
+                                    var progress_label_out = "display:block";
+
+                                }else{
+
+                                    var progress_label_in = "display:block";
+                                    var progress_label_out = "display:none";
+                                }
+
                                 if (data.result.compere_max_value == val.compere_option) {
 
-                                    $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress_bar_new_1 "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px;width:" + result_calculate_compere.toFixed(0) + "%'>" + result_calculate_compere.toFixed(0) + "%</div></div>");
+                                    $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress_bar_new_1 "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px;width:" + result_calculate_compere.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate_compere.toFixed(0) + "%</div><div id='progress_label_out'  style=' color:black; text-align: left; margin-left: calc(100% + 3px); "+progress_label_out+"'>" + result_calculate_compere.toFixed(0) + "%</div></div></div>");
                                 } else {
-                                    $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress-bar_1 presurvey-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='  border-radius: 20px; width:" + result_calculate_compere.toFixed(0) + "%'>" + result_calculate_compere.toFixed(0) + "%</div></div>");
+
+                                    $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress-bar_1 presurvey-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='  border-radius: 20px; width:" + result_calculate_compere.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate_compere.toFixed(0) + "%</div><div id='progress_label_out'  style='  color:black; text-align: left; margin-left: calc(100% + 3px); "+progress_label_out+"'>" + result_calculate_compere.toFixed(0) + "%</div></div></div>");
                                 }
                             }else{
                                 window.isComparisonpoll = false;
@@ -793,6 +805,17 @@ function get_poll_vot_section() {
                                 var zeroVotes = "";
                             }
 
+                            if(parseInt(result_calculate.toFixed(0)) <= 50)
+                            {
+                                var progress_label_in = "display:none";
+                                var progress_label_out = "display:block";
+
+                            }else{
+
+                                var progress_label_in = "display:block";
+                                var progress_label_out = "display:none";
+                            }
+
                             if (data.result.max_value == val.total_vot) {
 
                                 if(!window.isComparisonpoll)
@@ -803,7 +826,7 @@ function get_poll_vot_section() {
                                 }
                                 $("#result_section").css('margin-left','30px');
                                 $("#result_section .progress_1").css('margin-bottom','4px');
-                                $("#result_section").append("<div class='progress'  id='progress_check_"+key+"' style='margin-bottom: 25px; background-color: #EBEAEA; border-radius: 20px; text-align: right'><div class='progress_bar_new "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px; width:" + result_calculate.toFixed(0) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
+                                $("#result_section").append("<div class='progress'  id='progress_check_"+key+"' style='margin-bottom: 25px; background-color: #EBEAEA; border-radius: 20px; text-align: right'><div class='progress_bar_new "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px; width:" + result_calculate.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate.toFixed(0) + "%</div></div><div id='progress_label_out'  style='text-align: left; "+progress_label_out+"'>" + result_calculate.toFixed(0) + "%</div></div>");
                             } else {
                                 if(!window.isComparisonpoll)
                                 {
@@ -811,7 +834,8 @@ function get_poll_vot_section() {
                                     $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label>");
                                 }
                                 $("#result_section").css('margin-left','30px');
-                                $("#result_section").append("<div class='progress' id='progress_check_"+key+"' style='margin-bottom: 25px; background-color: #EBEAEA;border-radius: 20px; text-align: right'><div class='progress-bar assesment-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px; width:" + result_calculate.toFixed(0) + "%'>" + result_calculate.toFixed(0) + "%</div></div>");
+                                $("#result_section .progress_1").css('margin-bottom','4px');
+                                $("#result_section").append("<div class='progress' id='progress_check_"+key+"' style='margin-bottom: 25px; background-color: #EBEAEA;border-radius: 20px; text-align: right'><div class='progress-bar assesment-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px; width:" + result_calculate.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate.toFixed(0) + "%</div></div><div id='progress_label_out' style='text-align: left; "+progress_label_out+"'>" + result_calculate.toFixed(0) + "%</div></div>");
                             }
 
                             pollIteration++;
@@ -821,20 +845,15 @@ function get_poll_vot_section() {
                                 if(data.result.correct_answer1 ==  key) {
 
                                     $("#result_section  #label_"+data.result.correct_answer1+"").css({'color':'green','text-decoration': 'underline','font-weight':'800'});
-                                    // $("#result_section  #progress_check_'"+data.result.correct_answer1+"'").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
-                                    // $("#result_section #label_"+data.result.correct_answer1).prepend('<span class="fa fa-check fa-2x " style="position: absolute; m argin-left:-30px"></span>').css({'color':'#22B14C'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }else if (data.result.correct_answer2 ==  key){
                                     $("#result_section  #label_"+data.result.correct_answer2+"").css({'color':'green','text-decoration': 'underline','font-weight':'800'});
-                                    // $("#result_section  #progress_check_'"+data.result.correct_answer2+"'").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
-                                    // $("#result_section #label_"+data.result.correct_answer2).prepend('<span class="fa fa-check fa-2x " style="position: absolute; margin-left:-30px"></span>').css({'color':'#22B14C'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }
                                 else{
-
                                     $("#result_section").css('margin-left','30px');
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray;  margin-left: -30px; margin-bottom: 5px'></div>");
-                                    // $(".progress").append("<i id='correct_answer_indicator' class='fa fa-check-circle-o' style='font-size: 25px'></i>");
+
                                 }
                             }
 
@@ -1022,7 +1041,7 @@ function timer(status,timer_count)
     if (status == 0 || is_poll_ended == 1) {
         $('#poll_vot_section_is_ended').val(0);
         $("#btn_vote").show();
-        // $("#id_day_time").css("color", "#ef5e25");
+        $("#id_day_time").css("color", cust_timer_color);
 
         if(timer_count >= 15){
             play_music_15sec();
@@ -1037,7 +1056,7 @@ function timer(status,timer_count)
 
                 stop_music();
                 $("#btn_vote").hide();
-                // $("#id_day_time").css("color", "red");
+                $("#id_day_time").css("color", "red");
             } else {
                 document.getElementById('id_day_time').innerHTML = timeLeft-1;
             }

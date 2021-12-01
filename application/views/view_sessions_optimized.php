@@ -74,7 +74,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content" style="padding: 0px; border: 0px solid #999; border-radius: 15px;">
                                     <div class="modal-header" style="height: 45px!important; background-color: #ebeaea; border-radius: 20px 20px 0 0;">
-                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'gray'?>;right: 30px; position: absolute">
+                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'white'?>;right: 30px; position: absolute">
                                                 <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=isset($cust_timer_color)?$cust_timer_color:'green'?>">
                                         </timer></span>
 
@@ -514,6 +514,8 @@ if (isset($sessions)) {
     var session_end_datetime =  new Date("<?= date('M d, Y', strtotime($sessions->sessions_date)) . ' ' . $sessions->end_time ?>");
 
     var socket_session_name = "<?=getAppName('_admin-to-attendee-chat')?>";
+
+    var cust_timer_color = "<?=isset($cust_timer_color)?$cust_timer_color:'#54bea8'?>";
 </script>
 <?= getSocketScript()?>
 <script src="<?= base_url() ?>front_assets/js/custom-fullscreen.js"></script>

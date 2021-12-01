@@ -2423,4 +2423,15 @@ class M_sessions extends CI_Model {
             return '';
         }
     }
+
+    function getPollThemeData(){
+        $theme = $this->db->select('*')
+            ->get('custom_poll_style');
+
+        if ($theme->num_rows()>0){
+            return $theme->result();
+        }else{
+            return '';
+        }
+    }
 }

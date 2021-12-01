@@ -1197,8 +1197,10 @@ public function deleteStreamName($stream_id){
 
     public function customize_poll(){
 
+        $data['pollThemeData']= $this->msessions->getPollThemeData();
+
         $this->load->view('admin/header');
-        $this->load->view('admin/customize_poll');
+        $this->load->view('admin/customize_poll', $data);
         $this->load->view('admin/footer');
     }
 
@@ -1220,7 +1222,18 @@ public function deleteStreamName($stream_id){
             redirect(base_url() . 'admin/sessions/customize_poll/' );
         }
 
+    }
 
+    public function deletePollTheme($poll_style_id){
+       $delete =  $this->db->delete('custom_poll_style', array('id'=>$poll_style_id));
+
+        if ($this->db->affected_rows()>0){
+            $this->session->set_flashdata('msg', 'success');
+            redirect(base_url().'admin/sessions/customize_poll');
+        }else{
+            $this->session->set_flashdata('msg', 'error');
+            redirect(base_url().'admin/sessions/customize_poll');
+        }
     }
 
 }
