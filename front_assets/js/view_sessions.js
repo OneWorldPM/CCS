@@ -844,10 +844,10 @@ function get_poll_vot_section() {
 
                                 if(data.result.correct_answer1 ==  key) {
 
-                                    $("#result_section  #label_"+data.result.correct_answer1+"").css({'color':'green','text-decoration': 'underline','font-weight':'800'});
+                                    $("#result_section  #label_"+data.result.correct_answer1+"").css({'color':cust_correct_answer,'text-decoration': 'underline','font-weight':'800'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }else if (data.result.correct_answer2 ==  key){
-                                    $("#result_section  #label_"+data.result.correct_answer2+"").css({'color':'green','text-decoration': 'underline','font-weight':'800'});
+                                    $("#result_section  #label_"+data.result.correct_answer2+"").css({'color':cust_correct_answer,'text-decoration': 'underline','font-weight':'800'});
                                     $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
                                 }
                                 else{
