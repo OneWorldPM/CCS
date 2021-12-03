@@ -693,13 +693,13 @@ function get_poll_vot_section() {
 
 
                         $("#poll_vot_section").html("<form id='frm_reg' name='frm_reg' method='post' action=''>\n\
-            \n\<h2 id='popup_title_lbl' style='border-top-left-radius:15px; border-top-right-radius: 15px; margin-bottom: 0; margin-left:30px; margin-right:30px; color: #666; font-weight: 400;font-size: 16px; padding: 15px 5px 25px 10px;'>" + data.result.question + "</h2>\n\
+            \n\<h2 id='popup_title_lbl' style='border-top-left-radius:15px; border-top-right-radius: 15px; margin-bottom: 0; margin-left:30px; margin-right:30px; color: #666; font-weight: 400;font-size: 24px; padding: 15px 5px 25px 10px;'>" + data.result.question + "</h2>\n\
 <div class='col-md-12'>\n\
 \n\<input type='hidden' id='sessions_poll_question_id' value='" + data.result.sessions_poll_question_id + "'>\n\
 \n\<input type='hidden' id='sessions_id' value='" + data.result.sessions_id + "'>\n\
 <div class='col-md-12' id='option_section'></div>\n\
 \n\<span id='error_vote' style='color:red; margin-left: 20px;'></span><span id='success_voted' style='color:green; margin-left: 20px;'></span>\n\
-<div style='padding-right: 20px;text-align: center;'><a class='btn rounded vote-btn' id='btn_vote' style='height: 30px;background-color: #c3c3c3; border-color: #c3c3c3; font-size: 16px;text-shadow: 10px 10px 10px gray;'><span id='btn_vote_label' style='text-align: center !important; font-weight: 500'>VOTE NOW <i class='fa fa-check' id='fa_fa_check' style='font-size: 13px; display:none; '></i></span></a></div>\n\
+<div style='padding-right: 20px;text-align: center;'><a class='btn rounded vote-btn' id='btn_vote' style='height: 30px;background-color: #c3c3c3; border-color: #c3c3c3; font-size: 16px;text-shadow: 10px 10px 10px gray; margin-top:25px'><span id='btn_vote_label' style='text-align: center !important; font-weight: 500'>VOTE NOW <i class='fa fa-check' id='fa_fa_check' style='font-size: 13px; display:none; '></i></span></a></div>\n\
 </form>");
                         if (data.result.exist_status == 1) {
                             $.each(data.result.option, function (key, val) {
@@ -734,8 +734,8 @@ function get_poll_vot_section() {
                         });
                         $('#modal').modal('show');
 
-                        $("#poll_vot_section").html("<div class='row'><div class='col-md-12'><div class='col-md-12'><h5 style='margin-left: 30px; letter-spacing: 0px; padding-top: 10px; font-size: 13px; border-bottom: 1px solid #b1b1b1; padding-bottom: 10px;'>" + data.result.question + "</h5>\n\
-                                                        \n\<div id='result_section' style='padding-bottom: 10px;'></div></div></div></div>");
+                        $("#poll_vot_section").html("<div class='row'><div class='col-md-12'><div class='col-md-12'><h5 style='margin-left: 30px; letter-spacing: 0px; padding-top: 10px; font-size: 24px; border-bottom: 1px solid #b1b1b1; padding-bottom: 10px; line-height: 30px'>" + data.result.question + "</h5>\n\
+                                                        \n\<div id='result_section' style='padding-bottom: 10px; margin-top:40px'></div></div></div></div>");
                         var total_vote = 0;
                         var total_vote_compere_option = 0;
                         $.each(data.result.option, function (key, val) {
@@ -788,10 +788,10 @@ function get_poll_vot_section() {
 
                                 if (data.result.compere_max_value == val.compere_option) {
 
-                                    $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress_bar_new_1 "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px;width:" + result_calculate_compere.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate_compere.toFixed(0) + "%</div><div id='progress_label_out'  style=' color:black; text-align: left; margin-left: calc(100% + 3px); "+progress_label_out+"'>" + result_calculate_compere.toFixed(0) + "%</div></div></div>");
+                                    $("#result_section").append("<label style='font-size:24px; margin-bottom: 20px' id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress_bar_new_1 "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style=' border-radius: 20px;width:" + result_calculate_compere.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate_compere.toFixed(0) + "%</div><div id='progress_label_out'  style=' color:black; text-align: left; margin-left: calc(100% + 3px); "+progress_label_out+"'>" + result_calculate_compere.toFixed(0) + "%</div></div></div>");
                                 } else {
 
-                                    $("#result_section").append("<label id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress-bar_1 presurvey-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='  border-radius: 20px; width:" + result_calculate_compere.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate_compere.toFixed(0) + "%</div><div id='progress_label_out'  style='  color:black; text-align: left; margin-left: calc(100% + 3px); "+progress_label_out+"'>" + result_calculate_compere.toFixed(0) + "%</div></div></div>");
+                                    $("#result_section").append("<label style='font-size:24px; margin-bottom: 20px' id='label_"+key+"'>"+pollIteration+". " + val.option + "</label><div class='progress_1' style='background-color: #EBEAEA; border-radius: 20px'><div class='progress-bar_1 presurvey-bar "+zeroVotes+"' role='progressbar' aria-valuenow='" + result_calculate_compere.toFixed(0) + "' aria-valuemin='0' aria-valuemax='100' style='  border-radius: 20px; width:" + result_calculate_compere.toFixed(0) + "%'><div id='progress_label_in' style='text-align: right; "+progress_label_in+"'>" + result_calculate_compere.toFixed(0) + "%</div><div id='progress_label_out'  style='  color:black; text-align: left; margin-left: calc(100% + 3px); "+progress_label_out+"'>" + result_calculate_compere.toFixed(0) + "%</div></div></div>");
                                 }
                             }else{
                                 window.isComparisonpoll = false;
@@ -845,14 +845,14 @@ function get_poll_vot_section() {
                                 if(data.result.correct_answer1 ==  key) {
 
                                     $("#result_section  #label_"+data.result.correct_answer1+"").css({'color':cust_correct_answer,'text-decoration': 'underline','font-weight':'800'});
-                                    $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
+                                    $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 20px'></div>");
                                 }else if (data.result.correct_answer2 ==  key){
                                     $("#result_section  #label_"+data.result.correct_answer2+"").css({'color':cust_correct_answer,'text-decoration': 'underline','font-weight':'800'});
-                                    $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 5px'></div>");
+                                    $("#result_section").append("<div style='border-bottom: 1px solid gray; margin-left: -30px; margin-bottom: 20px'></div>");
                                 }
                                 else{
                                     $("#result_section").css('margin-left','30px');
-                                    $("#result_section").append("<div style='border-bottom: 1px solid gray;  margin-left: -30px; margin-bottom: 5px'></div>");
+                                    $("#result_section").append("<div style='border-bottom: 1px solid gray;  margin-left: -30px; margin-bottom: 20px'></div>");
 
                                 }
                             }
@@ -887,7 +887,7 @@ function get_poll_vot_section() {
                             $("#poll_vot_section").html("<form id='frm_reg' name='frm_reg' method='post' action=''>\n\
             \n\<h2 style='margin-bottom: 0px; color: #fff; font-weight: 700;font-size: 15px; padding: 5px 5px 5px 10px; background-color: #b2b7bb; text-transform: uppercase; border-top-right-radius: 15px; border-top-left-radius: 15px;'>Live Poll</h2>\n\
 <div class='col-md-12'>\n\
-\n\<h5 style='letter-spacing: 0px; padding-top: 10px; font-size: 13px; border-bottom: 1px solid #b1b1b1; padding-bottom: 10px;'>" + data.result.question + "</h5></div>\n\
+\n\<h5 style='letter-spacing: 0px; padding-top: 10px; font-size: 24px; border-bottom: 1px solid #b1b1b1; padding-bottom: 10px; line-height: 30px'>" + data.result.question + "</h5></div>\n\
 \n\<input type='hidden' id='sessions_poll_question_id' value='" + data.result.sessions_poll_question_id + "'>\n\
 \n\<input type='hidden' id='sessions_id' value='" + data.result.sessions_id + "'>\n\
 <div class='col-md-12' id='option_section'></div>\n\

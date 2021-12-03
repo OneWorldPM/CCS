@@ -1,7 +1,7 @@
 <link href="<?= base_url() ?>assets/css/attendee-session-view.css?v=200" rel="stylesheet">
 
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
-<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=29" rel="stylesheet">
+<link href="<?= base_url() ?>front_assets/css/view_sessions.css?v=30" rel="stylesheet">
 
 <style>
     .color{
@@ -75,8 +75,8 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content" style="padding: 0px; border: 0px solid #999; border-radius: 15px;">
                                     <div class="modal-header" style="height: 45px!important; background-color: #ebeaea; border-radius: 20px 20px 0 0;">
-                                        <span style="font-weight: bold; font-size: 16px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="box-shadow: 3px 3px 10px grey;background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'white'?>;right: 30px; position: absolute">
-                                                <span id="id_day_time" style=" font-size: 15px; font-weight: 700; color: <?=isset($cust_timer_color)?$cust_timer_color:'green'?>">
+                                        <span style="font-weight: bold; font-size: 24px; margin-bottom: 10px; margin-left: 28px" id="span_poll_name"></span><timer class="badge" id="timer_sectiom" style="box-shadow: 3px 3px 10px grey;background-color: <?=isset($cust_timer_bg_color)?$cust_timer_bg_color:'white'?>;right: 30px; position: absolute; font-size: 20px">
+                                                <span id="id_day_time" style=" font-size: 20px; font-weight: 700; color: <?=isset($cust_timer_color)?$cust_timer_color:'green'?>">
                                         </timer></span>
 
                                         <button type="button" class="poll-modal-close close" data-dismiss="modal" aria-label="Close">
@@ -533,5 +533,5 @@ if (isset($sessions)) {
 
 
 <!-- Please add scripts only in this JS file, NOT directly on this HTML file -->
-<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=36"></script>
+<script src="<?= base_url() ?>front_assets/js/view_sessions.js?v=37"></script>
 <script src="<?= base_url() ?>front_assets/js/admin-to-attendee-chat.js?v=104"></script>
