@@ -1230,4 +1230,32 @@ public function deleteStreamName($stream_id){
         }
     }
 
+    public function editPollTheme(){
+        $theme_id = $this->input->post('theme_id');
+        $theme_details  =  $this->msessions->edit_poll_theme($theme_id);
+
+        if($theme_details){
+            echo json_encode($theme_details, JSON_PRETTY_PRINT);
+        }else{
+            echo json_encode('error');
+        }
+
+    }
+
+    public function updatePollTheme($theme_id){
+        $update_theme  =  $this->msessions->updatePollTheme($theme_id);
+
+        if($update_theme == 'success'){
+            $this->session->set_flashdata('msg', 'success');
+            redirect(base_url().'admin/sessions/customize_poll');
+        }else if($update_theme == 'exist'){
+            $this->session->set_flashdata('msg', 'poll name exist');
+            redirect(base_url().'admin/sessions/customize_poll');
+        }else{
+            $this->session->set_flashdata('msg', 'no changes made');
+            redirect(base_url().'admin/sessions/customize_poll');
+        }
+
+    }
+
 }
