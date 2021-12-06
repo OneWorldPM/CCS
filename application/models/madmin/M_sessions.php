@@ -2434,4 +2434,57 @@ class M_sessions extends CI_Model {
             return '';
         }
     }
+
+    function edit_poll_theme($theme_id){
+        $theme = $this->db->select('*')
+            ->where('id', $theme_id)
+            ->get('custom_poll_style');
+
+        if ($theme->num_rows()>0){
+            return $theme->result();
+        }else{
+            return '';
+        }
+    }
+
+    function updatePollTheme($theme_id){
+        $post = $this->input->post();
+
+        if ($this->checkThemeName($post['poll_style_name'], $theme_id) == 'exist'){
+            return 'exist';
+            die;
+        }
+
+
+        $poll_details = array(
+            'name'=>$post['poll_style_name'],
+            'cust_theme_color'=>$post['cust_theme_color'],
+            'cust_radio_color'=>$post['cust_radio_color'],
+            'cust_timer_color'=>$post['cust_timer_color'],
+            'cust_timer_bg_color'=>$post['cust_timer_bg_color'],
+            'cust_assessment_color'=>$post['cust_assessment_color'],
+            'cust_presurvey_color'=>$post['cust_presurvey_color'],
+            'cust_correct_color'=>$post['cust_correct_color']
+        );
+        $this->db->update('custom_poll_style', $poll_details, array('id'=>$theme_id));
+
+        if($this->db->affected_rows() > 0){
+            return 'success';
+        }else{
+            return 'error';
+        }
+    }
+
+    function checkThemeName($name, $theme_id){
+        $exist = $this->db->select('*')
+            ->where('name', $name)
+            ->where('id !=', $theme_id)
+            ->get('custom_poll_style');
+
+        if($exist->num_rows() > 0){
+            return 'exist';
+        }else{
+            return 'notExist';
+        }
+    }
 }

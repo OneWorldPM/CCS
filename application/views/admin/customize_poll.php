@@ -28,7 +28,7 @@
         </section>
         <div class="row">
             <div class="col">
-                <table class="table table-striped">
+                <table id="table-theme" class="table table-striped">
                     <thead>
                     <th>Theme Name</th>
                     <th>Theme Color</th>
@@ -54,7 +54,10 @@
                                 <td><?=$theme->cust_presurvey_color?></td>
                                 <td><?=$theme->cust_correct_color?></td>
 
-                                <td> <a href="<?=base_url().'admin/sessions/deletePollTheme/'.$theme->id?>" class="btn btn-danger"> Delete </a></td>
+                                <td>
+                                    <a href="<?=base_url().'admin/sessions/deletePollTheme/'.$theme->id?>" class="btn btn-danger"> Delete </a>
+                                    <a href="" id="edit_poll_theme" data-theme_id = '<?=$theme->id?>' class="btn btn-info"> Edit </a>
+                                </td>
 
                             </tr>
                         <?php endforeach;?>
@@ -66,7 +69,7 @@
 
         <div class="row">
             <label style="margin-left: 20px; color:darkgray">Colors can be set like ColorName(red), ColorCode Hex(#FF0000), RgbColors(255,0,0)</label><br><br>
-            <form action="<?=base_url()?>admin/sessions/save_poll_style" method="POST">
+            <form id="form" action="<?=base_url()?>admin/sessions/save_poll_style" method="POST">
             <div class="col-lg-5" >
 
 
@@ -127,8 +130,10 @@
 <!--                        <input type="text"  class="form-control" id="custom_progress_shadow_color" name="custom_progress_shadow_color">-->
 <!--                    </div>-->
 <!--                </div>-->
-                <div>
-                    <button type="submit" class="btn btn-green " > Save Style </button>
+                <div class="">
+                    <button type="submit" id="submit" class="btn btn-green " style="display: inline-block" > Save Style </button>
+                    <button class="btn" id="update" style="display: none; background-color: #fd7e14; color:white" > Update Style </button>
+                    <button type="reset" class="btn" id="cancel" style="background-color: red; color:white" > Cancel </button>
                 </div>
             </div>
             </form>
@@ -160,7 +165,13 @@
                 response,
                 'success'
             )
-        }else{
+        }else if(response === 'no changes made')
+            Swal.fire(
+                'info',
+                response,
+                'info'
+            )
+        else{
             Swal.fire(
                 'Error',
                 response,
@@ -168,6 +179,44 @@
             )
         }
     }
+</script>
+<script>
+    $(function(){
+        $('#table-theme').on('click', '#edit_poll_theme', function(e){
+            e.preventDefault();
+            var theme_id = $(this).attr('data-theme_id');
+
+            $.post('<?=base_url()?>/admin/sessions/editPollTheme',
+                {'theme_id':theme_id},
+            function(data){
+                data = JSON.parse(data);
+
+                $.each(data, function (index, value){
+                    console.log(value);
+                    if(value.id !=='' ){
+                        $('#poll_style_name').val(value.name);
+                        $('#custom_theme_color').val(value.cust_theme_color);
+                        $('#custom_radio_color').val(value.cust_radio_color);
+                        $('#custom_timer_color').val(value.cust_timer_color);
+                        $('#custom_timer_background_color').val(value.cust_timer_bg_color);
+                        $('#custom_assessment_color').val(value.cust_assessment_color);
+                        $('#custom_presurvey_color').val(value.cust_presurvey_color);
+                        $('#cust_correct_color').val(value.cust_correct_color);
+                    }
+                })
+            })
+            $('#submit').css('display','none');
+            $('#update').css('display','inline-block').attr('data-theme_id',theme_id);
+            $('#form').attr('action','<?=base_url()?>/admin/sessions/updatePollTheme/'+theme_id);
+        })
+
+        $('#cancel').on('click', function(){
+            $('#submit').css('display','inline-block');
+            $('#update').css('display','none');
+            $('#form').attr('action','<?=base_url()?>admin/sessions/save_poll_style');
+        })
+    })
+
 </script>
 
 <?php $this->session->unset_userdata('msg');?>
