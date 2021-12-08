@@ -49,6 +49,16 @@
         <?=pubnub_keys()?>
         <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.14.0.min.js"></script>
 
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSVCB0240L"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-VSVCB0240L');
+        </script>
+
         <style>
             @media (min-width: 1200px){
                 .container {

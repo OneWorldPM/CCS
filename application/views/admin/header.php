@@ -89,6 +89,17 @@ $user_name = ucfirst($this->session->userdata('uname'));
          }
         })
         </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSVCB0240L"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-VSVCB0240L');
+        </script>
+
         <style type="text/css">
             .action-row{
                 margin: 10px 0;
