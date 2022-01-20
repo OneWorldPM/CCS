@@ -98,7 +98,7 @@
 
 <!--<img src="--><?//= base_url() ?><!--front_assets/images/attend_background.png" id="bg" alt="">-->
 <!--<div id="bg" alt="" style="background-color: #52c4ad;"></div>-->
-<div id="bg" alt="" style="background-image: linear-gradient(#52c4ad, #f58113);"></div>
+<div id="bg" alt="" style="background-image: linear-gradient(#52c4ad, #f78e1e );"></div>
 
 <section class="parallax">
     <div class="container container-fullscreen" id="home_first_section">

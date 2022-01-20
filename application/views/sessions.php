@@ -18,7 +18,7 @@
     }
 
     .icon-home {
-        color: #f05d1f;
+        color: #F78E1E;
         font-size: 1.5em;
         font-weight: 700;
         vertical-align: middle;
@@ -37,7 +37,7 @@
     }
 
     .box_home_active {
-        background-color: #f05d1f;
+        background-color: #F78E1E;
         border-radius: 20px;
         max-width: 250px;
         min-width: 250px;
@@ -49,7 +49,7 @@
     }
 
     .box-home:hover {
-        background-color: #f05d1f;
+        background-color: #F78E1E;
         color: #fff !important;
     }
 
@@ -66,7 +66,7 @@
 
 <!--<img src="--><?//= base_url() ?><!--front_assets/images/attend_background.png" id="bg" alt="">-->
 <!--<div id="bg" alt="" style="background-color: #52c4ad;"></div>-->
-<div id="bg" alt="" style="background-image: linear-gradient(#52c4ad, #f58113);"></div>
+<div id="bg" alt="" style="background-image: linear-gradient(#52c4ad, #f78e1e );"></div>
 
 <section class="parallax">
 <!--<section class="parallax" style="background-image: url(<?= base_url() ?>front_assets/images/Sessions_BG_screened.jpg); top: 0; padding-top: 0px;">-->
@@ -124,7 +124,7 @@
 
                                                 <div class="post-title">
                                                     <h6 style="font-weight: 600"><?= $val->sessions_date . ' ' . date("h:i A", strtotime($val->time_slot)) . ' - ' . date("h:i A", strtotime($val->end_time)) ?> ET </h6>
-                                                    <h3><a href="<?= base_url() ?>sessions/attend/<?= $val->sessions_id ?>" style="color: #f05d1f; font-weight: 900;"><?= $val->session_title ?></a></h3>
+                                                    <h3><a href="<?= base_url() ?>sessions/attend/<?= $val->sessions_id ?>" style="color: #F78E1E; font-weight: 900;"><?= $val->session_title ?></a></h3>
                                                 </div>
                                                 <?php
                                                 if (isset($val->presenter) && !empty($val->presenter)) {
