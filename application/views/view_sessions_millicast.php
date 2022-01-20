@@ -206,7 +206,7 @@
             font-size: 12px;
         }
         .rightSticky{
-            background-color: #EF5D21;
+            background-color: #F78E1E;
         }
     .rightSticky ul li{
             width: 32%;
