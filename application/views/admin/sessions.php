@@ -283,6 +283,9 @@ $user_role = $this->session->userdata('role');
                                                          <a href="<?= base_url() ?>admin/sessions/polling_report/<?= $val->sessions_id ?>" class="btn btn-azure btn-sm" style="margin-bottom: 5px;">Polling Report</a>
                                                          <button class="askarep-report btn btn-azure btn-sm" session-id="<?=$val->sessions_id?>" session-name="<?= $val->session_title ?>" style="margin-bottom: 5px;">Ask A Rep - Report</button>
                                                          <a href="<?= base_url() ?>admin/sessions/attendee_question_report/<?= $val->sessions_id ?>" class="btn btn-info btn-sm">Questions Report</a>
+                                                        <?php if ($user_role == 'super_admin') { ?>
+                                                            <br><br><a data-session-id="<?=$val->sessions_id?>" data-session-name="<?=$val->session_title?>" data-session-status="<?=$val->session_ended?>" class="btn <?=($val->session_ended == 0)?'btn-danger':'btn-success'?> end_session"  style="font-size: 15px !important; margin-bottom: 5px;"><?=($val->session_ended == 0)?'<i class="fa fa-stop-circle-o" aria-hidden="true"></i> End Session':'<i class="fa fa-play-circle-o" aria-hidden="true"></i> Open Session'?></a>
+                                                        <?php } ?>
                                                     </td>
                                               
                                                      
@@ -560,5 +563,76 @@ $('#sessions_table').on('click','#btn-send-json',function(e){
             $('#upload-modal .modal-title').html('<h3>Submitted Files <span class="badge badge-warning " style="font-size: 20px ">Session '+session_id+'</badge></h3>')
             getUploadedData(session_id);
         })
+
+        $('#sessions_table').on('click', '.end_session', function () {
+
+            let session_id = $(this).data('session-id');
+            let session_name = $(this).data('session-name');
+            let status = ($(this).data('session-status') == 1)?0:1;
+            let info_text;
+            let buton_text;
+            let button = $(this);
+            let row = $(this).parent().parent();
+
+            if (status == 1)
+            {
+                buton_text = 'Yes, end it!';
+                info_text = "This will end session ("+session_name+"), further visits to this session will take attendees to the next session configured! <br><br> This does not redirect attendees or reload their page though";
+            }
+            else{
+                buton_text = 'Yes, open it!';
+                info_text = "This will open session ("+session_name+") <br><br> This does not redirect attendees or reload their page though";
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                html: info_text,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: buton_text
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post("<?= base_url() ?>admin/sessions/change_session_status",
+                        {
+                            "id":session_id,
+                            "status": status
+                        },
+                        function (response){
+                            response = JSON.parse(response);
+                            if(response.status == "success"){
+
+                                if(status == 1)
+                                {
+                                    button.html('<i class="fa fa-play-circle-o" aria-hidden="true"></i> Open Session');
+                                    button.removeClass('btn-danger');
+                                    button.addClass('btn-success');
+                                    button.data('session-status', 1);
+                                    row.css('background', '#fbe9e9');
+                                } else {
+                                    button.html('<i class="fa fa-stop-circle-o" aria-hidden="true"></i> End Session');
+                                    button.removeClass('btn-success');
+                                    button.addClass('btn-danger');
+                                    button.data('session-status', 0)
+                                    row.css('background', '#f1fff1');
+                                }
+
+                                Swal.fire(
+                                    'Done!',
+                                    'Session status changed!',
+                                    'success'
+                                )
+                            }else{
+                                Swal.fire(
+                                    'Error!',
+                                    'Unable to change session status!',
+                                    'error'
+                                )
+                            }
+                        });
+                }
+            })
+        });
     })
 </script>
