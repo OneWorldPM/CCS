@@ -62,7 +62,7 @@ class Sessions extends CI_Controller {
 
         $poll_style= $this->objsessions->get_poll_style($sessions_id);
 
-        if (date("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime($sesions->sessions_date . ' ' . $sesions->end_time)) && $sessions_id != 25) {
+        if ( $sessions_id != 25 || $sesions->session_ended == 1) {
             header("location:" . base_url() . "sessions/session_end/".$sessions_id);
             die();
         }
