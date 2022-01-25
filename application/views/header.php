@@ -17,13 +17,13 @@
         <link href="<?= base_url() ?>front_assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
         <!-- Template base -->
-        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=5" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/theme-base.css?v=9" rel="stylesheet">
 
         <!-- Template elements -->
         <link href="<?= base_url() ?>front_assets/css/theme-elements.css" rel="stylesheet">
 
         <!-- Responsive classes -->
-        <link href="<?= base_url() ?>front_assets/css/responsive.css" rel="stylesheet">
+        <link href="<?= base_url() ?>front_assets/css/responsive.css?v=5" rel="stylesheet">
 
         <!-- [if lt IE 9]>
         <script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -48,6 +48,16 @@
         <!-- DO NOT use production keys on localhost-->
         <?=pubnub_keys()?>
         <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.14.0.min.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSVCB0240L"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-VSVCB0240L');
+        </script>
 
         <style>
             @media (min-width: 1200px){
@@ -88,20 +98,20 @@
 
             .logo2 {
                 float: left;
-                padding-left: 15px;
-                margin-top: 15px;
+                padding-left: 0px;
+                margin-left:30px !important;
             }
 
             .logo2 img {
-                object-fit: contain;
-                width: 79px;
-                height: 50px;
+                /*object-fit: contain;*/
             }
             .logo2 span {
                 position: absolute;
-                top: 5px;
+                top: 0;
+                margin-top: -30px;
                 font-family: sans-serif;
                 font-size: 11px;
+                float:left;
             }
 
             #mainMenu2 {
@@ -173,13 +183,14 @@
 
             @media screen and (max-width: 1290px) {
                 #header-wrap {
-                    padding: 16px 30px;
+
+                    /*padding: 16px 30px;*/
                 }
             }
 
             @media screen and (max-width: 1200px) {
                 #header-wrap {
-                    padding: 16px 10px;
+                    /*padding: 16px 10px;*/
                 }
 
                 #header .container {
@@ -216,7 +227,7 @@
 
             @media screen and (max-width: 493px) {
                 .logo2 {
-                    margin-left: 5px;
+                    margin-left: 10px !important;
                 }
 
                 .logo2 img {
@@ -234,21 +245,21 @@
         <div class="wrapper">
             <!-- HEADER -->
             <header id="header" class="header-transparent header-sticky">
-                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 115)?'style="height:'.$sesions_logo_height.'px"':'style="height:115px"':'';?>>
+                <div id="header-wrap" <?=((isset($sesions_logo_height) && !empty($sesions_logo_height)) && isset($sesions_logo) && !empty($sesions_logo))?($sesions_logo_height > 80)?'style="height:'.$sesions_logo_height.'px"':'style="height:87px"':'';?>>
                 <div style="height: 4px;background-color: #52c4ad;"></div>
-                    <div class="container">
+                    <div class="container" >
                         <!--LOGO-->
                         <?php
                         if ($this->session->userdata('cid') != "") {
                             $profile_data = $this->common->get_user_details($this->session->userdata('cid'));
                             ?>
-                            <div id="logo">
-                                <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="margin-top: 12px; cursor: auto">
+                            <div class="" id="logo">
+                                <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png" style="<?=(isset($sponsor_type) && $sponsor_type)?'margin-top: 25px; ':'margin-top: 12px; '?>cursor: auto">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
                             </div>
                         <?php } else { ?>
-                            <div id="logo">
+                            <div class="" id="logo">
                                 <a href="#" class="logo" data-dark-logo="<?= base_url() ?>front_assets/images/logo_new.png">
                                     <img src="<?= base_url() ?>front_assets/CCS/Clinical_Care_Solutions_Logo.png" alt="CCS Logo">
                                 </a>
@@ -258,11 +269,11 @@
                         <?php
                         if (isset($sesions_logo)) {
                             ?>
-                            <div class="logo2">
-                                <?php if($sponsor_type!=''):?>
-                                <span><?= $sponsor_type ?></span>
+                            <div class="logo2 col-lg-2 col-md-4 col-sm-12" style=" <?=(isset($sponsor_type) && $sponsor_type!='')?'margin-top: 28px;':'margin-top: 12px;'?> width: <?=$sesions_logo_width?>px; height: <?=$sesions_logo_height?>px">
+                            <?php if($sponsor_type!=''):?>
+                                <span style="white-space: nowrap"><?= $sponsor_type ?></span>
                                 <?php endif;?>
-                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: <?=$sesions_logo_width?>px;height: <?=$sesions_logo_height?>px;<?=(($sesions_logo_height) < 90 )?'margin-top:10px;':''?>">
+                                <img src="<?= base_url() . "uploads/sessions_logo/" . $sesions_logo ?>" onerror="$(this).parent().remove()" style="width: 100%;height:100%;">
                             </div>
                             <?php
                         }
@@ -281,7 +292,7 @@
 
                         <!--NAVIGATION-->
                         <div class="navbar-collapse collapse main-menu-collapse navigation-wrap">
-                            <div class="container" style="text-transform: uppercase;">
+                            <div class="container" style="text-transform: uppercase;" >
                                 <nav id="mainMenu2" class="main-menu mega-menu" style="margin-top: 10px;">
                                     <?php
                                     if ($this->session->userdata('cid') != "") {
@@ -348,22 +359,22 @@
 
                                             if (isset($custom_header_button1) && !empty($custom_header_button1)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
-                                                    <a target="_blank" href="<?=(!empty($custom_header_button1_link))?$custom_header_button1_link:''?>" ><?=$custom_header_button1?></a>
+                                                <li class="">
+                                                    <a target="_blank" style="text-transform: none" href="<?=(!empty($custom_header_button1_link))?$custom_header_button1_link:''?>" ><?=$custom_header_button1?></a>
                                                 </li>
                                                 <?php
                                             }
                                             if (isset($custom_header_button2) && !empty($custom_header_button2)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
-                                                    <a target="_blank" href="<?=(!empty($custom_header_button2_link))?$custom_header_button2_link:''?>"><?=$custom_header_button2?></a>
+                                                <li class="">
+                                                    <a target="_blank" style="text-transform: none" href="<?=(!empty($custom_header_button2_link))?$custom_header_button2_link:''?>"><?=$custom_header_button2?></a>
                                                 </li>
                                                 <?php
                                             }
                                             if (isset($custom_header_button3) && !empty($custom_header_button3)) {
                                                 ?>
-                                                <li class="sticky_resources_open" data-type="resourcesSticky">
-                                                    <a target="_blank" href="<?=(!empty($custom_header_button3_link))?$custom_header_button3_link:''?>"><?=$custom_header_button3?></a>
+                                                <li class="">
+                                                    <a target="_blank" style="text-transform: none" href="<?=(!empty($custom_header_button3_link))?$custom_header_button3_link:''?>"><?=$custom_header_button3?></a>
                                                 </li>
                                                 <?php
                                             }

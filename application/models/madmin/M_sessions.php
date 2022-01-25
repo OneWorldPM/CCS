@@ -735,7 +735,7 @@ class M_sessions extends CI_Model {
         $set = array(
             'sessions_id' => trim($post['sessions_id']),
             'poll_type_id' => $post['poll_type_id'],
-            'question' => trim($post['question']),
+            'question' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "",trim($post['question']))),
             'poll_name' => trim($post['poll_name']),
             'slide_number' => trim($post['slide_number']),
             'correct_answer1' => trim($post['correct_answer1']),
@@ -751,8 +751,8 @@ class M_sessions extends CI_Model {
                 if ($post['option_' . $i] != "") {
                     $set_array = array(
                         'sessions_poll_question_id' => $insert_id,
-                        'sessions_id' => trim($post['sessions_id']),
-                        'option' => $post['option_' . $i],
+                        'sessions_id' =>trim($post['sessions_id']),
+                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "", $post['option_' . $i])),
                         "total_vot" => 0
                     );
                     $this->db->insert("poll_question_option", $set_array);
@@ -769,7 +769,7 @@ class M_sessions extends CI_Model {
         $set = array(
             'sessions_id' => trim($post['sessions_id']),
             'poll_type_id' => $post['poll_comparisons_with_us'],
-            'question' => trim($post['question']),
+            'question' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "",trim($post['question']))),
             'poll_name' => trim($post['poll_name']),
 			'slide_number' => trim($post['slide_number']),
             'correct_answer1' => trim($post['correct_answer1']),
@@ -786,7 +786,7 @@ class M_sessions extends CI_Model {
                     $set_array = array(
                         'sessions_poll_question_id' => $insert_new_id,
                         'sessions_id' => trim($post['sessions_id']),
-                        'option' => $post['option_' . $i],
+                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace(array("</p>","<br>"), "",$post['option_' . $i])),
                         "total_vot" => 0
                     );
                     $this->db->insert("poll_question_option", $set_array);
@@ -852,8 +852,7 @@ class M_sessions extends CI_Model {
     function update_poll_data() {
         $post = $this->input->post();
         $set = array(
-            'question' => trim($post['question']),
-            'question' => trim($post['question']),
+            'question' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "",trim($post['question']))),
             'poll_name' => trim($post['poll_name']),
             'slide_number' => trim($post['slide_number']),
             'correct_answer1' => trim($post['correct_answer1']),
@@ -868,7 +867,7 @@ class M_sessions extends CI_Model {
                 $key++;
                 if ($post['option_' . $key] != "") {
                     $set_array = array(
-                        'option' => $post['option_' . $key],
+                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "",$post['option_' . $key])),
                     );
                     $this->db->update("poll_question_option", $set_array, array("poll_question_option_id" => $val->poll_question_option_id));
                 } else {
@@ -887,7 +886,7 @@ class M_sessions extends CI_Model {
                     $set_array_int = array(
                         'sessions_poll_question_id' => $post['sessions_poll_question_id'],
                         'sessions_id' => trim($post['sessions_id']),
-                        'option' => $post['option_' . $i],
+                        'option' => preg_replace("/<p[^>]*?>/", "", str_replace("</p>", "",$post['option_' . $i])),
                         "total_vot" => 0
                     );
                     $this->db->insert("poll_question_option", $set_array_int);
@@ -2256,4 +2255,82 @@ class M_sessions extends CI_Model {
             return false;
         }
     }
+
+    function moderatorCheckedList(){
+        $moderatorList = $this->db->select('*')
+            ->get('moderator_checked_list');
+        $mod_array = array();
+        if($moderatorList->num_rows() > 0){
+//            print_r($moderatorList->result());
+            foreach ($moderatorList->result() as $res){
+                array_push ($mod_array, $res->presenter_id);
+            }
+            return $mod_array;
+
+        }else{
+            return '';
+        }
+    }
+
+    function addSelectedModerator(){
+        $post = $this->input->post();
+        if(isset($post['selected_moderator']) && !empty($post['selected_moderator'])) {
+            foreach ($post['selected_moderator'] as $list) {
+                if ($this->checkSelectedModerator($list)) {
+                    $this->db->insert('moderator_checked_list', array('presenter_id' => $list));
+                }
+            }
+            $this->db->where_not_in('presenter_id', $post['selected_moderator']);
+            $this->db->delete('moderator_checked_list');
+
+
+        }else{
+            $this->db->truncate('moderator_checked_list');
+        }
+
+        if($this->db->affected_rows() > 0){
+            return array('status'=>'success');
+        }else{
+            return array('status'=>'error');
+        }
+    }
+
+    function checkSelectedModerator($list){
+        $result = $this->db->select('*')
+            ->where('presenter_id', $list)
+            ->get('moderator_checked_list');
+
+        if($result->num_rows()>0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    function getSelectedModerators(){
+        $checkedModerators = $this->db->select('*')
+            ->join('presenter p','moderator_checked_list.presenter_id = p.presenter_id')
+            ->get('moderator_checked_list');
+        if($checkedModerators->num_rows() > 0){
+            return $checkedModerators->result();
+        }else{
+            return '';
+        }
+    }
+
+    function getPresenters() {
+        $this->db->select('*');
+        $this->db->from('presenter');
+        $this->db->order_by('first_name', 'asc');
+        $this->db->order_by('last_name', 'asc');
+        $presenter = $this->db->get();
+
+        if ($presenter->num_rows() > 0) {
+            return $presenter->result();
+        } else {
+            return '';
+        }
+    }
+
 }

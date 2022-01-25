@@ -59,6 +59,7 @@ class Sessions extends CI_Controller {
         $data['session_tracks'] = $this->msessions->getSessionTracks();
         $data['unique_identifier_id'] = $this->msessions->getSession_Unique_Identifier_ID();
         $data['millicast_stream_names']=$this->msessions->getMillicast_Stream_Name();
+        $data['default_moderators']=$this->msessions->moderatorCheckedList();
         $this->load->view('admin/header');
         $this->load->view('admin/add_sessions', $data);
         $this->load->view('admin/footer');
@@ -551,6 +552,7 @@ class Sessions extends CI_Controller {
 
     public function poll_chart($session_id)
     {
+        ob_start();
         $sesstion_title = $this->getSessionName($session_id);
         $poll_data = $this->getPollData($session_id);
 
@@ -563,10 +565,14 @@ class Sessions extends CI_Controller {
         $pdf->setFooterMargin(20);
         $pdf->SetAutoPageBreak(true);
         $pdf->SetAuthor('Your Conference Live');
-
+        $pdf->AddFont('dejavusans', '', 'DejaVuSans.ttf', true);
+        $pdf->AddFont('dejavusans', 'B', 'DejaVuSans-Bold.ttf', true);
+        $pdf->AddFont('dejavusans', 'I', 'DejaVuSans-Oblique.ttf', true);
+        $pdf->AddFont('dejavusans', 'BI', 'DejaVuSans-BoldOblique.ttf', true);
         $pdf->AddPage('L', 'A4');
 
         $chart_title = $sesstion_title;
+//        $pdf->SetFont('helvetica', '', 45);
         $pdf->SetFont('helvetica', '', 45);
         $pdf->SetXY(10, 40);
         $pdf->Write(0, $chart_title, '', 0, 'C', true, 0, false, false, 0);
@@ -598,12 +604,14 @@ class Sessions extends CI_Controller {
 
             $pdf->SetFont('helvetica', '', 8);
             $pdf->SetXY(5, 5);
-            $pdf->Write(0, $sesstion_title, '', 0, 'C', true, 0, false, false, 0);
+            $pdf->WriteHTML($sesstion_title, '', 0, 'C', true, 0, false, false, 0);
 
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('helvetica', 'B', 20);
             $pdf->SetXY(10, 30);
-            $pdf->Write(0, $poll->poll_name.': '.$poll->question, '', 0, 'C', true, 0, false, false, 0);
+
+            $pdf->WriteHTML(trim($poll->poll_name).': '.$poll->question, '', 0, '', true, 'C', false, false, 0);
+
 
 
             $xc = 80;
@@ -640,10 +648,13 @@ class Sessions extends CI_Controller {
                         $pdf->Circle(140, $desc_y, 2, 0, 360, 'DF', null, array($color_r, $color_g, $color_b));
                         $desc_y = $desc_y+10;
 
-                        $pdf->SetFont('helvetica', 'I', 10);
+//                        $pdf->SetFont('helvetica', 'I', 10);
+                        $pdf->SetFont('dejavusans', '', 8,'', true);
                         $pdf->SetTextColor(0,0,0);
-                        $pdf->SetXY(142, $desc_y-12);
-                        $pdf->Write(0, $option->option, '', 0, '', true, 0, false, false, 0);
+
+                        $pdf->SetXY(142, $desc_y - 12);
+                        $pdf->WriteHTML( trim($option->option), '', 0, true, true, 'left', false, false, 0);
+
 
                     }
 
@@ -675,7 +686,9 @@ class Sessions extends CI_Controller {
                 if ($poll->total_votes != 0)
                 {
                     $result_table .= '<tr>
-                                    <td style="width: 500px; height: 10px;">'.htmlspecialchars($option->option).'</td>
+
+                                    <td style="width: 500px; height: 10px;">'.trim($option->option).'</td>
+
                                     <td style="width: 100px;">'.$option->total_vot.'</td>
                                     <td style="width: 100px;">'.number_format(($option->total_vot*100)/$poll->total_votes, 1).'%</td>
                                   </tr>';
@@ -684,6 +697,7 @@ class Sessions extends CI_Controller {
             }
 
             $result_table .= '</table>';
+            $pdf->SetFont('dejavusans', '', 10,'', true);
             $pdf->writeHTML($result_table, true, false, false, false, 'center');
 
             $pdf->SetXY(30, 180);
@@ -698,7 +712,7 @@ class Sessions extends CI_Controller {
                  </table>';
             $pdf->writeHTML($result_table, true, false, false, false, 'center');
         }
-
+        ob_end_clean();
         $pdf->Output(__DIR__.'/Poll Overview - '.$sesstion_title.'.pdf', 'FD');
 
         return;
@@ -1075,5 +1089,24 @@ public function deleteStreamName($stream_id){
         else{
             echo "error";
         }
+    }
+
+    public function moderatorCheckedList(){
+        $this->load->view('admin/header');
+        $this->load->view('admin/moderatorCheckedList');
+        $this->load->view('admin/footer');
+    }
+
+    public function getPresentersJson(){
+        echo json_encode($this->msessions->getPresenters());
+//        echo json_encode($this->msessions->getSelectedModerators());
+    }
+
+    public function getSelectedModerators(){
+        echo json_encode($this->msessions->getSelectedModerators());
+    }
+
+    public function addSelectedModerator(){
+        echo json_encode($this->msessions->addSelectedModerator());
     }
 }
