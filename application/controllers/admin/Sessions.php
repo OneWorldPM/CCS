@@ -612,7 +612,9 @@ class Sessions extends CI_Controller {
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('helvetica', 'B', 20);
             $pdf->SetXY(10, 30);
+
             $pdf->WriteHTML(trim($poll->poll_name).': '.$poll->question, '', 0, '', true, 'C', false, false, 0);
+
 
 
             $xc = 80;
@@ -652,8 +654,10 @@ class Sessions extends CI_Controller {
 //                        $pdf->SetFont('helvetica', 'I', 10);
                         $pdf->SetFont('dejavusans', '', 8,'', true);
                         $pdf->SetTextColor(0,0,0);
+
                         $pdf->SetXY(142, $desc_y - 12);
                         $pdf->WriteHTML( trim($option->option), '', 0, true, true, 'left', false, false, 0);
+
 
                     }
 
@@ -685,7 +689,9 @@ class Sessions extends CI_Controller {
                 if ($poll->total_votes != 0)
                 {
                     $result_table .= '<tr>
+
                                     <td style="width: 500px; height: 10px;">'.trim($option->option).'</td>
+
                                     <td style="width: 100px;">'.$option->total_vot.'</td>
                                     <td style="width: 100px;">'.number_format(($option->total_vot*100)/$poll->total_votes, 1).'%</td>
                                   </tr>';
