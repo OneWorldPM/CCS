@@ -82,6 +82,16 @@ $presenter_details = $this->common->get_presenter_data($this->session->userdata(
 
     </script>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSVCB0240L"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-VSVCB0240L');
+    </script>
+
     <style type="text/css">
         .action-row{
             margin: 10px 0;
