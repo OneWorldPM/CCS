@@ -1,10 +1,10 @@
 /* Add your custom css styles */
 
 .rightSticky {
-    width: 200px;
+    width: 229px;
     height: max-content;
     position: absolute;
-    right: -150px;
+    right: -180px;
     bottom: 200px;
     margin: auto;
     z-index: 4445;
