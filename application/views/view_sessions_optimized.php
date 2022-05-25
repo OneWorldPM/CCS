@@ -146,12 +146,12 @@ if (isset($sessions)) {
                 }
                 if(sessionRightBarControl($sessions->right_bar, "questions")){
                     ?>
-                    <li data-type="questionsSticky"><i class="fa fa-question" aria-hidden="true"></i> <span>QUESTIONS</span></li>
+                    <li data-type="questionsSticky"><i class="fa fa-question" aria-hidden="true"></i> <span>Submit a Question</span></li>
                     <?php
                 }
                 if(sessionRightBarControl($sessions->right_bar, "askarep")){
                     ?>
-                    <li data-type="askarepSticky"><img src="<?=base_url('front_assets/CCS/conversation_icon.png')?>" style="width: 25px;padding-bottom: 3px;"> <span>ASK A REP</span></li>
+                    <li data-type="askarepSticky"><img src="<?=base_url('front_assets/CCS/conversation_icon.png')?>" style="width: 25px;padding-bottom: 3px;"> <span>Ask a Representative</span></li>
                     <?php
                 }
                 ?>
@@ -188,7 +188,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Questions</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
 
@@ -229,7 +229,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Questions</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
@@ -291,7 +291,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Questions</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
@@ -355,7 +355,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Questions
+            Submit a Question
         </div>
         <div class="questionElement">
         </div>
@@ -393,7 +393,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            ASK A REP
+            Ask a Representative
         </div>
         <div class="ask-a-rep" style="color: white;">
             I would like a representative to contact me.
@@ -426,7 +426,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Questions</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
