@@ -197,7 +197,7 @@ if (isset($sessions)) {
                 }
                 if(sessionRightBarControl($sessions->right_bar, "askarep")){
                     ?>
-                    <li data-type="askarepSticky"><img src="<?=base_url('front_assets/CCS/conversation_icon.png')?>" style="width: 25px;padding-bottom: 3px;"> <span>Ask a Representative</span></li>
+                    <li data-type="askarepSticky"><img src="<?=base_url('front_assets/CCS/conversation_icon.png')?>" style="width: 25px;padding-bottom: 3px;"> <span>Contact an MSL</span></li>
                     <?php
                 }
                 ?>
@@ -439,7 +439,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Ask a Representative
+            Contact an MSL
         </div>
         <div class="ask-a-rep" style="color: white;">
             I would like a representative to contact me.
