@@ -146,7 +146,7 @@ if (isset($sessions)) {
                 }
                 if(sessionRightBarControl($sessions->right_bar, "questions")){
                     ?>
-                    <li data-type="questionsSticky"><i class="fa fa-question" aria-hidden="true"></i> <span>Submit Question</span></li>
+                    <li data-type="questionsSticky"><i class="fa fa-question" aria-hidden="true"></i> <span>Submit a Question</span></li>
                     <?php
                 }
                 if(sessionRightBarControl($sessions->right_bar, "askarep")){
@@ -188,7 +188,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
 
@@ -229,7 +229,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
@@ -291,7 +291,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
@@ -355,7 +355,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Submit Question
+            Submit a Question
         </div>
         <div class="questionElement">
         </div>
@@ -426,7 +426,7 @@ if (isset($sessions)) {
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
