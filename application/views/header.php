@@ -395,7 +395,7 @@
 
                                                             if (sessionRightBarControl($right_bar, "questions")) {
                                                                 ?>
-                                                                <li data-type="questionsSticky"><a data-type2="off"><i class="fa fa-question" aria-hidden="true"></i> Submit Question</a></li>
+                                                                <li data-type="questionsSticky"><a data-type2="off"><i class="fa fa-question" aria-hidden="true"></i> Submit a Question</a></li>
                                                                 <?php
                                                             }
                                                             if (sessionRightBarControl($right_bar, "notes")) {
@@ -423,7 +423,7 @@
                                                                         $('.askarep-header-img').attr("src", "<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>");
                                                                     });
                                                                 </script>
-                                                                <li id="askarepLi" data-type="askarepSticky"><a data-type2="off"><img class="askarep-header-img" src="<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>" style="width: 20px;margin-left: 4px;margin-right: 2px;"> Ask a Representative </a></li>
+                                                                <li id="askarepLi" data-type="askarepSticky"><a data-type2="off"><img class="askarep-header-img" src="<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>" style="width: 20px;margin-left: 4px;margin-right: 2px;"> Contact an MSL </a></li>
                                                                 <?php
 
                                                         }
