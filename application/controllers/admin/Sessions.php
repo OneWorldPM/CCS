@@ -75,6 +75,8 @@ class Sessions extends CI_Controller {
     }
 
     public function edit_sessions($sessions_id) {
+
+        $data['toolbox_setting'] = $this->msessions->getToolboxSetting($sessions_id);
         $data['sessions_edit'] = $this->msessions->edit_sessions($sessions_id);
         $data['presenter'] = $this->msessions->getPresenterDetails();
         $data['sessions_type'] = $this->msessions->getSessionTypes();

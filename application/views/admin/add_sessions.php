@@ -326,6 +326,29 @@ $user_role = $this->session->userdata('role');
                                             <label class="checkbox-inline"><input type="checkbox" name="session_right_bar[]" <?=$right_bar?sessionRightBarControl($right_bar, "questions", "checked"):""?> value="questions" >Questions</label>
                                             <label class="checkbox-inline"><input type="checkbox" name="session_right_bar[]" <?=$right_bar?sessionRightBarControl($right_bar, "askarep", "checked"):""?> value="askarep" >Ask A Rep</label>
                                         </div>
+                                        <label class="col-md-12 text-large text-bold"><strong> Toolbox text</strong></label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <label class="">Resource Text</label><br>
+                                            <input class="form-control" type="text" name="resource_text" id="resource_text" value="<?=(isset($toolbox_setting) && !empty($toolbox_setting) && $toolbox_setting->resources !=='')?$toolbox_setting->resources:''?>">
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <label class="">Chat Text</label><br>
+                                                <input class="form-control"  type="text" name="chat_text" id="chat_text" value="<?=(isset($toolbox_setting) && !empty($toolbox_setting) && $toolbox_setting->chat !=='')?$toolbox_setting->chat:''?>">
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <label class="">Notes Text</label><br>
+                                                <input class="form-control"  type="text" name="notes_text" id="notes_text" value="<?=(isset($toolbox_setting) && !empty($toolbox_setting) && $toolbox_setting->take_notes !=='')?$toolbox_setting->take_notes:''?>" >
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <label class="">Question Text</label><br>
+                                                <input class="form-control"  type="text" name="question_text" id="question_text" value="<?=(isset($toolbox_setting) && !empty($toolbox_setting) && $toolbox_setting->submit_question !=='')?$toolbox_setting->submit_question:''?>" >
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <label class="">Ask a Rep Text</label><br>
+                                                <input class="form-control"  type="text" name="askArep_text" id="askArep_text" value="<?=(isset($toolbox_setting) && !empty($toolbox_setting) && $toolbox_setting->ask_rep !=='')?$toolbox_setting->ask_rep:''?>">
+                                            </div>
+                                        </div>
                                     </div>
                                     </fieldset>
                                 </div>

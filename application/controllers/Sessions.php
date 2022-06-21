@@ -55,6 +55,7 @@ class Sessions extends CI_Controller {
     }
 
     public function view($sessions_id) {
+        $toolbox_setting = $this->db->get_where('toolbox_setting', array('session_id' => $sessions_id));
         $this->load->library('MobileDetect');
         $this->MobileDetect = new MobileDetect();
 
@@ -91,6 +92,15 @@ class Sessions extends CI_Controller {
         $header_data["header_toolbox_status"] = $sesions->header_toolbox_status;
 
         $data['isMobile'] = $this->MobileDetect->isMobile();
+
+        if($toolbox_setting->num_rows()>0){
+            $data['toolbox_setting'] = $toolbox_setting->result()[0];
+            $header_data["toolbox_setting"] = $toolbox_setting->result()[0];
+        }else{
+            $data['toolbox_setting'] = '';
+            $header_data["toolbox_setting"] = '';
+        }
+
 
         $this->load->view('header', $header_data);
         $this->load->view('view_sessions_optimized', $data);

@@ -395,22 +395,22 @@
 
                                                             if (sessionRightBarControl($right_bar, "questions")) {
                                                                 ?>
-                                                                <li data-type="questionsSticky"><a data-type2="off"><i class="fa fa-question" aria-hidden="true"></i> Submit a Question</a></li>
+                                                                <li data-type="questionsSticky"><a data-type2="off"><i class="fa fa-question" aria-hidden="true"></i> <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->submit_question  !== '' ))?$toolbox_setting->submit_question:'Submit a Question'?></a></li>
                                                                 <?php
                                                             }
                                                             if (sessionRightBarControl($right_bar, "notes")) {
                                                                 ?>
-                                                                <li data-type="notesSticky"><a data-type2="off"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> TAKE NOTES</a></li>
+                                                                <li data-type="notesSticky"><a data-type2="off"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes  !== '' ))?$toolbox_setting->take_notes:'TAKE NOTES'?></a></li>
                                                                 <?php
                                                             }
                                                             if (sessionRightBarControl($right_bar, "chat")) {
                                                                 ?>
-                                                                <li data-type="messagesSticky"><a data-type2="off"><i class="fa fa-comments" aria-hidden="true"></i> CHAT</a></li>
+                                                                <li data-type="messagesSticky"><a data-type2="off"><i class="fa fa-comments" aria-hidden="true"></i> <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->chat  !== '' ))?$toolbox_setting->chat:'CHAT'?></a></li>
                                                                 <?php
                                                             }
                                                             if (sessionRightBarControl($right_bar, "resources")) {
                                                                 ?>
-                                                                <li data-type="resourcesSticky"><a data-type2="off"><i class="fa fa-paperclip" aria-hidden="true"></i> RESOURCES</a></li>
+                                                                <li data-type="resourcesSticky"><a data-type2="off"><i class="fa fa-paperclip" aria-hidden="true"></i> <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources  !== '' ))?$toolbox_setting->resources:'RESOURCES'?></a></li>
                                                                 <?php
                                                             }
                                                             if (sessionRightBarControl($right_bar, "askarep")) {
@@ -423,7 +423,7 @@
                                                                         $('.askarep-header-img').attr("src", "<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>");
                                                                     });
                                                                 </script>
-                                                                <li id="askarepLi" data-type="askarepSticky"><a data-type2="off"><img class="askarep-header-img" src="<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>" style="width: 20px;margin-left: 4px;margin-right: 2px;"> Contact an MSL </a></li>
+                                                                <li id="askarepLi" data-type="askarepSticky"><a data-type2="off"><img class="askarep-header-img" src="<?=base_url('front_assets/CCS/conversation_icon_grey.png')?>" style="width: 20px;margin-left: 4px;margin-right: 2px;"> <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->ask_rep  !== '' ))?$toolbox_setting->ask_rep:'Contact an MSL'?> </a></li>
                                                                 <?php
 
                                                         }

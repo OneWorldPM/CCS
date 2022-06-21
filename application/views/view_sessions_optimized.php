@@ -1,3 +1,4 @@
+
 <link href="<?= base_url() ?>assets/css/attendee-session-view.css?v=200" rel="stylesheet">
 
 <!-- Please add styles only in this CSS file, NOT directly on this HTML file -->
@@ -91,7 +92,7 @@
                             <div class="col-md-3">
                                 <div id="resource_section" style="padding: 0px 0px 0px 0px; margin-top: 10px; background-color: #fff; border-radius: 5px;">
                                     <div>
-                                        <h2 style='margin-bottom: 0px; color: #ffffff; font-weight: 700;font-size: 15px; padding: 5px 5px 5px 10px; background-color: #b2b7bb; text-transform: uppercase;'><i class="fa fa-paperclip" style="font-size: 18px; color: #ee5d26;"></i> Resources <i class="fa fa-caret-down" id="resource_show" data-resource_show_status="1" style="float: right; font-size: 16px;"></i></h2>
+                                        <h2 style='margin-bottom: 0px; color: #ffffff; font-weight: 700;font-size: 15px; padding: 5px 5px 5px 10px; background-color: #b2b7bb; text-transform: uppercase;'><i class="fa fa-paperclip" style="font-size: 18px; color: #ee5d26;"></i> <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?> <i class="fa fa-caret-down" id="resource_show" data-resource_show_status="1" style="float: right; font-size: 16px;"></i></h2>
                                     </div>
                                     <div style="padding: 15px 15px 15px 15px; overflow-y: auto; height: 240px;" id="resource_display_status">
                                         <?php
@@ -131,27 +132,27 @@ if (isset($sessions)) {
                 <?php
                 if(sessionRightBarControl($sessions->right_bar, "notes")){
                     ?>
-                    <li data-type="notesSticky"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>TAKE NOTES</span></li>
+                    <li data-type="notesSticky"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes !== ''))?$toolbox_setting->take_notes:'Take Notes'?></span></li>
                     <?php
                 }
                 if(sessionRightBarControl($sessions->right_bar, "resources")){
                     ?>
-                    <li data-type="resourcesSticky"><i class="fa fa-paperclip" aria-hidden="true"></i> <span>RESOURCES</span></li>
+                    <li data-type="resourcesSticky"><i class="fa fa-paperclip" aria-hidden="true"></i> <span><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?></span></li>
                     <?php
                 }
                 if(sessionRightBarControl($sessions->right_bar, "chat")){
                     ?>
-                    <li data-type="messagesSticky"><i class="fa fa-comments" aria-hidden="true"></i> <span class="notify notify<?=getAppName($sessions->sessions_id) ?> displayNone"></span> <span>MESSAGES</span></li>
+                    <li data-type="messagesSticky"><i class="fa fa-comments" aria-hidden="true"></i> <span class="notify notify<?=getAppName($sessions->sessions_id) ?> displayNone"></span> <span><?=(isset($toolbox_setting) && !empty($toolbox_setting) && !empty($toolbox_setting))?$toolbox_setting->chat:'Messages'?></span></li>
                     <?php
                 }
                 if(sessionRightBarControl($sessions->right_bar, "questions")){
                     ?>
-                    <li data-type="questionsSticky"><i class="fa fa-question" aria-hidden="true"></i> <span>Submit a Question</span></li>
+                    <li data-type="questionsSticky"><i class="fa fa-question" aria-hidden="true"></i> <span><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->submit_question  !== '' ))?$toolbox_setting->submit_question:'Submit a Question'?></span></li>
                     <?php
                 }
                 if(sessionRightBarControl($sessions->right_bar, "askarep")){
                     ?>
-                    <li data-type="askarepSticky"><img src="<?=base_url('front_assets/CCS/conversation_icon.png')?>" style="width: 25px;padding-bottom: 3px;"> <span>Contact an MSL</span></li>
+                    <li data-type="askarepSticky"><img src="<?=base_url('front_assets/CCS/conversation_icon.png')?>" style="width: 25px;padding-bottom: 3px;"> <span><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->ask_rep  !== '' ))?$toolbox_setting->ask_rep:'Ask a Representative'?></span></li>
                     <?php
                 }
                 ?>
@@ -178,17 +179,17 @@ if (isset($sessions)) {
                     <?php
                     if(sessionRightBarControl($sessions->right_bar, "resources")){
                         ?>
-                        <li data-type="resourcesSticky"><a data-type2="off">Resources</a></li>
+                        <li data-type="resourcesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "chat")){
                         ?>
-                        <li data-type="messagesSticky"><a data-type2="off">Messages</a></li>
+                        <li data-type="messagesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && !empty($toolbox_setting))?$toolbox_setting->chat:'Messages'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->submit_question  !== '' ))?$toolbox_setting->submit_question:'Submit a Question'?></a></li>
                         <?php
                     }
 
@@ -199,7 +200,7 @@ if (isset($sessions)) {
         </div>
     </div>
    <div class="content">
-        <div class="contentHeader">Take Notes</div>
+        <div class="contentHeader"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes !== ''))?$toolbox_setting->take_notes:'Take Notes'?></div>
         <div id="briefcase_section">
             <div id="briefcase_section">
                 <div class="col-md-12 input-group">
@@ -224,17 +225,17 @@ if (isset($sessions)) {
                     <?php
                     if(sessionRightBarControl($sessions->right_bar, "chat")){
                         ?>
-                        <li data-type="messagesSticky"><a data-type2="off">Messages</a></li>
+                        <li data-type="messagesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && !empty($toolbox_setting))?$toolbox_setting->chat:'Message'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->submit_question  !== '' ))?$toolbox_setting->submit_question:'Submit a Question'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
                         ?>
-                        <li data-type="notesSticky"><a data-type2="off">Take Notes</a></li>
+                        <li data-type="notesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes !== ''))?$toolbox_setting->take_notes:'Take Notes'?></a></li>
                         <?php
                     }
                     ?>
@@ -244,7 +245,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Resources
+            <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?>
         </div>
         <div id="resource_section" style="padding: 0px 0px 0px 0px; margin-top: 10px; background-color: #fff; border-radius: 5px;">
             <div style="padding: 0px 15px 15px 15px; overflow-y: auto; height: 240px;" id="resource_display_status">
@@ -286,17 +287,17 @@ if (isset($sessions)) {
                     <?php
                     if(sessionRightBarControl($sessions->right_bar, "resources")){
                         ?>
-                        <li data-type="resourcesSticky"><a data-type2="off">Resources</a></li>
+                        <li data-type="resourcesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->submit_question  !== '' ))?$toolbox_setting->submit_question:'Submit a Question'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
                         ?>
-                        <li data-type="notesSticky"><a data-type2="off">Take Notes</a></li>
+                        <li data-type="notesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes !== ''))?$toolbox_setting->take_notes:'Take Notes'?></a></li>
                         <?php
                     }
                     ?>
@@ -307,7 +308,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Messages
+            <?=(isset($toolbox_setting) && !empty($toolbox_setting) && !empty($toolbox_setting))?$toolbox_setting->chat:'Messages'?>
         </div>
         <div class="messages">
 
@@ -328,18 +329,18 @@ if (isset($sessions)) {
                     <?php
                     if(sessionRightBarControl($sessions->right_bar, "resources")){
                         ?>
-                        <li data-type="resourcesSticky"><a data-type2="off">Resources</a></li>
+                        <li data-type="resourcesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "chat")){
                         ?>
-                        <li data-type="messagesSticky"><a data-type2="off">Messages</a></li>
+                        <li data-type="messagesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && !empty($toolbox_setting))?$toolbox_setting->chat:'Messages'?></a></li>
                         <?php
                     }
 
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
                         ?>
-                        <li data-type="notesSticky"><a data-type2="off">Take Notes</a></li>
+                        <li data-type="notesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes !== ''))?$toolbox_setting->take_notes:'Take Notes'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "adminChat")){
@@ -355,7 +356,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Submit a Question
+            <?=(isset($toolbox_setting) && !empty($toolbox_setting) && !empty($toolbox_setting->submit_question !==''))?$toolbox_setting->submit_question:'Submit a Question'?>
         </div>
         <div class="questionElement">
         </div>
@@ -393,7 +394,7 @@ if (isset($sessions)) {
     </div>
     <div class="content">
         <div class="contentHeader">
-            Contact an MSL
+            <?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->ask_rep  !== '' ))?$toolbox_setting->ask_rep:'Ask a Representative'?>
         </div>
         <div class="ask-a-rep" style="color: white;">
             I would like a representative to contact me.
@@ -421,17 +422,17 @@ if (isset($sessions)) {
                     <?php
                     if(sessionRightBarControl($sessions->right_bar, "resources")){
                         ?>
-                        <li data-type="resourcesSticky"><a data-type2="off">Resources</a></li>
+                        <li data-type="resourcesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->resources !== ''))?$toolbox_setting->resources:'Resources'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "questions")){
                         ?>
-                        <li data-type="questionsSticky"><a data-type2="off">Submit a Question</a></li>
+                        <li data-type="questionsSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->submit_question  !== '' ))?$toolbox_setting->submit_question:'Submit a Question'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "notes")){
                         ?>
-                        <li data-type="notesSticky"><a data-type2="off">Take Notes</a></li>
+                        <li data-type="notesSticky"><a data-type2="off"><?=(isset($toolbox_setting) && !empty($toolbox_setting) && ($toolbox_setting->take_notes !== ''))?$toolbox_setting->take_notes:'Take Notes'?></a></li>
                         <?php
                     }
                     if(sessionRightBarControl($sessions->right_bar, "adminChat")){

@@ -262,7 +262,6 @@ class M_sessions extends CI_Model {
     function createSessions() {
         $post = $this->input->post();
 
-
         $session_right_bar = "";
         if (isset($post["session_right_bar"])) {
             $session_right_bar = implode(",", $post["session_right_bar"]);
@@ -340,6 +339,7 @@ class M_sessions extends CI_Model {
         );
         $this->db->insert("sessions", $set);
         $sessions_id = $this->db->insert_id();
+        $this->createToolboxSetting($sessions_id, $post);
         if ($sessions_id > 0) {
 
 
@@ -488,6 +488,23 @@ class M_sessions extends CI_Model {
         }
     }
 
+    function createToolboxSetting($session_id, $post){
+        $setting = $this->db->select('*')
+            ->from('toolbox_setting')
+            ->where('session_id', $session_id)
+            ->get();
+
+        if($setting->num_rows() > 0){
+            $this->db->where('session_id', $session_id);
+            $this->db->update('toolbox_setting', array('submit_question'=> $post['question_text'], 'take_notes'=>$post['notes_text'], 'chat'=>$post['chat_text'], 'resources'=>$post['resource_text'], 'ask_rep'=>$post['askArep_text']));
+            return $setting->result()[0]->id;
+        }else{
+            $this->db->insert('toolbox_setting', array('session_id'=> $session_id, 'submit_question'=> $post['question_text'], 'take_notes'=>$post['notes_text'], 'chat'=>$post['chat_text'], 'resources'=>$post['resource_text'], 'ask_rep'=>$post['askArep_text']));
+            return $this->db->insert_id();
+        }
+
+    }
+
     function set_upload_presenter_resource() {
         $this->load->helper('string');
         $randname = random_string('numeric', '8');
@@ -627,6 +644,7 @@ class M_sessions extends CI_Model {
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
         $sessions_id = $post['sessions_id'];
+        $this->createToolboxSetting($sessions_id, $post);
         if ($sessions_id > 0) {
 
 
@@ -2331,6 +2349,18 @@ class M_sessions extends CI_Model {
         } else {
             return '';
         }
+    }
+
+    function getToolboxSetting($sessions_id){
+       $result = $this->db->select('*')
+            ->from('toolbox_setting')
+            ->where('session_id', $sessions_id)
+            ->get();
+
+        if($result->num_rows()>0){
+            return $result->result()[0];
+        }else
+            return '';
     }
 
 }
