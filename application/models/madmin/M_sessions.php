@@ -2351,4 +2351,16 @@ class M_sessions extends CI_Model {
         }
     }
 
+    function getToolboxSetting($sessions_id){
+       $result = $this->db->select('*')
+            ->from('toolbox_setting')
+            ->where('session_id', $sessions_id)
+            ->get();
+
+        if($result->num_rows()>0){
+            return $result->result()[0];
+        }else
+            return '';
+    }
+
 }
