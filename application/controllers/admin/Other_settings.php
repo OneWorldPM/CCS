@@ -19,7 +19,7 @@ class Other_settings extends CI_Controller
 
     public function index(){
         $this->load->view('admin/header');
-        $this->load->view('admin/Other_settings');
+        $this->load->view('admin/other_settings');
         $this->load->view('admin/footer');
     }
 
