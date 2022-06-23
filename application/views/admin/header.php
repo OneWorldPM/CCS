@@ -385,6 +385,19 @@ $user_name = ucfirst($this->session->userdata('uname'));
                                         </div>
                                     </a>
                                 </li>
+
+                            <li class="<?= ($uri_segment == 'other_settings') ? 'active' : ''; ?>" >
+                                <a href="<?= site_url() ?>admin/other_settings" id="dash">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="fa fa-cog"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title">Other Settings </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
