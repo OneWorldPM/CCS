@@ -19,16 +19,26 @@ $user_role = $this->session->userdata('role');
                 <div class="col-md-6">
                     <div class="panel panel-primary" id="panel5">
                         <div class="panel-heading">
-                            <div class="card">
+                            <div class="card" style="color: black">
                                 <div class="card-header" style="margin-bottom: 20px;">
                                     <div class="card-title">
-                                        Presenter Time Adjustment
+                                        Presenter Portal Countdown Timer Timezone<br>
+                                        (This is used to adjust time according to daylight or standard time)
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <label for="presenter_timezone" class="text-white ">Presenter Time Zone (example):  UTC-5</label>
+                                    <label for="presenter_timezone" style="color: black">Presenter Portal Timezone (example: UTC-5)</label>
                                     <input type="text" name="presenter_timezone" class="form-control presenter_timezone" placeholder="UTC-5">
+                                    <ul style="list-style-type:none; margin-top:20px; padding: 0">
+                                        <li>
+                                            EST = UTC-5
+                                        </li>
+                                        <li>
+                                            EDT = UTC-4
+                                        </li>
+                                    </ul>
                                 </div>
+
                                 <div class="card-footer text-right" style="margin-top:20px">
                                     <button class="btn btn-small btn-success btnSavePresenterTimezone">Save Presenter Time</button>
                                 </div>
