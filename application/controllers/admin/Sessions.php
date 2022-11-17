@@ -13,7 +13,7 @@ class Sessions extends CI_Controller {
             redirect('admin/alogin');
         }
         $this->load->model('madmin/m_sessions', 'msessions');
-
+        $this->load->model('M_other_settings', 'mSettings');
 
     }
 
@@ -278,6 +278,7 @@ class Sessions extends CI_Controller {
     }
 
     public function view_session($sessions_id) {
+        $data['timezone'] = $this->mSettings->getPresenterTimezone();
         $data['poll_data'] = $this->msessions->get_poll_details($sessions_id);
         $data["sessions"] = $this->msessions->view_session($sessions_id);
         $data["session_resource"] = $this->msessions->get_session_resource($sessions_id);
