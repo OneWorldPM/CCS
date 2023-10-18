@@ -334,7 +334,7 @@ class M_sessions extends CI_Model {
             'custom_header_button2_link'=>$post['custom_header_button2_link'],
             'custom_header_button3_link'=>$post['custom_header_button3_link'],
             'header_toolbox_status'=>$post['header_toolbox_status'],
-
+            'embed_vimeo_link'=>$post['vimeo_stream_link'],
 
         );
         $this->db->insert("sessions", $set);
@@ -640,6 +640,7 @@ class M_sessions extends CI_Model {
             'custom_header_button2_link'=>$post['custom_header_button2_link'],
             'custom_header_button3_link'=>$post['custom_header_button3_link'],
             'header_toolbox_status'=>$post['header_toolbox_status'],
+            'embed_vimeo_link'=>$post['vimeo_stream_link'],
 
         );
         $this->db->update("sessions", $set, array("sessions_id" => $post['sessions_id']));
