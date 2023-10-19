@@ -213,6 +213,11 @@ $user_role = $this->session->userdata('role');
                                         </select>
                                         <span style="float:right"><small style="color: red"> NEW! Click here to see ==> </small><a href="<?=base_url().'admin/sessions/streamNames'?>" class="btn btn-secondary btn-sm" id="manage-stream-btn">Manage Stream Names</a></span><br>
                                     </div>
+                                    <div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
+                                        <label class="text-large text-bold">Vimeo Stream Link <i class="fa fa-info-circle text-danger" aria-hidden="true" title="Millicast streaming wont work if this have value. Leave this empty to use the default millicast streaming."></i></label> 
+                                        <br>
+                                        <input  type="text" class="form-control" name="vimeo_stream_link" value="<?= isset($sessions_edit)?(!empty($sessions_edit->embed_vimeo_link))? $sessions_edit->embed_vimeo_link:'':''?>" placeholder="https://vimeo.com/event/3748120/embed">
+                                    </div>
                                    <br>
                                     <div class="form-group" <?=($user_role != 'super_admin')?'style="display:none"':''?>>
                                         <label class="text-large text-bold">Embed HTML Code <b>(Presenter)</b></label>

@@ -20,9 +20,16 @@
                     <?php } ?>
 
                     <div id="embededVideo">
-                        <div id="iframeDiv" class="row embed-responsive embed-responsive-16by9">
-                            <?= isset($sessions) ? '<iframe src="https://viewer.millicast.com/v2?streamId=pYVHx2/'.str_replace(' ', '', $sessions->embed_html_code).'&autoPlay=true&muted=true&disableFull=true" width="100%" height="100%"></iframe>' : "" ?>
-                        <div class="videoElement">
+                        <?php
+                            if(isset($sessions->embed_vimeo_link) && $sessions->embed_vimeo_link !== ''):?>
+                                <div id="iframeDiv" class="row embed-responsive embed-responsive-16by9">
+                                     <iframe src="<?=(isset($sessions->embed_vimeo_link) && $sessions->embed_vimeo_link !== '')?$sessions->embed_vimeo_link:''?>" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                <div class="videoElement">
+                            <?php else : ?>
+                                <div id="iframeDiv" class="row embed-responsive embed-responsive-16by9">
+                                    <?= isset($sessions) ? '<iframe src="https://viewer.millicast.com/v2?streamId=pYVHx2/'.str_replace(' ', '', $sessions->embed_html_code).'&autoPlay=true&muted=true&disableFull=true" width="100%" height="100%"></iframe>' : "" ?>
+                                <div class="videoElement">
+                            <?php endif ?>
                             <span id="btnFS" class="glyphicon glyphicon-resize-full" data-toggle="tooltip" title="Full Screen"></span>
                         </div>
                         </div>
